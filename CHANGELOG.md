@@ -8,6 +8,8 @@ write them at release time.
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-09-27
+
 ### Added
 
 - Search Analytics: `aggregation_type` (`--aggregation byPage|byProperty`), `by_day`

@@ -1,6 +1,6 @@
 [project]
 name = "gsc"
-version = "0.2.0"
+version = "0.3.0"
 description = "Google Search Console и PageSpeed Insights: библиотека gsc и CLI — ресурсы, поисковая аналитика, инспекция URL, карты сайта, скорость страниц"
 readme = "README.md"
 authors = [{ name = "bolandeu" }]
