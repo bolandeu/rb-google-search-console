@@ -23,11 +23,12 @@ gsc = "gsc.cli:main"
 Repository = "https://github.com/bolandeu/google-search-console"
 
 # google-oauth — общая авторизация Google для всех инструментов (ключи в общем слоте keychain).
-# ВРЕМЕННО path: репозитория bolandeu/google-oauth на GitHub ещё нет. После его создания заменить на
-# google-oauth = { git = "https://github.com/bolandeu/google-oauth.git" } (как yandex-oauth у ywm):
-# с path `uv tool install git+…` на другой машине не соберётся.
+# git, а не path: uv учитывает [tool.uv.sources] корневого пакета при `uv tool install git+…`,
+# и относительный путь на другой машине не существует. Версия зафиксирована в uv.lock;
+# подтянуть свежий коммит: `uv lock --upgrade-package google-oauth`. Для правок в соседней
+# папке во время разработки: `uv pip install -e ../google-oauth` (до следующего `uv sync`).
 [tool.uv.sources]
-google-oauth = { path = "../google-oauth", editable = true }
+google-oauth = { git = "https://github.com/bolandeu/google-oauth.git" }
 
 [build-system]
 requires = ["hatchling"]
