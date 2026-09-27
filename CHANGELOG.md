@@ -8,11 +8,6 @@ write them at release time.
 
 ## [Unreleased]
 
-## [0.2.0] - 2026-09-27
-
-Пакет переименован: `rb-google-search-console` / `rb_gsc` / команда `rb-gsc` →
-**`gsc`** (дистрибутив, импорт и команда). Переведён на архитектуру cli-generator.
-
 ### Added
 
 - Search Analytics: `aggregation_type` (`--aggregation byPage|byProperty`), `by_day`
@@ -29,6 +24,13 @@ write them at release time.
 - Chrome UX Report API: `gsc.CrUX` (`record`, `history` до 40 недель), команда `gsc crux`,
   `parse_crux_record` / `parse_crux_history`, `gsc.testing.FakeCrUX`. Ключ — тот же, что у
   PageSpeed, с включённым Chrome UX Report API.
+
+## [0.2.0] - 2026-09-27
+
+Пакет переименован: `rb-google-search-console` / `rb_gsc` / команда `rb-gsc` →
+**`gsc`** (дистрибутив, импорт и команда). Переведён на архитектуру cli-generator.
+
+### Added
 
 - Публичный API библиотеки (`import gsc`, без побочных эффектов при импорте):
   `SearchConsole` (`list_properties`, `get_property`, `property_for`,
