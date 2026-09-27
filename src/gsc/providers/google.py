@@ -212,3 +212,47 @@ class PageSpeedProvider(GoogleProvider):
         if self.key:
             params.append(("key", self.key))
         return self.request_json("GET", "runPagespeed", params=params)
+
+
+class CruxProvider(GoogleProvider):
+    """Chrome UX Report API. Ключ — тот же API-ключ Google Cloud, что у PageSpeed (с включённым CrUX API)."""
+
+    name = "crux"
+    base_url = "https://chromeuxreport.googleapis.com/v1/"
+
+    def __init__(self, *, api_key: str | None = None, transport: httpx.BaseTransport | None = None) -> None:
+        self._api_key = api_key
+        self.transport = transport
+
+    def error_for(self, response: httpx.Response, call: str) -> CliError:
+        message, status, reasons = google_error(response)
+        blocked = {"API_KEY_SERVICE_BLOCKED", "SERVICE_DISABLED", "API_KEY_INVALID"} & reasons
+        if (response.status_code in (400, 403) and (blocked or status == "PERMISSION_DENIED")) and not is_quota_error(
+            response
+        ):
+            return NotAuthorized(
+                self.name,
+                f"Chrome UX Report API недоступен для ключа: {message}",
+                action="Включите Chrome UX Report API в проекте Google Cloud ключа и добавьте его в ограничения "
+                f"ключа (APIs & Services → Credentials); ключ — '{auth.LOGIN_PAGESPEED}'.",
+            )
+        return super().error_for(response, call)
+
+    @property
+    def key(self) -> str | None:
+        if self._api_key is None:
+            self._api_key = auth.pagespeed_key() or ""
+        return self._api_key or None
+
+    def query(self, method: str, body: dict) -> dict | None:
+        """records:queryRecord / queryHistoryRecord; нет данных у Google (404) → None."""
+        if not self.key:
+            raise NotAuthorized(
+                self.name, "Нет API-ключа Google для Chrome UX Report.", action=f"Выполните '{auth.LOGIN_PAGESPEED}'."
+            )
+        try:
+            return self.request_json("POST", f"./records:{method}", params={"key": self.key}, json=body)
+        except ApiError as exc:
+            if exc.status == 404:
+                return None
+            raise

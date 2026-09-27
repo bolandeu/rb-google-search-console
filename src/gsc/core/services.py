@@ -6,6 +6,7 @@ from pathlib import Path
 import tomli_w
 from packaging.version import Version
 
+from .crux import CrUX
 from .errors import CliTooOld, InvalidArguments, ProjectNotInitialized
 from .models import ProjectConfig
 from .pagespeed import PageSpeed
@@ -98,6 +99,20 @@ def split_list(value: str | None) -> list[str]:
     return [part.strip() for part in (value or "").split(",") if part.strip()]
 
 
+FILTER_OPERATORS = ("equals", "notEquals", "contains", "notContains", "includingRegex", "excludingRegex")
+
+
+def parse_filter(value: str) -> dict:
+    """'page:contains:/blog/' → dimensionFilter API. Выражение может содержать «:» (URL)."""
+    parts = value.split(":", 2)
+    if len(parts) != 3 or not all(parts):
+        raise InvalidArguments(f"Фильтр '{value}': нужно СРЕЗ:ОПЕРАТОР:ВЫРАЖЕНИЕ, например page:contains:/blog/.")
+    dimension, operator, expression = parts
+    if operator not in FILTER_OPERATORS:
+        raise InvalidArguments(f"Оператор '{operator}' не поддерживается. Доступны: {', '.join(FILTER_OPERATORS)}.")
+    return {"dimension": dimension, "operator": operator, "expression": expression}
+
+
 # Фабрики клиентов: команды берут клиентов только отсюда, тесты CLI подменяют их фейками из gsc.testing.
 
 
@@ -107,3 +122,7 @@ def search_console() -> SearchConsole:
 
 def pagespeed() -> PageSpeed:
     return PageSpeed()
+
+
+def crux() -> CrUX:
+    return CrUX()

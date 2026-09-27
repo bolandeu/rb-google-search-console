@@ -1,6 +1,6 @@
 """Фейковые клиенты для тестов потребителей gsc — без сети и без ключей.
 
-Повторяют публичные методы SearchConsole / PageSpeed, данные задаются моделями:
+Повторяют публичные методы SearchConsole / PageSpeed / CrUX, данные задаются моделями:
 
     from gsc.testing import FakeSearchConsole
     sc = FakeSearchConsole(
@@ -20,6 +20,8 @@ from collections.abc import Iterable, Iterator, Sequence
 
 from .core.errors import ApiError, PropertyNotFound, QuotaExceeded
 from .core.models import (
+    CruxHistory,
+    CruxRecord,
     Inspection,
     InspectionError,
     PageSpeedError,
@@ -28,7 +30,8 @@ from .core.models import (
     Row,
     Sitemap,
 )
-from .core.search_console import property_for
+from .core.pagespeed import CATEGORIES
+from .core.search_console import SearchAnalyticsRows, property_for
 
 
 class FakeSearchConsole:
@@ -40,7 +43,9 @@ class FakeSearchConsole:
         inspections: dict[str, Inspection | Exception] | None = None,
         sitemaps: Iterable[Sitemap] = (),
         quota: int = 2000,
+        first_incomplete_date: str | None = None,
     ) -> None:
+        self.first_incomplete_date = first_incomplete_date
         self.properties = list(properties)
         self.rows = list(rows)
         self.inspections = inspections or {}
@@ -74,12 +79,17 @@ class FakeSearchConsole:
         data_state: str = "final",
         filters: list[dict] | None = None,
         *,
+        aggregation_type: str | None = None,
+        by_day: bool = False,
         limit: int | None = None,
         page_size: int = 25_000,
-    ) -> Iterator[Row]:
+    ) -> SearchAnalyticsRows:
         self._require(property)
-        self.calls.append(("iter_search_analytics", (property, start, end, tuple(dimensions), search_type)))
-        yield from self.rows[:limit]
+        self.calls.append(
+            ("iter_search_analytics", (property, start, end, tuple(dimensions), search_type, aggregation_type, by_day))
+        )
+        rows = SearchAnalyticsRows(iter([{"firstIncompleteDate": self.first_incomplete_date}, *self.rows[:limit]]))
+        return rows
 
     def quota_remaining(self, property: str) -> int:
         return self.quota
@@ -130,9 +140,10 @@ class FakePageSpeed:
         self,
         url: str,
         strategy: str = "mobile",
-        categories: Sequence[str] = ("performance",),
+        categories: Sequence[str] = CATEGORIES,
         *,
         locale: str | None = None,
+        screenshots: bool = False,
     ) -> PageSpeedResult:
         self.calls.append((url, strategy, tuple(categories)))
         result = self.results.get(url) or PageSpeedResult(url=url, final_url=url, strategy=strategy)
@@ -144,17 +155,65 @@ class FakePageSpeed:
         self,
         urls: Iterable[str],
         strategy: str = "mobile",
-        categories: Sequence[str] = ("performance",),
+        categories: Sequence[str] = CATEGORIES,
         *,
         concurrency: int = 4,
         locale: str | None = None,
+        screenshots: bool = False,
     ) -> Iterator[PageSpeedResult | PageSpeedError]:
         for url in urls:
             try:
-                yield self.analyze(url, strategy, categories, locale=locale)
+                yield self.analyze(url, strategy, categories, locale=locale, screenshots=screenshots)
             except QuotaExceeded as exc:
                 if exc.daily:
                     raise
                 yield PageSpeedError(url=url, code=exc.code, message=exc.message, status=exc.status)
             except ApiError as exc:
                 yield PageSpeedError(url=url, code=exc.code, message=exc.message, status=exc.status)
+
+
+class FakeCrUX:
+    """records / histories: ключ — URL или origin; нет ключа → None (у Google нет данных)."""
+
+    def __init__(
+        self,
+        records: dict[str, CruxRecord | Exception] | None = None,
+        histories: dict[str, CruxHistory | Exception] | None = None,
+    ) -> None:
+        self.records = records or {}
+        self.histories = histories or {}
+        self.calls: list[tuple[str, str, str | None]] = []
+
+    @staticmethod
+    def _pick(store: dict, key: str) -> CruxRecord | CruxHistory | None:
+        result = store.get(key)
+        if isinstance(result, Exception):
+            raise result
+        return result
+
+    def record(
+        self,
+        url: str | None = None,
+        *,
+        origin: str | None = None,
+        form_factor: str | None = None,
+        metrics: Sequence[str] | None = None,
+    ) -> CruxRecord | None:
+        key = url or origin or ""
+        self.calls.append(("record", key, form_factor))
+        result = self._pick(self.records, key)
+        return result if isinstance(result, CruxRecord) or result is None else None
+
+    def history(
+        self,
+        url: str | None = None,
+        *,
+        origin: str | None = None,
+        form_factor: str | None = None,
+        metrics: Sequence[str] | None = None,
+        periods: int = 25,
+    ) -> CruxHistory | None:
+        key = url or origin or ""
+        self.calls.append(("history", key, form_factor))
+        result = self._pick(self.histories, key)
+        return result if isinstance(result, CruxHistory) or result is None else None

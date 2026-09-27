@@ -18,7 +18,8 @@ def sitemaps(
     """Карты сайта ресурса: тип, ошибки, предупреждения, даты отправки.
 
     --json: {"ok": true, "site", "count", "sitemaps": [{path, type, errors, warnings,
-    is_pending, is_sitemaps_index, last_submitted, last_downloaded}]}.
+    is_pending, is_sitemaps_index, last_submitted, last_downloaded, contents: [{type,
+    submitted, indexed}]}]}; contents — сколько URL каждого типа (web, image, video) в карте.
 
     \b
     Пример:
@@ -36,9 +37,11 @@ def sitemaps(
         table.add_column("Тип")
         table.add_column("Ошибки", justify="right")
         table.add_column("Предупр.", justify="right")
+        table.add_column("URL в карте", justify="right")
         table.add_column("Отправлена")
         for s in items:
-            table.add_row(s.path, s.type or "", str(s.errors), str(s.warnings), s.last_submitted or "")
+            submitted = ", ".join(f"{c.type}: {c.submitted}" for c in s.contents)
+            table.add_row(s.path, s.type or "", str(s.errors), str(s.warnings), submitted, s.last_submitted or "")
         output.human.console.print(table)
 
     output.emit_success(
@@ -57,7 +60,7 @@ def sitemap(
     """Одна карта сайта: статус обработки, ошибки, даты.
 
     --json: {"ok": true, "site", "path", "type", "errors", "warnings", "is_pending",
-    "is_sitemaps_index", "last_submitted", "last_downloaded"}.
+    "is_sitemaps_index", "last_submitted", "last_downloaded", "contents": [{type, submitted, indexed}]}.
 
     \b
     Пример:
@@ -78,6 +81,7 @@ def sitemap(
                 "Индекс карт": d["is_sitemaps_index"],
                 "Отправлена": d["last_submitted"] or "—",
                 "Загружена Google": d["last_downloaded"] or "—",
+                **{f"URL ({c['type']})": c["submitted"] for c in d["contents"]},
             },
         ),
     )

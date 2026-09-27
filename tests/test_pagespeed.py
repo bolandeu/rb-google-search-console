@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import copy
+import json
 import threading
+from pathlib import Path
 from typing import Any
 
 import httpx
@@ -193,3 +195,60 @@ def test_analyze_many_stops_on_daily_quota() -> None:
         for item in ps(handler, api_key="k").analyze_many([f"https://e.com/{i}" for i in range(50)], concurrency=1):
             got.append(item)
     assert len(got) == 2
+
+
+FIXTURE = Path(__file__).parent / "fixtures" / "psi_ost_term_mobile.json"  # живой ответ PSI (урезанный), Lighthouse 13
+
+
+def test_live_fixture_full_parse() -> None:
+    data = json.loads(FIXTURE.read_text(encoding="utf-8"))
+    r = gsc.parse_pagespeed("https://ost-term.ru/", "mobile", data)
+    assert set(r.scores) == {"performance", "accessibility", "best-practices", "seo"}
+    assert r.category_titles["performance"] == "Производительность"
+    assert r.lighthouse_version.startswith("13.")
+    lcp = r.audit("largest-contentful-paint")
+    assert lcp is not None and lcp.description
+    assert gsc.AuditRef(category="performance", weight=25.0, group="metrics") in lcp.categories
+    assert any(ref.category == "seo" for a in r.audits for ref in a.categories)
+    assert r.crux_origin is not None and r.crux_origin.lcp is not None
+    m = r.crux_origin.lcp
+    assert m.good is not None and m.needs_improvement is not None and m.poor is not None
+    assert abs(m.good + m.needs_improvement + m.poor - 1) < 0.01
+    assert r.stack_packs and r.stack_packs[0].id == "wordpress" and r.stack_packs[0].descriptions
+    assert any(e.is_first_party for e in r.entities) and any(e.category == "analytics" for e in r.entities)
+    assert r.run_warnings == [] and r.runtime_error is None
+    # без screenshots=True — никаких base64-картинок
+    assert r.final_screenshot is None and r.full_page_screenshot is None
+    thumbs = r.audit("screenshot-thumbnails")
+    assert thumbs is not None and thumbs.details == []
+    with_shots = gsc.parse_pagespeed("https://ost-term.ru/", "mobile", data, screenshots=True)
+    assert with_shots.final_screenshot == "data:image/jpeg;base64,FINAL"
+    assert with_shots.full_page_screenshot == "data:image/jpeg;base64,FULL"
+    shots = with_shots.audit("screenshot-thumbnails")
+    assert shots is not None and shots.details
+
+
+def test_runtime_error_and_warnings() -> None:
+    data = {
+        "lighthouseResult": {
+            "runtimeError": {"code": "FAILED_DOCUMENT_REQUEST", "message": "net::ERR_TIMED_OUT"},
+            "runWarnings": ["The page was redirected"],
+            "audits": {"x": {"id": "x", "warnings": ["w1"], "explanation": "why", "errorMessage": "boom"}},
+        }
+    }
+    r = gsc.parse_pagespeed("u", "mobile", data)
+    assert r.runtime_error == "FAILED_DOCUMENT_REQUEST: net::ERR_TIMED_OUT"
+    assert r.run_warnings == ["The page was redirected"]
+    audit = r.audit("x")
+    assert audit is not None and (audit.warnings, audit.explanation, audit.error_message) == (["w1"], "why", "boom")
+
+
+def test_all_categories_by_default() -> None:
+    seen: list[httpx.Request] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        seen.append(request)
+        return json_response(200, PSI_RESPONSE)
+
+    ps(handler, api_key="k").analyze("https://example.com/")
+    assert seen[0].url.params.get_list("category") == ["PERFORMANCE", "ACCESSIBILITY", "BEST_PRACTICES", "SEO"]

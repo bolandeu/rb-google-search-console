@@ -15,6 +15,21 @@ write them at release time.
 
 ### Added
 
+- Search Analytics: `aggregation_type` (`--aggregation byPage|byProperty`), `by_day`
+  (`--by-day` — запрос на каждый день, обходит предел Google ~50 000 строк на запрос),
+  фильтры в CLI (`--filter СРЕЗ:ОПЕРАТОР:ВЫРАЖЕНИЕ`), почасовые данные (`-d hour
+  --data-state hourly_all`), `first_incomplete_date` — с какой даты данные неполные
+  (`iter_search_analytics` возвращает `SearchAnalyticsRows` — по-прежнему итератор `Row`).
+- Карты сайта: `contents` — сколько URL каждого типа в карте.
+- PageSpeed: все 4 категории по умолчанию (одна единица квоты); доли хороших / средних /
+  плохих визитов CrUX; у аудитов — описание, предупреждения, `explanation`, `error_message`,
+  категории с весом и группой; `category_titles`, `stack_packs` (советы под WordPress и др.),
+  `entities` (сторонние сервисы), `run_warnings`, `runtime_error`; скриншоты только по
+  `screenshots=True` / `--screenshots` (иначе base64-картинки из деталей выбрасываются).
+- Chrome UX Report API: `gsc.CrUX` (`record`, `history` до 40 недель), команда `gsc crux`,
+  `parse_crux_record` / `parse_crux_history`, `gsc.testing.FakeCrUX`. Ключ — тот же, что у
+  PageSpeed, с включённым Chrome UX Report API.
+
 - Публичный API библиотеки (`import gsc`, без побочных эффектов при импорте):
   `SearchConsole` (`list_properties`, `get_property`, `property_for`,
   `iter_search_analytics` с постраничной выдачей по 25 000, `inspect_url`,

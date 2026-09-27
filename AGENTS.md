@@ -33,8 +33,11 @@ text agents read as this CLI's API contract.
   `_site_errors`), 429 / 403 rateLimitExceeded → `QuotaExceeded` (daily quota is
   never retried), rest → `ApiError`. The service-account token is fetched by
   `google-auth` in `auth_headers()` — per request, so it refreshes after 1 h.
-  Tests inject `httpx.MockTransport` via `transport=`. Never call `httpx`
-  from `core/` or `commands/`.
+  `CruxProvider` — Chrome UX Report API with the PSI key; 404 means "no data"
+  and becomes `None`. Gotcha: a relative path whose first segment has a colon
+  (`records:queryRecord`) is parsed by httpx as a URL scheme — write
+  `./records:…`. Tests inject `httpx.MockTransport` via `transport=`. Never
+  call `httpx` from `core/` or `commands/`.
 - `credentials/` — secrets via OS keychain + env vars. Never write a secret
   to `.gsc/config.toml` or any other project-local file.
 - `output/` — every command supports both human and `--json` output via
@@ -66,7 +69,9 @@ a **major** release. Rules:
   read credentials lazily, on the first request.
 - Parsing lives in `core/search_console.py` / `core/pagespeed.py` (`parse_*`),
   models in `core/models.py`; commands only render models.
-- `gsc.testing.FakeSearchConsole` / `FakePageSpeed` must keep the exact public
+- `tests/fixtures/psi_ost_term_mobile.json` is a real (trimmed) PSI response —
+  refresh it when Lighthouse changes its format, don't hand-edit its structure.
+- `gsc.testing.FakeSearchConsole` / `FakePageSpeed` / `FakeCrUX` must keep the exact public
   method signatures of the real clients — `test_fakes_mirror_real_api` fails
   otherwise. Add a method to both.
 - Quotas are handled here, not by callers: `core/quota.py` (`RateLimiter`,

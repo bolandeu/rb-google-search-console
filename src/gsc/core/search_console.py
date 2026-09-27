@@ -13,7 +13,17 @@ import httpx
 
 from ..providers.google import AccessDenied, SearchConsoleProvider, seconds_until_quota_reset
 from .errors import ApiError, InvalidArguments, QuotaExceeded
-from .models import Inspection, InspectionError, Issue, Property, RichResult, RichResultItem, Row, Sitemap
+from .models import (
+    Inspection,
+    InspectionError,
+    Issue,
+    Property,
+    RichResult,
+    RichResultItem,
+    Row,
+    Sitemap,
+    SitemapContent,
+)
 from .quota import INSPECTION_PER_MINUTE, InspectionQuota, RateLimiter
 
 log = logging.getLogger(__name__)
@@ -119,6 +129,37 @@ def parse_inspection(url: str, site_url: str, response: dict) -> Inspection:
     )
 
 
+def _days(first: str, last: str) -> list[tuple[str, str]]:
+    day, stop = dt.date.fromisoformat(first), dt.date.fromisoformat(last)
+    if day > stop:
+        raise InvalidArguments(f"Начало периода {first} позже конца {last}.")
+    result = []
+    while day <= stop:
+        result.append((day.isoformat(), day.isoformat()))
+        day += dt.timedelta(days=1)
+    return result
+
+
+class SearchAnalyticsRows(Iterator[Row]):
+    """Итератор строк Search Analytics + метаданные ответа Google (заполняются после первой страницы)."""
+
+    def __init__(self, source: Iterator[Row | dict]) -> None:
+        self._source = source
+        self.first_incomplete_date: str | None = None
+        self.first_incomplete_hour: str | None = None
+
+    def __iter__(self) -> SearchAnalyticsRows:
+        return self
+
+    def __next__(self) -> Row:
+        while True:
+            item = next(self._source)
+            if isinstance(item, Row):
+                return item
+            self.first_incomplete_date = item.get("firstIncompleteDate") or self.first_incomplete_date
+            self.first_incomplete_hour = item.get("firstIncompleteHour") or self.first_incomplete_hour
+
+
 def _sitemap(raw: dict) -> Sitemap:
     return Sitemap(
         path=raw.get("path", ""),
@@ -129,6 +170,14 @@ def _sitemap(raw: dict) -> Sitemap:
         last_downloaded=raw.get("lastDownloaded"),
         warnings=int(raw.get("warnings", 0)),
         errors=int(raw.get("errors", 0)),
+        contents=[
+            SitemapContent(
+                type=c.get("type", ""),
+                submitted=int(c.get("submitted", 0)),
+                indexed=int(c["indexed"]) if c.get("indexed") is not None else None,
+            )
+            for c in raw.get("contents", [])
+        ],
     )
 
 
@@ -179,46 +228,88 @@ class SearchConsole:
         data_state: str = "final",
         filters: list[dict] | None = None,
         *,
+        aggregation_type: str | None = None,
+        by_day: bool = False,
         limit: int | None = None,
         page_size: int = PAGE_SIZE,
-    ) -> Iterator[Row]:
+    ) -> SearchAnalyticsRows:
         """Строки отчёта постранично (rowLimit + startRow): весь отчёт в памяти не держится.
 
         filters — dimensionFilters API как есть: [{"dimension": "page", "operator": "contains",
-        "expression": "/blog/"}]. limit — сколько строк всего (None — все).
+        "expression": "/blog/"}]. aggregation_type — auto (по умолчанию Google), byPage,
+        byProperty: клики/показы по страницам и по сайту считаются по-разному.
+        by_day=True — отдельный запрос на каждый день периода: Google отдаёт не больше
+        ~50 000 строк на запрос, по дням предел действует на каждый день отдельно. Строки
+        тогда подневные, в keys добавляется "date"; суммировать — на стороне вызывающего
+        (позицию — взвешивая по показам). limit — сколько строк всего (None — все).
+
+        Возвращает итерируемый объект; после первой страницы у него заполнено
+        `.first_incomplete_date` (при data_state="all"/"hourly_all": с какой даты данные неполные).
         """
+        return SearchAnalyticsRows(
+            self._rows(
+                property,
+                start,
+                end,
+                list(dimensions),
+                search_type,
+                data_state,
+                filters,
+                aggregation_type,
+                by_day,
+                limit,
+                page_size,
+            )
+        )
+
+    def _rows(
+        self,
+        property: str,
+        start: dt.date | str | None,
+        end: dt.date | str | None,
+        dims: list[str],
+        search_type: str,
+        data_state: str,
+        filters: list[dict] | None,
+        aggregation_type: str | None,
+        by_day: bool,
+        limit: int | None,
+        page_size: int,
+    ) -> Iterator[Row | dict]:
         d_start, d_end = default_range()
-        dims = list(dimensions)
-        body: dict[str, Any] = {
-            "startDate": _date(start or d_start),
-            "endDate": _date(end or d_end),
-            "dimensions": dims,
-            "type": search_type,
-            "dataState": data_state,
-        }
+        first, last = _date(start or d_start), _date(end or d_end)
+        body: dict[str, Any] = {"dimensions": dims, "type": search_type, "dataState": data_state}
         if filters:
             body["dimensionFilterGroups"] = [{"filters": filters}]
-        start_row = 0
+        if aggregation_type:
+            body["aggregationType"] = aggregation_type
+        days = _days(first, last) if by_day else [(first, last)]
         yielded = 0
-        while True:
-            size = page_size if limit is None else min(page_size, limit - yielded)
-            if size <= 0:
-                return
-            rows = self._api.search_analytics(property, {**body, "rowLimit": size, "startRow": start_row}).get(
-                "rows", []
-            )
-            for raw in rows:
-                yield Row(
-                    keys=dict(zip(dims, raw.get("keys", []), strict=False)),
-                    clicks=int(raw.get("clicks", 0)),
-                    impressions=int(raw.get("impressions", 0)),
-                    ctr=float(raw.get("ctr", 0.0)),
-                    position=float(raw.get("position", 0.0)),
-                )
-            yielded += len(rows)
-            if len(rows) < size:
-                return
-            start_row += len(rows)
+        for day_start, day_end in days:
+            start_row = 0
+            while True:
+                size = page_size if limit is None else min(page_size, limit - yielded)
+                if size <= 0:
+                    return
+                request = {**body, "startDate": day_start, "endDate": day_end, "rowLimit": size, "startRow": start_row}
+                response = self._api.search_analytics(property, request)
+                yield response.get("metadata", {})  # SearchAnalyticsRows забирает себе, наружу не выходит
+                rows = response.get("rows", [])
+                for raw in rows:
+                    keys = dict(zip(dims, raw.get("keys", []), strict=False))
+                    if by_day and "date" not in keys:
+                        keys["date"] = day_start
+                    yield Row(
+                        keys=keys,
+                        clicks=int(raw.get("clicks", 0)),
+                        impressions=int(raw.get("impressions", 0)),
+                        ctr=float(raw.get("ctr", 0.0)),
+                        position=float(raw.get("position", 0.0)),
+                    )
+                yielded += len(rows)
+                if len(rows) < size:
+                    break
+                start_row += len(rows)
 
     # --- URL Inspection --------------------------------------------------------------
 

@@ -12,19 +12,28 @@ SemVer). Импорт не трогает сеть, keychain и CLI: ключ ч
     for item in sc.inspect_many(urls, site, limit=500):
         ...
     ps = gsc.PageSpeed()
-    result = ps.analyze("https://example.com/", "mobile", ["performance", "seo"])
+    result = ps.analyze("https://example.com/", "mobile")        # все 4 категории
+    history = gsc.CrUX().history(origin="https://example.com", form_factor="PHONE")
 
-Для тестов без сети — gsc.testing.FakeSearchConsole / FakePageSpeed.
+Для тестов без сети — gsc.testing.FakeSearchConsole / FakePageSpeed / FakeCrUX.
 """
 
 from __future__ import annotations
 
 from .core.auth import AuthStatus, auth_status
+from .core.crux import CrUX, parse_crux_history, parse_crux_record
 from .core.errors import ApiError, CliError, NotAuthorized, PropertyNotFound, QuotaExceeded
 from .core.models import (
     Audit,
+    AuditRef,
     Crux,
+    CruxApiMetric,
+    CruxHistory,
+    CruxHistoryMetric,
     CruxMetric,
+    CruxPeriod,
+    CruxRecord,
+    Entity,
     Inspection,
     InspectionError,
     Issue,
@@ -36,9 +45,11 @@ from .core.models import (
     RichResultItem,
     Row,
     Sitemap,
+    SitemapContent,
+    StackPack,
 )
 from .core.pagespeed import PageSpeed, parse_pagespeed
-from .core.search_console import SearchConsole, default_range, parse_inspection, property_for
+from .core.search_console import SearchAnalyticsRows, SearchConsole, default_range, parse_inspection, property_for
 from .core.version import DEV_VERSION, installed_version
 
 __version__ = installed_version() or DEV_VERSION
@@ -46,10 +57,18 @@ __version__ = installed_version() or DEV_VERSION
 __all__ = [
     "ApiError",
     "Audit",
+    "AuditRef",
     "AuthStatus",
     "CliError",
+    "CrUX",
     "Crux",
+    "CruxApiMetric",
+    "CruxHistory",
+    "CruxHistoryMetric",
     "CruxMetric",
+    "CruxPeriod",
+    "CruxRecord",
+    "Entity",
     "Inspection",
     "InspectionError",
     "Issue",
@@ -64,11 +83,16 @@ __all__ = [
     "RichResult",
     "RichResultItem",
     "Row",
+    "SearchAnalyticsRows",
     "SearchConsole",
     "Sitemap",
+    "SitemapContent",
+    "StackPack",
     "__version__",
     "auth_status",
     "default_range",
+    "parse_crux_history",
+    "parse_crux_record",
     "parse_inspection",
     "parse_pagespeed",
     "property_for",

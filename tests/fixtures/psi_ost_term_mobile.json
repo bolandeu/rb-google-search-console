@@ -1,0 +1,5470 @@
+{
+"kind": "pagespeedonline#result",
+"id": "https://ost-term.ru/",
+"loadingExperience": {
+"id": "https://ost-term.ru",
+"metrics": {
+"CUMULATIVE_LAYOUT_SHIFT_SCORE": {
+"percentile": 0,
+"distributions": [
+{
+"min": 0,
+"max": 10,
+"proportion": 0.9604
+},
+{
+"min": 10,
+"max": 25,
+"proportion": 0.0344
+},
+{
+"min": 25,
+"proportion": 0.0052
+}
+],
+"category": "FAST"
+},
+"EXPERIMENTAL_TIME_TO_FIRST_BYTE": {
+"percentile": 1411,
+"distributions": [
+{
+"min": 0,
+"max": 800,
+"proportion": 0.2517
+},
+{
+"min": 800,
+"max": 1800,
+"proportion": 0.6286
+},
+{
+"min": 1800,
+"proportion": 0.1197
+}
+],
+"category": "AVERAGE"
+},
+"FIRST_CONTENTFUL_PAINT_MS": {
+"percentile": 2046,
+"distributions": [
+{
+"min": 0,
+"max": 1800,
+"proportion": 0.6328
+},
+{
+"min": 1800,
+"max": 3000,
+"proportion": 0.2649
+},
+{
+"min": 3000,
+"proportion": 0.1022
+}
+],
+"category": "AVERAGE"
+},
+"INTERACTION_TO_NEXT_PAINT": {
+"percentile": 114,
+"distributions": [
+{
+"min": 0,
+"max": 200,
+"proportion": 0.8969
+},
+{
+"min": 200,
+"max": 500,
+"proportion": 0.0774
+},
+{
+"min": 500,
+"proportion": 0.0257
+}
+],
+"category": "FAST"
+},
+"LARGEST_CONTENTFUL_PAINT_MS": {
+"percentile": 2058,
+"distributions": [
+{
+"min": 0,
+"max": 2500,
+"proportion": 0.834
+},
+{
+"min": 2500,
+"max": 4000,
+"proportion": 0.1313
+},
+{
+"min": 4000,
+"proportion": 0.0347
+}
+],
+"category": "FAST"
+}
+},
+"overall_category": "AVERAGE",
+"initial_url": "https://ost-term.ru/",
+"origin_fallback": true
+},
+"originLoadingExperience": {
+"id": "https://ost-term.ru",
+"metrics": {
+"CUMULATIVE_LAYOUT_SHIFT_SCORE": {
+"percentile": 0,
+"distributions": [
+{
+"min": 0,
+"max": 10,
+"proportion": 0.9604
+},
+{
+"min": 10,
+"max": 25,
+"proportion": 0.0344
+},
+{
+"min": 25,
+"proportion": 0.0052
+}
+],
+"category": "FAST"
+},
+"EXPERIMENTAL_TIME_TO_FIRST_BYTE": {
+"percentile": 1411,
+"distributions": [
+{
+"min": 0,
+"max": 800,
+"proportion": 0.2517
+},
+{
+"min": 800,
+"max": 1800,
+"proportion": 0.6286
+},
+{
+"min": 1800,
+"proportion": 0.1197
+}
+],
+"category": "AVERAGE"
+},
+"FIRST_CONTENTFUL_PAINT_MS": {
+"percentile": 2046,
+"distributions": [
+{
+"min": 0,
+"max": 1800,
+"proportion": 0.6328
+},
+{
+"min": 1800,
+"max": 3000,
+"proportion": 0.2649
+},
+{
+"min": 3000,
+"proportion": 0.1022
+}
+],
+"category": "AVERAGE"
+},
+"INTERACTION_TO_NEXT_PAINT": {
+"percentile": 114,
+"distributions": [
+{
+"min": 0,
+"max": 200,
+"proportion": 0.8969
+},
+{
+"min": 200,
+"max": 500,
+"proportion": 0.0774
+},
+{
+"min": 500,
+"proportion": 0.0257
+}
+],
+"category": "FAST"
+},
+"LARGEST_CONTENTFUL_PAINT_MS": {
+"percentile": 2058,
+"distributions": [
+{
+"min": 0,
+"max": 2500,
+"proportion": 0.834
+},
+{
+"min": 2500,
+"max": 4000,
+"proportion": 0.1313
+},
+{
+"min": 4000,
+"proportion": 0.0347
+}
+],
+"category": "FAST"
+}
+},
+"overall_category": "AVERAGE",
+"initial_url": "https://ost-term.ru/"
+},
+"lighthouseResult": {
+"requestedUrl": "https://ost-term.ru/",
+"finalUrl": "https://ost-term.ru/",
+"mainDocumentUrl": "https://ost-term.ru/",
+"finalDisplayedUrl": "https://ost-term.ru/",
+"lighthouseVersion": "13.5.0",
+"userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.36 Safari/537.36",
+"fetchTime": "2026-09-27T07:34:03.920Z",
+"runWarnings": [],
+"audits": {
+"input-button-name": {
+"id": "input-button-name",
+"title": "Текст кнопок ввода легко различим",
+"description": "Добавьте к кнопкам ввода легко различимый текст, чтобы пользователи программы чтения с экрана могли понимать их назначение. Подробнее [о кнопках ввода](https://dequeuniversity.com/rules/axe/4.13/input-button-name)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"items": [],
+"headings": [
+{
+"subItemsHeading": {
+"valueType": "node",
+"key": "relatedNode"
+},
+"key": "node",
+"valueType": "node",
+"label": "Неподходящие элементы"
+}
+],
+"type": "table"
+}
+},
+"crawlable-anchors": {
+"id": "crawlable-anchors",
+"title": "Ссылки можно просканировать",
+"description": "Поисковые системы при сканировании сайтов учитывают содержащиеся в ссылках атрибуты `href`. Чтобы на вашем сайте могло быть проиндексировано максимально возможное количество страниц, атрибуты `href` в анкерах должны корректно ссылаться на целевые страницы. Подробнее о том, как [сделать ссылки доступными для сканирования](https://support.google.com/webmasters/answer/9112205)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"items": [],
+"headings": [
+{
+"valueType": "node",
+"label": "Ссылки, которые невозможно просканировать",
+"key": "node"
+}
+],
+"type": "table"
+}
+},
+"label-content-name-mismatch": {
+"id": "label-content-name-mismatch",
+"title": "У элементов с видимыми текстовыми метками есть подходящие доступные названия",
+"description": "Видимые текстовые метки, которые не совпадают с доступными названиями, могут запутать пользователей программ чтения с экрана. Подробнее [о доступных названиях](https://dequeuniversity.com/rules/axe/4.13/label-content-name-mismatch)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"aria-valid-attr-value": {
+"id": "aria-valid-attr-value",
+"title": "Недействительные значения атрибутов `[aria-*]` отсутствуют",
+"description": "Технологии специальных возможностей, например программы чтения с экрана, не могут распознавать атрибуты ARIA с недопустимыми значениями. Подробнее [о существующих значениях для атрибутов ARIA](https://dequeuniversity.com/rules/axe/4.13/aria-valid-attr-value)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"type": "table",
+"items": [],
+"headings": [
+{
+"label": "Неподходящие элементы",
+"valueType": "node",
+"subItemsHeading": {
+"valueType": "node",
+"key": "relatedNode"
+},
+"key": "node"
+}
+]
+}
+},
+"aria-command-name": {
+"id": "aria-command-name",
+"title": "У элементов `button`, `link` и `menuitem` есть названия, доступные программам чтения с экрана",
+"description": "Если у элемента нет названия, доступного программам чтения с экрана, пользователи услышат его общее название и не поймут, для чего он нужен. Подробнее о том, [как сделать элементы команд более доступными](https://dequeuniversity.com/rules/axe/4.13/aria-command-name)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"aria-conditional-attr": {
+"id": "aria-conditional-attr",
+"title": "Атрибуты ARIA используются так, как указано для роли элемента",
+"description": "Использовать некоторые атрибуты ARIA в элементе можно только при определенных условиях. Подробнее [об условных атрибутах ARIA](https://dequeuniversity.com/rules/axe/4.13/aria-conditional-attr)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"items": [],
+"type": "table",
+"headings": [
+{
+"valueType": "node",
+"label": "Неподходящие элементы",
+"subItemsHeading": {
+"valueType": "node",
+"key": "relatedNode"
+},
+"key": "node"
+}
+]
+}
+},
+"target-size": {
+"id": "target-size",
+"title": "Области прикосновения и расстояние между ними недостаточно большие",
+"description": "Области прикосновения должны быть достаточно большими, как и расстояние между ними. Так пользователям, у которых могут возникнуть трудности с нажатием на небольшие элементы управления, будет проще выбрать нужный. Подробнее [об областях прикосновения](https://dequeuniversity.com/rules/axe/4.13/target-size)…",
+"score": 0,
+"scoreDisplayMode": "binary",
+"details": {
+"headings": [
+{
+"key": "node",
+"valueType": "node",
+"label": "Неподходящие элементы",
+"subItemsHeading": {
+"valueType": "node",
+"key": "relatedNode"
+}
+}
+],
+"type": "table",
+"items": [
+{
+"subItems": {
+"type": "subitems",
+"items": [
+{
+"relatedNode": {
+"snippet": "<button class=\"rb-reviews__dot\" data-index=\"1\" aria-label=\"Слайд 2\" style=\"transform: scale(0.8); opacity: 0.7;\">",
+"type": "node",
+"lhId": "1-23-BUTTON",
+"selector": "div.rb-reviews-widget > div#rb-reviews-1 > div.rb-reviews__dots > button.rb-reviews__dot",
+"nodeLabel": "Слайд 2",
+"boundingRect": {
+"left": 147,
+"height": 6,
+"bottom": 9101,
+"right": 153,
+"top": 9095,
+"width": 6
+},
+"path": "1,HTML,1,BODY,2,DIV,3,DIV,0,DIV,0,ARTICLE,0,DIV,0,DIV,0,DIV,0,DIV,0,DIV,0,DIV,1,DIV,1,DIV,1,BUTTON"
+}
+}
+]
+},
+"node": {
+"path": "1,HTML,1,BODY,2,DIV,3,DIV,0,DIV,0,ARTICLE,0,DIV,0,DIV,0,DIV,0,DIV,0,DIV,0,DIV,1,DIV,1,DIV,0,BUTTON",
+"selector": "div.rb-reviews-widget > div#rb-reviews-1 > div.rb-reviews__dots > button.rb-reviews__dot",
+"explanation": "Fix any of the following:\n  Target has insufficient size (4.8px by 4.8px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 8px instead of at least 24px.",
+"lhId": "1-22-BUTTON",
+"boundingRect": {
+"left": 132,
+"right": 136,
+"bottom": 9101,
+"height": 5,
+"width": 5,
+"top": 9096
+},
+"nodeLabel": "Слайд 1",
+"snippet": "<button class=\"rb-reviews__dot rb-reviews__dot--active\" data-index=\"0\" aria-label=\"Слайд 1\" style=\"transform: scale(0.6); opacity: 0.4;\">",
+"type": "node"
+}
+},
+{
+"subItems": {
+"items": [
+{
+"relatedNode": {
+"path": "1,HTML,1,BODY,2,DIV,3,DIV,0,DIV,0,ARTICLE,0,DIV,0,DIV,0,DIV,0,DIV,0,DIV,0,DIV,1,DIV,1,DIV,0,BUTTON",
+"boundingRect": {
+"width": 5,
+"top": 9096,
+"bottom": 9101,
+"right": 136,
+"height": 5,
+"left": 132
+},
+"nodeLabel": "Слайд 1",
+"lhId": "1-22-BUTTON",
+"selector": "div.rb-reviews-widget > div#rb-reviews-1 > div.rb-reviews__dots > button.rb-reviews__dot",
+"type": "node",
+"snippet": "<button class=\"rb-reviews__dot rb-reviews__dot--active\" data-index=\"0\" aria-label=\"Слайд 1\" style=\"transform: scale(0.6); opacity: 0.4;\">"
+}
+},
+{
+"relatedNode": {
+"lhId": "1-24-BUTTON",
+"boundingRect": {
+"height": 8,
+"right": 170,
+"bottom": 9102,
+"top": 9094,
+"left": 162,
+"width": 8
+},
+"nodeLabel": "Слайд 3",
+"selector": "div.rb-reviews-widget > div#rb-reviews-1 > div.rb-reviews__dots > button.rb-reviews__dot",
+"type": "node",
+"snippet": "<button class=\"rb-reviews__dot\" data-index=\"2\" aria-label=\"Слайд 3\">",
+"path": "1,HTML,1,BODY,2,DIV,3,DIV,0,DIV,0,ARTICLE,0,DIV,0,DIV,0,DIV,0,DIV,0,DIV,0,DIV,1,DIV,1,DIV,2,BUTTON"
+}
+}
+],
+"type": "subitems"
+},
+"node": {
+"path": "1,HTML,1,BODY,2,DIV,3,DIV,0,DIV,0,ARTICLE,0,DIV,0,DIV,0,DIV,0,DIV,0,DIV,0,DIV,1,DIV,1,DIV,1,BUTTON",
+"boundingRect": {
+"top": 9095,
+"width": 6,
+"left": 147,
+"height": 6,
+"bottom": 9101,
+"right": 153
+},
+"lhId": "1-23-BUTTON",
+"selector": "div.rb-reviews-widget > div#rb-reviews-1 > div.rb-reviews__dots > button.rb-reviews__dot",
+"explanation": "Fix any of the following:\n  Target has insufficient size (6.4px by 6.4px, should be at least 24px by 24px)\n  Target has insufficient space to its closest neighbors. Safe clickable space has a diameter of 8px instead of at least 24px.",
+"type": "node",
+"nodeLabel": "Слайд 2",
+"snippet": "<button class=\"rb-reviews__dot\" data-index=\"1\" aria-label=\"Слайд 2\" style=\"transform: scale(0.8); opacity: 0.7;\">"
+}
+}
+]
+}
+},
+"third-party-cookies": {
+"id": "third-party-cookies",
+"title": "Сторонние файлы cookie не используются",
+"description": "Иногда сторонние файлы cookie могут блокироваться. Узнайте, [что делать в случае ограничений на использование таких файлов](https://privacysandbox.google.com/cookies/prepare/overview).",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"items": [],
+"headings": [
+{
+"valueType": "text",
+"label": "Название",
+"key": "name"
+},
+{
+"valueType": "url",
+"key": "url",
+"label": "URL"
+}
+],
+"type": "table"
+}
+},
+"valid-lang": {
+"id": "valid-lang",
+"title": "Недействительные значения атрибутов `[lang]` отсутствуют",
+"description": "Чтобы программы чтения с экрана правильно озвучивали текст, укажите для элементов допустимый [языковой тег BCP 47](https://www.w3.org/International/questions/qa-choosing-language-tags#question). Подробнее о том, [как использовать атрибут `lang`](https://dequeuniversity.com/rules/axe/4.13/valid-lang)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"headings": [
+{
+"label": "Неподходящие элементы",
+"subItemsHeading": {
+"valueType": "node",
+"key": "relatedNode"
+},
+"valueType": "node",
+"key": "node"
+}
+],
+"type": "table",
+"items": []
+}
+},
+"button-name": {
+"id": "button-name",
+"title": "Названия кнопок доступны программам чтения с экрана",
+"description": "Если у кнопки нет названия, доступного программам чтения с экрана, пользователи услышат слово \"кнопка\", но не поймут, для чего она нужна. Подробнее о том, [как сделать кнопки более доступными](https://dequeuniversity.com/rules/axe/4.13/button-name)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"type": "table",
+"headings": [
+{
+"key": "node",
+"valueType": "node",
+"label": "Неподходящие элементы",
+"subItemsHeading": {
+"valueType": "node",
+"key": "relatedNode"
+}
+}
+],
+"items": []
+}
+},
+"list": {
+"id": "list",
+"title": "В списках содержатся только элементы `<li>` и элементы поддержки скрипта (`<script>` и `<template>`)",
+"description": "Используйте правильную структуру кода при верстке списков, иначе программы чтения с экрана будут некорректно их озвучивать. Подробнее [о правильной структуре списков](https://dequeuniversity.com/rules/axe/4.13/list)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"items": [],
+"headings": [
+{
+"valueType": "node",
+"subItemsHeading": {
+"valueType": "node",
+"key": "relatedNode"
+},
+"label": "Неподходящие элементы",
+"key": "node"
+}
+],
+"type": "table"
+}
+},
+"interactive": {
+"id": "interactive",
+"title": "Time to Interactive",
+"description": "Время загрузки для взаимодействия – показатель, который отражает время, за которое страница полностью подготавливается к взаимодействию с пользователем. Подробнее [о времени загрузки для взаимодействия](https://developer.chrome.com/docs/lighthouse/performance/interactive/)…",
+"score": 0.84,
+"scoreDisplayMode": "numeric",
+"displayValue": "4,4 сек.",
+"numericValue": 4371.523971213866,
+"numericUnit": "millisecond"
+},
+"aria-prohibited-attr": {
+"id": "aria-prohibited-attr",
+"title": "В элементах используются только разрешенные атрибуты ARIA",
+"description": "Если атрибуты ARIA используются в ролях, для которых они запрещены, пользователи специальных возможностей могут не получать важную информацию. Подробнее [о запрещенных ролях ARIA](https://dequeuniversity.com/rules/axe/4.13/aria-prohibited-attr)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"headings": [
+{
+"subItemsHeading": {
+"valueType": "node",
+"key": "relatedNode"
+},
+"label": "Неподходящие элементы",
+"key": "node",
+"valueType": "node"
+}
+],
+"items": [],
+"type": "table"
+}
+},
+"bootup-time": {
+"id": "bootup-time",
+"title": "Время выполнения кода JavaScript",
+"description": "Рекомендуем сократить время на обработку, компиляцию и выполнение скриптов JS. Для этого вы можете разбить код JS на небольшие фрагменты. Подробнее о том, [как ускорить выполнение скриптов JavaScript](https://developer.chrome.com/docs/lighthouse/performance/bootup-time/)…",
+"score": 1,
+"scoreDisplayMode": "metricSavings",
+"displayValue": "0,5 сек.",
+"metricSavings": {
+"TBT": 100
+},
+"details": {
+"headings": [
+{
+"label": "URL",
+"key": "url",
+"valueType": "url"
+},
+{
+"key": "total",
+"valueType": "ms",
+"granularity": 1,
+"label": "Общее процессорное время"
+},
+{
+"granularity": 1,
+"label": "Время оценки скриптов",
+"valueType": "ms",
+"key": "scripting"
+},
+{
+"label": "Время анализа скриптов",
+"key": "scriptParseCompile",
+"valueType": "ms",
+"granularity": 1
+}
+],
+"summary": {
+"wastedMs": 499.9055999999991
+},
+"type": "table",
+"sortedBy": [
+"total"
+],
+"items": [
+{
+"scriptParseCompile": 0,
+"scripting": 11.534399999999996,
+"total": 867.5651999999988,
+"url": "Unattributable"
+},
+{
+"scriptParseCompile": 8.981999999999998,
+"scripting": 27.124799999999993,
+"total": 482.40119999999985,
+"url": "https://ost-term.ru/"
+}
+]
+},
+"numericValue": 499.9055999999991,
+"numericUnit": "millisecond"
+},
+"table-duplicate-name": {
+"id": "table-duplicate-name",
+"title": "В таблицах указаны разные значения для атрибута summary и элемента `<caption>`",
+"description": "Атрибут summary должен описывать структуру таблицы, а в элементе `<caption>` требуется указать экранный заголовок. Точная разметка таблиц упрощает работу пользователей программ чтения с экрана. Подробнее [об атрибуте summary и элементе caption](https://dequeuniversity.com/rules/axe/4.13/table-duplicate-name)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"visual-order-follows-dom": {
+"id": "visual-order-follows-dom",
+"title": "Visual order on the page follows DOM order",
+"description": "DOM order matches the visual order, improving navigation for assistive technology. [Learn more about DOM and visual ordering](https://developer.chrome.com/docs/lighthouse/accessibility/visual-order-follows-dom/).",
+"score": null,
+"scoreDisplayMode": "manual"
+},
+"landmark-one-main": {
+"id": "landmark-one-main",
+"title": "В документе есть ориентир main",
+"description": "Если добавить ориентир main, пользователям программы чтения с экрана будет удобнее перемещаться по веб-странице. Подробнее [об ориентирах](https://dequeuniversity.com/rules/axe/4.13/landmark-one-main)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"type": "table",
+"headings": [
+{
+"valueType": "node",
+"label": "Неподходящие элементы",
+"key": "node",
+"subItemsHeading": {
+"key": "relatedNode",
+"valueType": "node"
+}
+}
+],
+"items": []
+}
+},
+"link-in-text-block": {
+"id": "link-in-text-block",
+"title": "Ссылки можно различить, не опираясь на цвет",
+"description": "Многие пользователи не видят текст с низкой контрастностью, или им сложно его воспринимать. Хорошо различимый текст ссылки облегчает работу людям со слабым зрением. Подробнее о том, [как сделать ссылку хорошо различимой](https://dequeuniversity.com/rules/axe/4.13/link-in-text-block)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"headings": [
+{
+"label": "Неподходящие элементы",
+"key": "node",
+"valueType": "node",
+"subItemsHeading": {
+"key": "relatedNode",
+"valueType": "node"
+}
+}
+],
+"type": "table",
+"items": []
+}
+},
+"forced-reflow-insight": {
+"id": "forced-reflow-insight",
+"title": "Принудительная компоновка",
+"description": "Принудительная компоновка происходит, когда JavaScript запрашивает геометрические свойства (например, offsetWidth) после того, как стили становятся недействительными из-за изменения состояния DOM. Это может привести к снижению производительности. Подробнее [о принудительной компоновке](https://developer.chrome.com/docs/performance/insights/forced-reflow) и возможных способах ее устранения…",
+"score": 0,
+"scoreDisplayMode": "numeric",
+"details": {
+"items": [
+{
+"items": [
+{
+"reflowTime": 49.843,
+"source": {
+"line": 2,
+"urlProvider": "network",
+"column": 27323,
+"type": "source-location",
+"url": "https://ost-term.ru/wp-includes/js/jquery/jquery.min.js"
+}
+}
+],
+"type": "table",
+"headings": [
+{
+"label": "Самый времязатратный вызов функции",
+"key": "source",
+"valueType": "source-location"
+},
+{
+"key": "reflowTime",
+"valueType": "ms",
+"granularity": 1,
+"label": "Общее время компоновки"
+}
+]
+},
+{
+"type": "table",
+"headings": [
+{
+"valueType": "source-location",
+"key": "source",
+"label": "Источник"
+},
+{
+"label": "Общее время компоновки",
+"valueType": "ms",
+"key": "reflowTime",
+"granularity": 1
+}
+],
+"items": [
+{
+"reflowTime": 48.067,
+"source": {
+"column": 49615,
+"line": 1,
+"type": "source-location",
+"url": "https://ost-term.ru/wp-includes/js/jquery/jquery.min.js",
+"urlProvider": "network"
+}
+},
+{
+"reflowTime": 0.895,
+"source": {
+"url": "https://ost-term.ru/wp-includes/js/jquery/jquery.min.js",
+"line": 1,
+"urlProvider": "network",
+"type": "source-location",
+"column": 50335
+}
+},
+{
+"reflowTime": 0.269,
+"source": {
+"line": 1,
+"column": 50393,
+"urlProvider": "network",
+"url": "https://ost-term.ru/wp-includes/js/jquery/jquery.min.js",
+"type": "source-location"
+}
+},
+{
+"reflowTime": 0.276,
+"source": {
+"line": 1,
+"urlProvider": "network",
+"type": "source-location",
+"url": "https://ost-term.ru/wp-includes/js/jquery/jquery.min.js",
+"column": 50457
+}
+},
+{
+"reflowTime": 0.336,
+"source": {
+"line": 1,
+"column": 84212,
+"type": "source-location",
+"urlProvider": "network",
+"url": "https://ost-term.ru/wp-includes/js/jquery/jquery.min.js"
+}
+}
+]
+}
+],
+"type": "list"
+}
+},
+"heading-order": {
+"id": "heading-order",
+"title": "Элементы заголовков расположены последовательно в порядке убывания",
+"description": "Когда заголовки расположены в правильном порядке и между их уровнями нет пропусков, они образуют семантическую структуру страницы. Благодаря этому навигация с помощью технологий специальных возможностей становится проще и понятнее. Подробнее [о расположении заголовков](https://dequeuniversity.com/rules/axe/4.13/heading-order)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"headings": [
+{
+"valueType": "node",
+"key": "node",
+"subItemsHeading": {
+"valueType": "node",
+"key": "relatedNode"
+},
+"label": "Неподходящие элементы"
+}
+],
+"type": "table",
+"items": []
+}
+},
+"color-contrast": {
+"id": "color-contrast",
+"title": "Цвета фона и переднего плана недостаточно контрастны",
+"description": "Многие пользователи не видят текст с низкой контрастностью, или им сложно его воспринимать. Подробнее о том, [как обеспечить достаточный цветовой контраст](https://dequeuniversity.com/rules/axe/4.13/color-contrast)…",
+"score": 0,
+"scoreDisplayMode": "binary",
+"details": {
+"items": [
+{
+"subItems": {
+"items": [
+{
+"relatedNode": {
+"nodeLabel": "body.home",
+"type": "node",
+"selector": "body.home",
+"snippet": "<body class=\"home wp-singular page-template-default page page-id-2 wp-custom-logo wp-em…\" data-link=\"type-1\" data-prefix=\"single_page\" data-header=\"type-1:sticky\" data-footer=\"type-1\">",
+"lhId": "1-13-BODY",
+"boundingRect": {
+"top": 0,
+"right": 412,
+"bottom": 13760,
+"height": 13760,
+"width": 412,
+"left": 0
+},
+"path": "1,HTML,1,BODY"
+}
+}
+],
+"type": "subitems"
+},
+"node": {
+"lhId": "1-12-A",
+"snippet": "<a id=\"wp-block-file--media-d79cd5b0-7689-4998-ac72-240074ef2d24\" href=\"https://ost-term.ru/wp-content/uploads/2026/08/ost.pdf\">",
+"type": "node",
+"path": "1,HTML,1,BODY,2,DIV,1,MAIN,0,DIV,0,ARTICLE,0,DIV,3,DIV,1,DIV,1,A",
+"boundingRect": {
+"right": 295,
+"left": 25,
+"width": 270,
+"top": 3741,
+"height": 11,
+"bottom": 3752
+},
+"selector": "div.entry-content > div.wp-block-group > div.wp-block-file > a#wp-block-file--media-d79cd5b0-7689-4998-ac72-240074ef2d24",
+"explanation": "Fix any of the following:\n  Element has insufficient color contrast of 1.99 (foreground color: #f3a200, background color: #f9f9f9, font size: 9.6pt (12.8px), font weight: normal). Expected contrast ratio of 4.5:1",
+"nodeLabel": "Презентация компании ОСТ-ТЕРМИНАЛ"
+}
+},
+{
+"subItems": {
+"type": "subitems",
+"items": [
+{
+"relatedNode": {
+"path": "1,HTML,1,BODY,2,DIV,2,DIV,0,DIV,0,ARTICLE,0,DIV,0,DIV",
+"lhId": "1-15-DIV",
+"boundingRect": {
+"right": 387,
+"top": 7224,
+"width": 363,
+"left": 25,
+"bottom": 8361,
+"height": 1138
+},
+"selector": "div.ct-container-full > article#post-1786 > div.entry-content > div#gspb_row-id-gsbp-6e95f7b",
+"snippet": "<div class=\"wp-block-greenshift-blocks-row gspb_row gspb_row-id-gsbp-6e95f7b\" id=\"gspb_row-id-gsbp-6e95f7b\">",
+"type": "node",
+"nodeLabel": "Свяжитесь с нами\nотдел продаж\n+7 (495) 275-30-85\nГрафик работы 7 дней в неделю …"
+}
+}
+]
+},
+"node": {
+"path": "1,HTML,1,BODY,2,DIV,2,DIV,0,DIV,0,ARTICLE,0,DIV,0,DIV,1,DIV,0,DIV,1,DIV,1,A",
+"nodeLabel": "+7 (495) 275-30-85",
+"selector": "div.gspb_row__content > div#gspb_col-id-gsbp-ed7eeac > div#gspb_container-id-gsbp-efb3879 > a.gsbp-3b66a8f",
+"snippet": "<a class=\"gsbp-3b66a8f rb-phone\" href=\"tel:+74952753085\">",
+"boundingRect": {
+"top": 7360,
+"left": 57,
+"width": 256,
+"height": 23,
+"bottom": 7383,
+"right": 313
+},
+"lhId": "1-14-A",
+"type": "node",
+"explanation": "Fix any of the following:\n  Element has insufficient color contrast of 1.98 (foreground color: #f3a200, background color: #fff8e8, font size: 19.2pt (25.6px), font weight: bold). Expected contrast ratio of 3:1"
+}
+}
+],
+"headings": [
+{
+"valueType": "node",
+"label": "Неподходящие элементы",
+"subItemsHeading": {
+"valueType": "node",
+"key": "relatedNode"
+},
+"key": "node"
+}
+],
+"type": "table"
+}
+},
+"link-name": {
+"id": "link-name",
+"title": "Текст ссылок неразличим для программ чтения с экрана",
+"description": "Текст ссылок (как и альтернативный текст для изображений, используемых в качестве ссылок) должен быть уникальным, фокусируемым и доступным для программ чтения с экрана. Подробнее о том, [как сделать ссылки доступными для программ с технологиями специальных возможностей](https://dequeuniversity.com/rules/axe/4.13/link-name)…",
+"score": 0,
+"scoreDisplayMode": "binary",
+"details": {
+"headings": [
+{
+"valueType": "node",
+"key": "node",
+"subItemsHeading": {
+"key": "relatedNode",
+"valueType": "node"
+},
+"label": "Неподходящие элементы"
+}
+],
+"items": [
+{
+"node": {
+"lhId": "1-20-A",
+"type": "node",
+"path": "1,HTML,1,BODY,35,DIV,0,DIV,0,DIV,1,A",
+"nodeLabel": "div.chaty-widget > div#transition_disabled > div#chaty-channel-phone > a.rb-phone",
+"snippet": "<a target=\"\" href=\"tel:+74952753085\" class=\"rb-phone\">",
+"selector": "div.chaty-widget > div#transition_disabled > div#chaty-channel-phone > a.rb-phone",
+"explanation": "Fix all of the following:\n  Element is in tab order and does not have accessible text\n\nFix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute",
+"boundingRect": {
+"width": 54,
+"bottom": 670,
+"top": 616,
+"height": 54,
+"right": 383,
+"left": 329
+}
+}
+},
+{
+"node": {
+"lhId": "1-21-A",
+"nodeLabel": "div.chaty-widget > div#transition_disabled > div#chaty-channel-email > a",
+"type": "node",
+"path": "1,HTML,1,BODY,35,DIV,0,DIV,1,DIV,1,A",
+"explanation": "Fix all of the following:\n  Element is in tab order and does not have accessible text\n\nFix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute",
+"selector": "div.chaty-widget > div#transition_disabled > div#chaty-channel-email > a",
+"snippet": "<a target=\"\" href=\"mailto:info@ost-term.ru\">",
+"boundingRect": {
+"right": 383,
+"bottom": 732,
+"height": 54,
+"top": 678,
+"width": 54,
+"left": 329
+}
+}
+}
+],
+"type": "table"
+}
+},
+"image-aspect-ratio": {
+"id": "image-aspect-ratio",
+"title": "Отсутствуют изображения с некорректным соотношением сторон",
+"description": "Размеры отображаемого изображения должны соответствовать нормальному соотношению сторон. Подробнее [о соотношении сторон изображения](https://developer.chrome.com/docs/lighthouse/best-practices/image-aspect-ratio/)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"items": [],
+"headings": [
+{
+"valueType": "node",
+"key": "node"
+},
+{
+"valueType": "url",
+"label": "URL",
+"key": "url"
+},
+{
+"label": "Соотношение сторон (отображаемое)",
+"valueType": "text",
+"key": "displayedAspectRatio"
+},
+{
+"valueType": "text",
+"key": "actualAspectRatio",
+"label": "Соотношение сторон (фактическое)"
+}
+],
+"type": "table"
+}
+},
+"aria-required-parent": {
+"id": "aria-required-parent",
+"title": "Элементы с атрибутом `[role]` содержатся в своих родительских элементах",
+"description": "Некоторые дочерние элементы с ролями ARIA должны содержаться внутри определенных родительских элементов, иначе связанные с ними функции специальных возможностей будут работать неправильно. Подробнее [о ролях ARIA и необходимых родительских элементах](https://dequeuniversity.com/rules/axe/4.13/aria-required-parent)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"type": "table",
+"items": [],
+"headings": [
+{
+"valueType": "node",
+"subItemsHeading": {
+"key": "relatedNode",
+"valueType": "node"
+},
+"key": "node",
+"label": "Неподходящие элементы"
+}
+]
+}
+},
+"script-treemap-data": {
+"id": "script-treemap-data",
+"title": "Script Treemap Data",
+"description": "Used for treemap app",
+"score": 1,
+"scoreDisplayMode": "informative",
+"details": {
+"type": "treemap-data",
+"nodes": [
+{
+"encodedBytes": 4729,
+"unusedBytes": 3344,
+"resourceBytes": 26371,
+"name": "https://ost-term.ru/",
+"children": [
+{
+"name": "(inline) (function(m,e,t…",
+"unusedBytes": 0,
+"resourceBytes": 569
+},
+{
+"name": "(inline) sbjs.init({\n   …",
+"unusedBytes": 1000,
+"resourceBytes": 4029
+},
+{
+"name": "(inline) var chaty_setti…",
+"unusedBytes": 0,
+"resourceBytes": 3518
+},
+{
+"resourceBytes": 99,
+"unusedBytes": 0,
+"name": "(inline) wp.i18n.setLoca…"
+},
+{
+"name": "(inline) ( function( dom…",
+"unusedBytes": 0,
+"resourceBytes": 1032
+},
+{
+"resourceBytes": 170,
+"name": "(inline) var wpcf7 = {\n …",
+"unusedBytes": 0
+},
+{
+"unusedBytes": 0,
+"resourceBytes": 521,
+"name": "(inline) var la_sentinel…"
+},
+{
+"unusedBytes": 0,
+"resourceBytes": 866,
+"name": "(inline) window.rbInitPh…"
+},
+{
+"unusedBytes": 0,
+"resourceBytes": 1697,
+"name": "(inline) var quizle_scri…"
+},
+{
+"resourceBytes": 5149,
+"unusedBytes": 0,
+"name": "(inline) var ct_localiza…"
+},
+{
+"name": "(inline) var rbReviews =…",
+"unusedBytes": 0,
+"resourceBytes": 653
+},
+{
+"resourceBytes": 6142,
+"unusedBytes": 1815,
+"name": "(inline) (function() {\n …"
+},
+{
+"name": "(inline) (function () {\n…",
+"resourceBytes": 1926,
+"unusedBytes": 529
+}
+]
+},
+{
+"unusedBytes": 2589,
+"name": "https://ost-term.ru/wp-content/plugins/rb-core/inc/sourcebuster/sourcebuster.min.js",
+"resourceBytes": 14457,
+"encodedBytes": 4524
+},
+{
+"name": "https://ost-term.ru/wp-includes/js/jquery/jquery.min.js",
+"encodedBytes": 30332,
+"resourceBytes": 87553,
+"unusedBytes": 52878
+},
+{
+"unusedBytes": 4270,
+"resourceBytes": 5791,
+"encodedBytes": 2409,
+"name": "https://ost-term.ru/wp-includes/js/dist/i18n.min.js"
+},
+{
+"encodedBytes": 252,
+"name": "https://ost-term.ru/wp-includes/js/dist/script-modules/block-library/file/view.min.js?ver=a9114a756e418400594c",
+"resourceBytes": 543,
+"unusedBytes": 68
+},
+{
+"name": "https://ost-term.ru/wp-includes/js/dist/script-modules/interactivity/index.min.js?ver=efaa5193bbad9c60ffd1",
+"encodedBytes": 15121,
+"resourceBytes": 40106,
+"unusedBytes": 16846
+},
+{
+"unusedBytes": 2618,
+"resourceBytes": 4840,
+"encodedBytes": 2049,
+"name": "https://ost-term.ru/wp-content/plugins/blocksy-companion-pro/framework/extensions/cookies-consent/static/bundle/main.js"
+},
+{
+"unusedBytes": 5565,
+"encodedBytes": 4804,
+"name": "https://ost-term.ru/wp-includes/js/jquery/jquery-migrate.min.js",
+"resourceBytes": 13577
+},
+{
+"name": "https://ost-term.ru/wp-includes/js/dist/hooks.min.js",
+"resourceBytes": 5107,
+"unusedBytes": 2587,
+"encodedBytes": 1792
+},
+{
+"name": "https://ost-term.ru/wp-content/plugins/contact-form-7/includes/swv/js/index.js",
+"resourceBytes": 12512,
+"unusedBytes": 11627,
+"encodedBytes": 3435
+},
+{
+"name": "https://ost-term.ru/wp-content/plugins/contact-form-7/includes/js/index.js",
+"encodedBytes": 4182,
+"unusedBytes": 9472,
+"resourceBytes": 13452
+},
+{
+"encodedBytes": 1464,
+"unusedBytes": 213,
+"resourceBytes": 5184,
+"name": "https://ost-term.ru/wp-content/plugins/la-sentinelle-antispam/spamfilters/js/la-sentinelle-frontend.js"
+},
+{
+"name": "https://ost-term.ru/wp-content/plugins/rb-core/inc/imask/imask.min.js",
+"encodedBytes": 14062,
+"resourceBytes": 51440,
+"unusedBytes": 35616
+},
+{
+"unusedBytes": 54741,
+"name": "https://ost-term.ru/wp-content/plugins/quizle/assets/public/js/scripts.min.js",
+"resourceBytes": 61635,
+"encodedBytes": 16357
+},
+{
+"unusedBytes": 79826,
+"name": "https://ost-term.ru/wp-content/plugins/quizle/assets/public/js/plugins/intl-tel/intlTelInput.js",
+"resourceBytes": 101312,
+"encodedBytes": 21635
+},
+{
+"encodedBytes": 9567,
+"resourceBytes": 29750,
+"name": "https://ost-term.ru/wp-content/themes/blocksy/static/bundle/main.js",
+"unusedBytes": 18186
+},
+{
+"resourceBytes": 1051,
+"name": "https://ost-term.ru/wp-content/plugins/greenshift-animation-and-page-builder-blocks/libs/aos/aoslight.js",
+"unusedBytes": 321,
+"encodedBytes": 396
+},
+{
+"encodedBytes": 7859,
+"unusedBytes": 33515,
+"resourceBytes": 44418,
+"name": "https://ost-term.ru/wp-content/plugins/rb-reviews/assets/js/frontend.js"
+},
+{
+"resourceBytes": 6606,
+"name": "https://ost-term.ru/wp-content/plugins/rb-sitemap/assets/js/frontend.min.js",
+"encodedBytes": 1989,
+"unusedBytes": 1102
+},
+{
+"encodedBytes": 7047,
+"resourceBytes": 30582,
+"name": "https://ost-term.ru/wp-content/plugins/chaty-codecanyon/js/cht-front-script.js",
+"unusedBytes": 5488
+},
+{
+"resourceBytes": 11878,
+"name": "https://ost-term.ru/wp-content/plugins/blocksy-companion-pro/static/bundle/sticky.js?ver=2.1.56",
+"encodedBytes": 3282,
+"unusedBytes": 4760
+},
+{
+"resourceBytes": 277747,
+"encodedBytes": 91064,
+"name": "https://mc.yandex.ru/metrika/tag.js",
+"unusedBytes": 141635
+},
+{
+"name": "https://mc.yandex.com/metrika/match.html",
+"unusedBytes": 3128,
+"resourceBytes": 5679,
+"encodedBytes": 2013,
+"children": [
+{
+"unusedBytes": 3128,
+"resourceBytes": 5679,
+"name": "(inline) (function(){var…"
+}
+]
+},
+{
+"unusedBytes": 24111,
+"resourceBytes": 55161,
+"name": "https://mc.yandex.com/metrika/tag_phono.js",
+"encodedBytes": 12886
+},
+{
+"unusedBytes": 1711,
+"encodedBytes": 2013,
+"children": [
+{
+"unusedBytes": 1711,
+"name": "(inline) (function(){var…",
+"resourceBytes": 5679
+}
+],
+"resourceBytes": 5679,
+"name": "https://mc.yandex.com/metrika/match.html"
+}
+]
+}
+},
+"managed-focus": {
+"id": "managed-focus",
+"title": "The user's focus is directed to new content added to the page",
+"description": "If new content, such as a dialog, is added to the page, the user's focus is directed to it. [Learn how to direct focus to new content](https://developer.chrome.com/docs/lighthouse/accessibility/managed-focus/).",
+"score": null,
+"scoreDisplayMode": "manual"
+},
+"notification-on-start": {
+"id": "notification-on-start",
+"title": "Разрешение на отправку уведомлений не запрашивается при загрузке страницы",
+"description": "Пользователи с подозрением относятся к сайтам, которые беспричинно запрашивают разрешение на отправку уведомлений. Рекомендуем связать этот запрос с определенными действиями пользователя. Подробнее о том, [как запрашивать разрешение на уведомления должным образом](https://developer.chrome.com/docs/lighthouse/best-practices/notification-on-start/)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"headings": [
+{
+"valueType": "source-location",
+"label": "Источник",
+"key": "source"
+}
+],
+"items": [],
+"type": "table"
+}
+},
+"valid-source-maps": {
+"id": "valid-source-maps",
+"title": "У страницы правильные карты исходного кода",
+"description": "Карты исходных кодов переводят минифицированный код в исходный. Благодаря этому разработчики могут выполнять отладку на действующем ресурсе. Кроме того, Lighthouse может предоставлять дополнительную информацию. Чтобы воспользоваться этими преимуществами, внедрите карты исходных кодов. Подробнее [о картах исходных кодов](https://developer.chrome.com/docs/devtools/javascript/source-maps/)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"type": "table",
+"items": [
+{
+"sourceMapUrl": "https://ost-term.ru/wp-content/plugins/rb-core/inc/imask/imask.min.js.map",
+"subItems": {
+"items": [
+{
+"error": "SyntaxError: Unexpected token '<', \"<!doctype \"... is not valid JSON"
+}
+],
+"type": "subitems"
+},
+"scriptUrl": "https://ost-term.ru/wp-content/plugins/rb-core/inc/imask/imask.min.js"
+}
+],
+"headings": [
+{
+"valueType": "url",
+"label": "URL",
+"subItemsHeading": {
+"key": "error"
+},
+"key": "scriptUrl"
+},
+{
+"key": "sourceMapUrl",
+"valueType": "url",
+"label": "URL карт"
+}
+]
+}
+},
+"aria-required-attr": {
+"id": "aria-required-attr",
+"title": "У элементов `[role]` есть все необходимые атрибуты `[aria-*]`",
+"description": "К некоторым ролям ARIA необходимо добавлять атрибуты, описывающие состояние элемента для программ чтения с экрана. Подробнее [о ролях и необходимых атрибутах](https://dequeuniversity.com/rules/axe/4.13/aria-required-attr)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"items": [],
+"type": "table",
+"headings": [
+{
+"label": "Неподходящие элементы",
+"key": "node",
+"subItemsHeading": {
+"valueType": "node",
+"key": "relatedNode"
+},
+"valueType": "node"
+}
+]
+}
+},
+"network-requests": {
+"id": "network-requests",
+"title": "Network Requests",
+"description": "Lists the network requests that were made during page load.",
+"score": 1,
+"scoreDisplayMode": "informative",
+"details": {
+"headings": [
+{
+"label": "URL",
+"key": "url",
+"valueType": "url"
+},
+{
+"key": "protocol",
+"label": "Protocol",
+"valueType": "text"
+},
+{
+"granularity": 1,
+"valueType": "ms",
+"key": "networkRequestTime",
+"label": "Network Request Time"
+},
+{
+"granularity": 1,
+"valueType": "ms",
+"label": "Network End Time",
+"key": "networkEndTime"
+},
+{
+"granularity": 1,
+"key": "transferSize",
+"valueType": "bytes",
+"label": "Transfer Size",
+"displayUnit": "kb"
+},
+{
+"label": "Resource Size",
+"displayUnit": "kb",
+"valueType": "bytes",
+"key": "resourceSize",
+"granularity": 1
+},
+{
+"label": "Status Code",
+"key": "statusCode",
+"valueType": "text"
+},
+{
+"label": "MIME Type",
+"key": "mimeType",
+"valueType": "text"
+},
+{
+"label": "Resource Type",
+"valueType": "text",
+"key": "resourceType"
+}
+],
+"items": [
+{
+"mimeType": "text/html",
+"networkEndTime": 757.2800000011921,
+"resourceType": "Document",
+"networkRequestTime": 1.5989999920129776,
+"priority": "VeryHigh",
+"statusCode": 200,
+"finished": true,
+"transferSize": 56059,
+"cache": "none",
+"experimentalFromMainFrame": true,
+"sessionTargetType": "page",
+"entity": "ost-term.ru",
+"resourceSize": 310839,
+"url": "https://ost-term.ru/",
+"rendererStartTime": 0,
+"protocol": "h2"
+},
+{
+"resourceType": "Stylesheet",
+"protocol": "h2",
+"url": "https://ost-term.ru/wp-content/uploads/blocksy/css/global.css",
+"experimentalFromMainFrame": true,
+"networkRequestTime": 779.71099999547,
+"statusCode": 200,
+"networkEndTime": 1001.0300000011921,
+"finished": true,
+"priority": "VeryHigh",
+"transferSize": 3149,
+"rendererStartTime": 778.6270000040531,
+"sessionTargetType": "page",
+"entity": "ost-term.ru",
+"resourceSize": 23547,
+"cache": "none",
+"mimeType": "text/css"
+}
+],
+"type": "table"
+}
+},
+"html-has-lang": {
+"id": "html-has-lang",
+"title": "Элемент `<html>` содержит атрибут `[lang]`",
+"description": "Если для страницы не указан атрибут `lang`, программа чтения с экрана предполагает, что текст приведен на языке по умолчанию, выбранном пользователем при установке программы. Если текст написан на другом языке, он может озвучиваться некорректно. Подробнее [об атрибуте `lang`](https://dequeuniversity.com/rules/axe/4.13/html-has-lang)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"type": "table",
+"items": [],
+"headings": [
+{
+"key": "node",
+"label": "Неподходящие элементы",
+"valueType": "node",
+"subItemsHeading": {
+"valueType": "node",
+"key": "relatedNode"
+}
+}
+]
+}
+},
+"structured-data": {
+"id": "structured-data",
+"title": "Структурированные данные действительны",
+"description": "Чтобы протестировать структурированные данные, воспользуйтесь [инструментом для их проверки](https://developers.google.com/search/docs/appearance/structured-data/). Подробнее [о структурированных данных](https://developer.chrome.com/docs/lighthouse/seo/structured-data/)…",
+"score": null,
+"scoreDisplayMode": "manual"
+},
+"aria-tooltip-name": {
+"id": "aria-tooltip-name",
+"title": "У элементов `tooltip` ARIA есть названия, доступные программам чтения с экрана",
+"description": "Если у элемента подсказки нет названия, доступного программам чтения с экрана, пользователи услышат только его общее название и не поймут, для чего он нужен. Подробнее о том, [как присваивать названия элементам \"`tooltip`\"](https://dequeuniversity.com/rules/axe/4.13/aria-tooltip-name)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"empty-heading": {
+"id": "empty-heading",
+"title": "Во всех элементах заголовка есть содержимое",
+"description": "Если у заголовка нет содержимого или текст недоступен, пользователи программы чтения с экрана не могут получить информацию о структуре страницы. Подробнее [о заголовках](https://dequeuniversity.com/rules/axe/4.13/empty-heading)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"image-size-responsive": {
+"id": "image-size-responsive",
+"title": "Изображения показываются в нужном разрешении",
+"description": "Чтобы обеспечить максимальное качество, размеры исходного изображения должны быть пропорциональны размерам при отображении на экране с учетом соотношения пикселей. Подробнее о том, [как добавлять адаптивные изображения](https://web.dev/articles/serve-responsive-images)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"items": [],
+"headings": [
+{
+"key": "node",
+"valueType": "node"
+},
+{
+"label": "URL",
+"valueType": "url",
+"key": "url"
+},
+{
+"valueType": "text",
+"label": "Отображаемый размер",
+"key": "displayedSize"
+},
+{
+"key": "actualSize",
+"label": "Фактический размер",
+"valueType": "text"
+},
+{
+"key": "expectedSize",
+"valueType": "text",
+"label": "Ожидаемый размер"
+}
+],
+"type": "table"
+}
+},
+"duplicated-javascript-insight": {
+"id": "duplicated-javascript-insight",
+"title": "Дублирующийся код JavaScript",
+"description": "Чтобы сократить расход трафика, удалите из пакетов большие [повторяющиеся модули JavaScript](https://developer.chrome.com/docs/performance/insights/duplicated-javascript).",
+"score": 1,
+"scoreDisplayMode": "metricSavings",
+"metricSavings": {
+"LCP": 0,
+"FCP": 0
+},
+"details": {
+"type": "table",
+"items": [],
+"headings": [
+{
+"valueType": "code",
+"subItemsHeading": {
+"valueType": "url",
+"key": "url"
+},
+"key": "source",
+"label": "Источник"
+},
+{
+"granularity": 10,
+"label": "Дублирующиеся байты",
+"subItemsHeading": {
+"key": "sourceTransferBytes"
+},
+"key": "wastedBytes",
+"valueType": "bytes"
+}
+]
+}
+},
+"mainthread-work-breakdown": {
+"id": "mainthread-work-breakdown",
+"title": "Минимизируйте работу в основном потоке",
+"description": "Рекомендуем сократить время на обработку, компиляцию и выполнение скриптов JS. Для этого вы можете разбить код JS на небольшие фрагменты. Подробнее о том, [как минимизировать работу в основном потоке](https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/)…",
+"score": 0,
+"scoreDisplayMode": "metricSavings",
+"displayValue": "2,4 сек.",
+"metricSavings": {
+"TBT": 300
+},
+"details": {
+"headings": [
+{
+"key": "groupLabel",
+"valueType": "text",
+"label": "Категория"
+},
+{
+"key": "duration",
+"valueType": "ms",
+"granularity": 1,
+"label": "Потраченное время"
+}
+],
+"type": "table",
+"items": [
+{
+"groupLabel": "Style & Layout",
+"group": "styleLayout",
+"duration": 871.9559999999998
+},
+{
+"group": "scriptEvaluation",
+"groupLabel": "Script Evaluation",
+"duration": 553.3367999999962
+}
+],
+"sortedBy": [
+"duration"
+]
+},
+"numericValue": 2382.016799999992,
+"numericUnit": "millisecond"
+},
+"aria-hidden-focus": {
+"id": "aria-hidden-focus",
+"title": "Элементы, к которым применен атрибут `[aria-hidden=\"true\"]`, не содержат активных дочерних элементов",
+"description": "Если для родительского элемента задан атрибут `[aria-hidden=\"true\"]`, то все его фокусируемые потомки становятся недоступны для программ чтения с экрана и других технологий специальных возможностей. Подробнее о том, [какое влияние `aria-hidden` оказывает на фокусируемые элементы](https://dequeuniversity.com/rules/axe/4.13/aria-hidden-focus)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"items": [],
+"type": "table",
+"headings": [
+{
+"valueType": "node",
+"label": "Неподходящие элементы",
+"subItemsHeading": {
+"valueType": "node",
+"key": "relatedNode"
+},
+"key": "node"
+}
+]
+}
+},
+"logical-tab-order": {
+"id": "logical-tab-order",
+"title": "The page has a logical tab order",
+"description": "Tabbing through the page follows the visual layout. Users cannot focus elements that are offscreen. [Learn more about logical tab ordering](https://developer.chrome.com/docs/lighthouse/accessibility/logical-tab-order/).",
+"score": null,
+"scoreDisplayMode": "manual"
+},
+"layout-shifts": {
+"id": "layout-shifts",
+"title": "Устраните большие смещения макета",
+"description": "Это самые значительные смещения макета страницы. Каждый пункт таблицы относится к одному сдвигу и показывает, какой элемент затронут сильнее всего. Под пунктами таблицы приведены возможные причины смещения макета. Некоторые из приведенных случаев могли быть упущены при расчете показателя CLS, так как использовалась [обработка методом окна](https://web.dev/articles/cls#what_is_cls). Узнайте, [как уменьшить CLS](https://web.dev/articles/optimize-cls).",
+"score": null,
+"scoreDisplayMode": "notApplicable",
+"metricSavings": {
+"CLS": 0
+},
+"details": {
+"headings": [
+{
+"valueType": "node",
+"key": "node",
+"label": "Элемент",
+"subItemsHeading": {
+"key": "extra"
+}
+},
+{
+"key": "score",
+"subItemsHeading": {
+"key": "cause",
+"valueType": "text"
+},
+"label": "Показатель смещения макета",
+"valueType": "numeric",
+"granularity": 0.001
+}
+],
+"items": [],
+"type": "table"
+}
+},
+"aria-allowed-attr": {
+"id": "aria-allowed-attr",
+"title": "Атрибуты `[aria-*]` соответствуют своим ролям",
+"description": "Каждая `role` ARIA поддерживает определенный набор атрибутов `aria-*`. Неверно присвоенные атрибуты `aria-*` будут недействительны. Подробнее о том, [как сопоставлять атрибуты ARIA с их ролями](https://dequeuniversity.com/rules/axe/4.13/aria-allowed-attr)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"items": [],
+"headings": [
+{
+"label": "Неподходящие элементы",
+"subItemsHeading": {
+"key": "relatedNode",
+"valueType": "node"
+},
+"key": "node",
+"valueType": "node"
+}
+],
+"type": "table"
+}
+},
+"redirects-http": {
+"id": "redirects-http",
+"title": "Перенаправляет трафик с HTTP на HTTPS",
+"description": "Убедитесь, что весь трафик перенаправляется с HTTP на HTTPS, чтобы обеспечить безопасность для всех своих пользователей. [Подробнее…](https://developer.chrome.com/docs/lighthouse/pwa/redirects-http/)",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"custom-controls-roles": {
+"id": "custom-controls-roles",
+"title": "Custom controls have ARIA roles",
+"description": "Custom interactive controls have appropriate ARIA roles. [Learn how to add roles to custom controls](https://developer.chrome.com/docs/lighthouse/accessibility/custom-control-roles/).",
+"score": null,
+"scoreDisplayMode": "manual"
+},
+"aria-treeitem-name": {
+"id": "aria-treeitem-name",
+"title": "У элементов `treeitem` ARIA есть названия, доступные программам чтения с экрана",
+"description": "Если у элемента `treeitem` нет названия, доступного программам чтения с экрана, пользователи услышат только его общее название и не поймут, для чего он нужен. Подробнее [о присваивании ярлыков элементам `treeitem`](https://dequeuniversity.com/rules/axe/4.13/aria-treeitem-name)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"table-fake-caption": {
+"id": "table-fake-caption",
+"title": "Для обозначения подписей в таблицах используется элемент `<caption>` вместо ячеек с атрибутом `[colspan]`",
+"description": "Чтобы пользователям было проще перемещаться по таблицам с помощью программ чтения с экрана, не используйте в таблицах ячейки с атрибутом `[colspan]` для обозначения подписей. Подробнее [о подписях](https://dequeuniversity.com/rules/axe/4.13/table-fake-caption)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"errors-in-console": {
+"id": "errors-in-console",
+"title": "Ошибки браузера занесены в журнал консоли",
+"description": "Ошибки, которые появляются в консоли, указывают на нерешенные проблемы. Это могут быть невыполненные сетевые запросы и другие сбои в работе браузера. Подробнее [об этих ошибках в результатах диагностики консоли](https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/)…",
+"score": 0,
+"scoreDisplayMode": "binary",
+"details": {
+"items": [
+{
+"sourceLocation": {
+"url": "https://mdd.yandex.net/",
+"line": 0,
+"urlProvider": "network",
+"type": "source-location",
+"column": 0
+},
+"description": "Failed to load resource: net::ERR_FAILED",
+"source": "network"
+},
+{
+"description": "Failed to load resource: net::ERR_FAILED",
+"source": "network",
+"sourceLocation": {
+"url": "https://hdrc.yandex.net/",
+"type": "source-location",
+"column": 0,
+"line": 0,
+"urlProvider": "network"
+}
+}
+],
+"headings": [
+{
+"valueType": "source-location",
+"key": "sourceLocation",
+"label": "Источник"
+},
+{
+"key": "description",
+"valueType": "code",
+"label": "Описание"
+}
+],
+"type": "table"
+}
+},
+"csp-xss": {
+"id": "csp-xss",
+"title": "Убедитесь, что политика CSP эффективна против атак XSS",
+"description": "Надежная политика безопасности контента (Content Security Policy, CSP) существенно снижает риск атак XSS (межсайтовый скриптинг). Подробнее о том, [как использовать CSP для предотвращения атак XSS](https://developer.chrome.com/docs/lighthouse/best-practices/csp-xss/)…",
+"score": 1,
+"scoreDisplayMode": "informative",
+"details": {
+"items": [
+{
+"description": "Не найдены политики CSP в режиме принудительного применения.",
+"severity": "Высокая"
+}
+],
+"type": "table",
+"headings": [
+{
+"key": "description",
+"label": "Описание",
+"valueType": "text",
+"subItemsHeading": {
+"key": "description"
+}
+},
+{
+"key": "directive",
+"subItemsHeading": {
+"key": "directive"
+},
+"valueType": "code",
+"label": "Директива"
+},
+{
+"valueType": "text",
+"key": "severity",
+"label": "Уровень серьезности",
+"subItemsHeading": {
+"key": "severity"
+}
+}
+]
+}
+},
+"user-timings": {
+"id": "user-timings",
+"title": "Метки и промежутки пользовательского времени",
+"description": "Используйте User Timing API, чтобы измерить реальную производительность своего приложения во время ключевых моментов взаимодействия с пользователями. Подробнее [о метках пользовательского времени](https://developer.chrome.com/docs/lighthouse/performance/user-timings/)…",
+"score": null,
+"scoreDisplayMode": "notApplicable",
+"details": {
+"headings": [
+{
+"valueType": "text",
+"key": "name",
+"label": "Название"
+},
+{
+"valueType": "text",
+"key": "timingType",
+"label": "Тип"
+},
+{
+"label": "Время начала",
+"granularity": 0.01,
+"key": "startTime",
+"valueType": "ms"
+},
+{
+"valueType": "ms",
+"label": "Длительность",
+"key": "duration",
+"granularity": 0.01
+}
+],
+"items": [],
+"type": "table"
+}
+},
+"frame-title": {
+"id": "frame-title",
+"title": "У элементов `<frame>` и `<iframe>` есть атрибут title",
+"description": "Чтобы программы чтения с экрана могли описывать содержимое фреймов, у каждого из них должно быть название (атрибут title). Подробнее [о названиях фреймов](https://dequeuniversity.com/rules/axe/4.13/frame-title)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"cumulative-layout-shift": {
+"id": "cumulative-layout-shift",
+"title": "Cumulative Layout Shift",
+"description": "Совокупное смещение макета – это величина, на которую смещаются видимые элементы области просмотра при загрузке. Подробнее о [совокупном смещении макета](https://web.dev/articles/cls)…",
+"score": 1,
+"scoreDisplayMode": "numeric",
+"displayValue": "0",
+"details": {
+"items": [
+{
+"newEngineResult": {
+"cumulativeLayoutShiftMainFrame": 0,
+"cumulativeLayoutShift": 0
+},
+"newEngineResultDiffered": false,
+"cumulativeLayoutShiftMainFrame": 0
+}
+],
+"type": "debugdata"
+},
+"numericValue": 0,
+"numericUnit": "unitless"
+},
+"accesskeys": {
+"id": "accesskeys",
+"title": "`[accesskey]`: значения уникальны",
+"description": "Клавиши доступа позволяют быстро перейти к нужной части страницы. Для удобства навигации на каждую клавишу должно быть назначено только одно действие. Подробнее [о клавишах доступа](https://dequeuniversity.com/rules/axe/4.13/accesskeys)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"network-server-latency": {
+"id": "network-server-latency",
+"title": "Задержка со стороны сервера",
+"description": "Задержки со стороны сервера могут влиять на скорость загрузки страниц. Высокое время реакции сервера говорит о его перегруженности или недостаточной производительности. Подробнее [о времени ответа сервера](https://hpbn.co/primer-on-web-performance/#analyzing-the-resource-waterfall)…",
+"score": 1,
+"scoreDisplayMode": "informative",
+"displayValue": "10 мс",
+"details": {
+"sortedBy": [
+"serverResponseTime"
+],
+"items": [
+{
+"serverResponseTime": 6.5,
+"origin": "https://ost-term.ru"
+},
+{
+"origin": "https://mc.yandex.ru",
+"serverResponseTime": 6
+}
+],
+"type": "table",
+"headings": [
+{
+"label": "URL",
+"valueType": "text",
+"key": "origin"
+},
+{
+"valueType": "ms",
+"key": "serverResponseTime",
+"granularity": 1,
+"label": "Потраченное время"
+}
+]
+},
+"numericValue": 6.5,
+"numericUnit": "millisecond"
+},
+"deprecations": {
+"id": "deprecations",
+"title": "Устаревшие API не используются",
+"description": "В будущем устаревшие API будут удалены из браузера. Подробнее [об устаревших API](https://developer.chrome.com/docs/lighthouse/best-practices/deprecations/)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"items": [],
+"type": "table",
+"headings": [
+{
+"valueType": "text",
+"label": "Прекращение поддержки / предупреждение",
+"key": "value"
+},
+{
+"valueType": "source-location",
+"key": "source",
+"label": "Источник"
+}
+]
+}
+},
+"unminified-javascript": {
+"id": "unminified-javascript",
+"title": "Уменьшите размер кода JavaScript",
+"description": "Уменьшив файлы JavaScript, вы можете сократить объем полезной нагрузки и время обработки скриптов. Подробнее о том, [как уменьшить файл JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unminified-javascript/)…",
+"score": 0,
+"scoreDisplayMode": "metricSavings",
+"displayValue": "Ожидаемая экономия – 15 КиБ",
+"metricSavings": {
+"LCP": 150,
+"FCP": 0
+},
+"details": {
+"sortedBy": [
+"wastedBytes"
+],
+"type": "opportunity",
+"overallSavingsMs": 150,
+"headings": [
+{
+"key": "url",
+"label": "URL",
+"valueType": "url"
+},
+{
+"valueType": "bytes",
+"key": "totalBytes",
+"label": "Объем переданных данных"
+},
+{
+"label": "Ожидаемая экономия",
+"valueType": "bytes",
+"key": "wastedBytes"
+}
+],
+"overallSavingsBytes": 15738,
+"items": [
+{
+"url": "https://ost-term.ru/wp-content/plugins/quizle/assets/public/js/plugins/intl-tel/intlTelInput.js",
+"wastedBytes": 11958,
+"wastedPercent": 55.27282059380922,
+"totalBytes": 21635
+},
+{
+"url": "https://ost-term.ru/wp-content/plugins/rb-reviews/assets/js/frontend.js",
+"totalBytes": 7859,
+"wastedPercent": 48.10212076185331,
+"wastedBytes": 3780
+}
+]
+},
+"warnings": [],
+"numericValue": 150,
+"numericUnit": "millisecond"
+},
+"image-alt": {
+"id": "image-alt",
+"title": "Для элементов изображений не заданы атрибуты `[alt]`",
+"description": "В информационных элементах должен содержаться короткий и ясный альтернативный текст. Если элемент декоративный, то атрибут alt для него можно оставить пустым. Подробнее [об атрибуте `alt`](https://dequeuniversity.com/rules/axe/4.13/image-alt)…",
+"score": 0,
+"scoreDisplayMode": "binary",
+"details": {
+"type": "table",
+"headings": [
+{
+"valueType": "node",
+"label": "Неподходящие элементы",
+"key": "node",
+"subItemsHeading": {
+"valueType": "node",
+"key": "relatedNode"
+}
+}
+],
+"items": [
+{
+"node": {
+"path": "1,HTML,1,BODY,2,DIV,5,FOOTER,0,DIV,0,DIV,3,DIV,0,DIV,0,DIV,0,DIV,0,IMG",
+"boundingRect": {
+"top": 13450,
+"width": 97,
+"left": 25,
+"height": 52,
+"bottom": 13502,
+"right": 122
+},
+"explanation": "Fix any of the following:\n  Element does not have an alt attribute\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute\n  Element's default semantics were not overridden with role=\"none\" or role=\"presentation\"",
+"snippet": "<img src=\"/wp-content/uploads/2024/11/logo-3.png\">",
+"selector": "div.ct-header-text > div.entry-content > div > img",
+"lhId": "1-19-IMG",
+"nodeLabel": "div.ct-header-text > div.entry-content > div > img",
+"type": "node"
+}
+}
+]
+}
+},
+"dlitem": {
+"id": "dlitem",
+"title": "Элементы списков определений расположены внутри элементов `<dl>`",
+"description": "Чтобы программы чтения с экрана правильно озвучивали элементы списков определений `<dt>` и `<dd>`, они должны располагаться внутри родительского элемента `<dl>`. Подробнее о том, [как правильно создавать списки определений](https://dequeuniversity.com/rules/axe/4.13/dlitem)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"unsized-images": {
+"id": "unsized-images",
+"title": "Для изображений не заданы явным образом атрибуты `width` и `height`.",
+"description": "Чтобы уменьшить совокупное смещение макета и избежать проблем, связанных со смещением элементов, рекомендуем всегда явным образом задавать ширину и высоту для изображений. Подробнее о том, [как задавать размеры изображений](https://web.dev/articles/optimize-cls#images_without_dimensions)…",
+"score": 0.5,
+"scoreDisplayMode": "metricSavings",
+"metricSavings": {
+"CLS": 0
+},
+"details": {
+"type": "table",
+"items": [
+{
+"node": {
+"boundingRect": {
+"left": 25,
+"right": 122,
+"top": 13450,
+"height": 52,
+"width": 97,
+"bottom": 13502
+},
+"lhId": "1-19-IMG",
+"type": "node",
+"snippet": "<img src=\"/wp-content/uploads/2024/11/logo-3.png\">",
+"path": "1,HTML,1,BODY,2,DIV,5,FOOTER,0,DIV,0,DIV,3,DIV,0,DIV,0,DIV,0,DIV,0,IMG",
+"selector": "div.ct-header-text > div.entry-content > div > img",
+"nodeLabel": "div.ct-header-text > div.entry-content > div > img"
+},
+"url": "https://ost-term.ru/wp-content/uploads/2024/11/logo-3.png"
+}
+],
+"headings": [
+{
+"valueType": "node",
+"key": "node"
+},
+{
+"valueType": "url",
+"label": "URL",
+"key": "url"
+}
+]
+}
+},
+"js-libraries": {
+"id": "js-libraries",
+"title": "Обнаруженные библиотеки JavaScript",
+"description": "Все клиентские библиотеки JavaScript, обнаруженные на странице. Подробнее [о результатах диагностики этой библиотеки JavaScript](https://developer.chrome.com/docs/lighthouse/best-practices/js-libraries/)…",
+"score": 1,
+"scoreDisplayMode": "informative",
+"details": {
+"headings": [
+{
+"label": "Название",
+"valueType": "text",
+"key": "name"
+},
+{
+"label": "Версия",
+"valueType": "text",
+"key": "version"
+}
+],
+"items": [
+{
+"npm": "jquery",
+"name": "jQuery",
+"version": "3.7.1"
+},
+{
+"name": "WordPress"
+}
+],
+"type": "table"
+}
+},
+"network-dependency-tree-insight": {
+"id": "network-dependency-tree-insight",
+"title": "Дерево зависимостей в сети",
+"description": "[Старайтесь избегать цепочек критических запросов.](https://developer.chrome.com/docs/performance/insights/network-dependency-tree) Чтобы ускорить загрузку страницы, сократите количество запросов, уменьшите размер скачиваемых ресурсов или отложите скачивание ненужных ресурсов.",
+"score": 0,
+"scoreDisplayMode": "numeric",
+"metricSavings": {
+"LCP": 0
+},
+"details": {
+"type": "list",
+"items": [
+{
+"value": {
+"type": "network-tree",
+"longestChain": {
+"duration": 1081
+},
+"chains": {
+"49957C54EA3581358F0F4B281B043579": {
+"children": {
+"83.31": {
+"transferSize": 2804,
+"navStartToEndTime": 1077,
+"children": {},
+"url": "https://ost-term.ru/wp-includes/js/dist/i18n.min.js"
+},
+"83.2": {
+"transferSize": 3149,
+"children": {},
+"url": "https://ost-term.ru/wp-content/uploads/blocksy/css/global.css",
+"navStartToEndTime": 1004
+},
+"83.8": {
+"url": "https://ost-term.ru/wp-content/themes/blocksy/style.css",
+"navStartToEndTime": 1034,
+"transferSize": 806,
+"children": {}
+},
+"83.10": {
+"transferSize": 568,
+"url": "https://ost-term.ru/wp-content/themes/blocksy/static/bundle/cf-7.min.css",
+"navStartToEndTime": 1078,
+"children": {}
+},
+"83.5": {
+"children": {},
+"url": "https://ost-term.ru/wp-content/plugins/contact-form-7/includes/css/styles.css",
+"navStartToEndTime": 1038,
+"transferSize": 1331
+},
+"83.6": {
+"children": {},
+"navStartToEndTime": 1013,
+"transferSize": 6408,
+"url": "https://ost-term.ru/wp-content/plugins/quizle/assets/public/css/style.min.css"
+},
+"83.20": {
+"transferSize": 8454,
+"navStartToEndTime": 914,
+"url": "https://ost-term.ru/wp-content/plugins/rb-blocks/blocks/uniblock/presets/cards-grid/style.css",
+"children": {}
+},
+"83.3": {
+"navStartToEndTime": 1016,
+"url": "https://ost-term.ru/wp-content/plugins/rb-blocks/assets/css/scenes-frontend.css",
+"transferSize": 2397,
+"children": {}
+},
+"83.13": {
+"transferSize": 4921,
+"navStartToEndTime": 998,
+"children": {},
+"url": "https://ost-term.ru/wp-content/plugins/rb-core/inc/sourcebuster/sourcebuster.min.js"
+},
+"83.21": {
+"transferSize": 3168,
+"navStartToEndTime": 1027,
+"url": "https://ost-term.ru/wp-content/plugins/rb-blocks/blocks/uniblock/presets/timeline/style.css",
+"children": {}
+},
+"83.23": {
+"children": {},
+"transferSize": 2360,
+"url": "https://ost-term.ru/wp-content/plugins/rb-sitemap/assets/css/frontend.min.css",
+"navStartToEndTime": 947
+},
+"83.11": {
+"url": "https://ost-term.ru/wp-content/plugins/blocksy-companion-pro/framework/premium/extensions/post-types-extra/static/bundle/main.min.css",
+"transferSize": 798,
+"navStartToEndTime": 946,
+"children": {}
+},
+"83.9": {
+"transferSize": 17941,
+"url": "https://ost-term.ru/wp-content/themes/blocksy/static/bundle/main.min.css",
+"navStartToEndTime": 1003,
+"children": {}
+},
+"83.14": {
+"url": "https://ost-term.ru/wp-includes/js/jquery/jquery.min.js",
+"children": {},
+"navStartToEndTime": 1021,
+"transferSize": 30732
+},
+"83.7": {
+"transferSize": 3527,
+"url": "https://ost-term.ru/wp-content/plugins/quizle/assets/public/css/plugins/intl-tel-input.min.css",
+"navStartToEndTime": 841,
+"children": {}
+},
+"83.4": {
+"navStartToEndTime": 1012,
+"transferSize": 974,
+"children": {},
+"url": "https://ost-term.ru/wp-content/plugins/rb-blocks/assets/css/layout-width.css"
+},
+"83.12": {
+"url": "https://ost-term.ru/wp-content/plugins/blocksy-companion-pro/framework/premium/extensions/mega-menu/static/bundle/main.min.css",
+"transferSize": 1680,
+"children": {},
+"navStartToEndTime": 1039
+},
+"83.19": {
+"navStartToEndTime": 1081,
+"url": "https://ost-term.ru/wp-content/plugins/rb-core/assets/css/core.css",
+"transferSize": 7329,
+"children": {},
+"isLongest": true
+},
+"83.22": {
+"navStartToEndTime": 843,
+"url": "https://ost-term.ru/wp-content/plugins/rb-reviews/assets/css/frontend.min.css",
+"transferSize": 4503,
+"children": {}
+}
+},
+"navStartToEndTime": 801,
+"url": "https://ost-term.ru/",
+"transferSize": 56059,
+"isLongest": true
+}
+}
+},
+"type": "list-section"
+},
+{
+"value": {
+"type": "text",
+"value": "нет предварительно подключенных источников"
+},
+"description": "Подсказки [preconnect](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preconnect/) помогают браузеру установить соединение на более ранних этапах загрузки страницы, что экономит время при первом запросе к источнику. Далее перечислены источники, к которым предварительно подключилась страница.",
+"title": "Предварительно подключенные источники",
+"type": "list-section"
+}
+]
+}
+},
+"aria-valid-attr": {
+"id": "aria-valid-attr",
+"title": "Атрибуты `[aria-*]` действительны и написаны без ошибок",
+"description": "Технологии специальных возможностей, например программы чтения с экрана, не могут распознавать атрибуты ARIA с недопустимыми названиями. Подробнее [о существующих атрибутах ARIA](https://dequeuniversity.com/rules/axe/4.13/aria-valid-attr)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"items": [],
+"type": "table",
+"headings": [
+{
+"label": "Неподходящие элементы",
+"valueType": "node",
+"subItemsHeading": {
+"key": "relatedNode",
+"valueType": "node"
+},
+"key": "node"
+}
+]
+}
+},
+"robots-txt": {
+"id": "robots-txt",
+"title": "Файл robots.txt действителен",
+"description": "Если файл robots.txt поврежден, поисковые роботы могут не распознать ваши инструкции по сканированию или индексации сайта. Подробнее [о файле robots.txt](https://developer.chrome.com/docs/lighthouse/seo/invalid-robots-txt/)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"type": "table",
+"items": [],
+"headings": [
+{
+"label": "Line #",
+"key": "index",
+"valueType": "text"
+},
+{
+"label": "Content",
+"key": "line",
+"valueType": "code"
+},
+{
+"label": "Error",
+"key": "message",
+"valueType": "code"
+}
+]
+}
+},
+"network-rtt": {
+"id": "network-rtt",
+"title": "Время прохождения сигнала сети",
+"description": "Время прохождения сигнала сети (RTT) напрямую влияет на производительность сайта. Высокое значение этого показателя может означать, что необходимо использовать серверы, которые находятся ближе к пользователю. Подробнее [о времени прохождения сигнала](https://hpbn.co/primer-on-latency-and-bandwidth/)…",
+"score": 1,
+"scoreDisplayMode": "informative",
+"displayValue": "0 мс",
+"details": {
+"sortedBy": [
+"rtt"
+],
+"type": "table",
+"items": [
+{
+"rtt": 1.5874499999999998,
+"origin": "https://mc.yandex.com"
+},
+{
+"origin": "https://ost-term.ru",
+"rtt": 0.001219945369000341
+}
+],
+"headings": [
+{
+"valueType": "text",
+"label": "URL",
+"key": "origin"
+},
+{
+"granularity": 1,
+"valueType": "ms",
+"label": "Потраченное время",
+"key": "rtt"
+}
+]
+},
+"numericValue": 1.5874499999999998,
+"numericUnit": "millisecond"
+},
+"video-caption": {
+"id": "video-caption",
+"title": "Элементы `<video>` содержат элемент `<track>` с атрибутом `[kind=\"captions\"]`",
+"description": "Чтобы информация, озвучиваемая в видео, была доступна людям с нарушениями слуха, добавьте субтитры. Подробнее [о субтитрах в видео](https://dequeuniversity.com/rules/axe/4.13/video-caption)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"trusted-types-xss": {
+"id": "trusted-types-xss",
+"title": "Используйте Trusted Types для предотвращения XSS-атак на основе DOM",
+"description": "Директива `require-trusted-types-for` в заголовке `Content-Security-Policy` (CSP) предписывает агентам пользователей управлять данными, которые передаются в приемники DOM XSS. Подробнее о том, [как использовать Trusted Types для предотвращения XSS-атак на основе DOM](https://developer.chrome.com/docs/lighthouse/best-practices/trusted-types-xss)…",
+"score": 1,
+"scoreDisplayMode": "informative",
+"details": {
+"items": [
+{
+"severity": "Высокая",
+"description": "Заголовок `Content-Security-Policy` с директивой Trusted Types не найден"
+}
+],
+"headings": [
+{
+"label": "Описание",
+"subItemsHeading": {
+"key": "description"
+},
+"valueType": "text",
+"key": "description"
+},
+{
+"valueType": "text",
+"subItemsHeading": {
+"key": "severity"
+},
+"label": "Уровень серьезности",
+"key": "severity"
+}
+],
+"type": "table"
+}
+},
+"server-response-time": {
+"id": "server-response-time",
+"title": "Время до получения первого байта от сервера допустимое",
+"description": "Время ответа сервера для основного документа должно быть небольшим, так как все прочие запросы зависят от этого показателя. Подробнее [о времени до получения первого байта](https://developer.chrome.com/docs/lighthouse/performance/time-to-first-byte/)…",
+"score": 1,
+"scoreDisplayMode": "metricSavings",
+"displayValue": "Загрузка корневого документа заняла 80 мс",
+"metricSavings": {
+"LCP": 0,
+"FCP": 0
+},
+"details": {
+"headings": [
+{
+"valueType": "url",
+"key": "url",
+"label": "URL"
+},
+{
+"label": "Потраченное время",
+"key": "responseTime",
+"valueType": "timespanMs"
+}
+],
+"type": "opportunity",
+"overallSavingsMs": 0,
+"items": [
+{
+"responseTime": 75,
+"url": "https://ost-term.ru/"
+}
+]
+},
+"numericValue": 75,
+"numericUnit": "millisecond"
+},
+"total-blocking-time": {
+"id": "total-blocking-time",
+"title": "Total Blocking Time",
+"description": "Сумма (в миллисекундах) всех периодов от первой отрисовки контента до загрузки для взаимодействия, когда скорость выполнения задач превышала 50 мс. Подробнее [об общем времени блокировки](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time/)…",
+"score": 0.76,
+"scoreDisplayMode": "numeric",
+"displayValue": "320 мс",
+"numericValue": 322,
+"numericUnit": "millisecond"
+},
+"offscreen-content-hidden": {
+"id": "offscreen-content-hidden",
+"title": "Offscreen content is hidden from assistive technology",
+"description": "Offscreen content is hidden with display: none or aria-hidden=true. [Learn how to properly hide offscreen content](https://developer.chrome.com/docs/lighthouse/accessibility/offscreen-content-hidden/).",
+"score": null,
+"scoreDisplayMode": "manual"
+},
+"paste-preventing-inputs": {
+"id": "paste-preventing-inputs",
+"title": "Вставка контента в поля ввода разрешена",
+"description": "Запрет на вставку информации в поле ввода негативно влияет на удобство использования и снижает безопасность, блокируя работу менеджеров паролей. Подробнее [об удобных полях ввода](https://developer.chrome.com/docs/lighthouse/best-practices/paste-preventing-inputs/)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"items": [],
+"type": "table",
+"headings": [
+{
+"label": "Неподходящие элементы",
+"key": "node",
+"valueType": "node"
+}
+]
+}
+},
+"form-field-multiple-labels": {
+"id": "form-field-multiple-labels",
+"title": "В форме нет полей с несколькими ярлыками",
+"description": "Когда программы чтения с экрана или другие технологии специальных возможностей обнаруживают поля формы с несколькими ярлыками, они озвучивают только первый, последний или все ярлыки. Это может запутать пользователей. Подробнее о том, [как использовать ярлыки формы](https://dequeuniversity.com/rules/axe/4.13/form-field-multiple-labels)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"autocomplete-valid": {
+"id": "autocomplete-valid",
+"title": "Атрибуты `autocomplete` используются правильно",
+"description": "Значения атрибута `autocomplete` должны быть действительными и правильно применены, чтобы программы чтения с экрана работали корректно. Подробнее [о допустимых значениях атрибута autocomplete](https://dequeuniversity.com/rules/axe/4.13/autocomplete-valid)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"label": {
+"id": "label",
+"title": "Элементам формы присвоены соответствующие ярлыки",
+"description": "Ярлыки нужны для того, чтобы программы чтения с экрана и другие технологии специальных возможностей могли правильно озвучивать элементы управления формой. Подробнее [о ярлыках для элементов формы](https://dequeuniversity.com/rules/axe/4.13/label)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"items": [],
+"type": "table",
+"headings": [
+{
+"valueType": "node",
+"subItemsHeading": {
+"valueType": "node",
+"key": "relatedNode"
+},
+"key": "node",
+"label": "Неподходящие элементы"
+}
+]
+}
+},
+"largest-contentful-paint": {
+"id": "largest-contentful-paint",
+"title": "Largest Contentful Paint",
+"description": "Отрисовка самого крупного контента – показатель, который отражает время, требуемое на полную отрисовку самого крупного изображения или текстового блока. Подробнее [об отрисовке самого крупного контента](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)…",
+"score": 0.4,
+"scoreDisplayMode": "numeric",
+"displayValue": "4,4 сек.",
+"numericValue": 4356.523882759202,
+"numericUnit": "millisecond"
+},
+"document-latency-insight": {
+"id": "document-latency-insight",
+"title": "Задержка при запросе документа",
+"description": "Первый сетевой запрос – самый важный. [Уменьшите задержку при его отправке](https://developer.chrome.com/docs/performance/insights/document-latency): не используйте переадресацию, применяйте сжатие текста и следите за тем, чтобы ответ с сервера приходил быстро.",
+"score": 1,
+"scoreDisplayMode": "metricSavings",
+"metricSavings": {
+"LCP": 0,
+"FCP": 0
+},
+"details": {
+"type": "checklist",
+"items": {
+"serverResponseIsFast": {
+"value": true,
+"label": "Сервер отвечает быстро. Фактическая скорость – 75 ms."
+},
+"usesCompression": {
+"value": true,
+"label": "Применяется сжатие текста"
+},
+"noRedirects": {
+"value": true,
+"label": "Не используются переадресации"
+}
+}
+}
+},
+"is-crawlable": {
+"id": "is-crawlable",
+"title": "Страница доступна для индексации",
+"description": "Поисковые системы не смогут включать ваши страницы в результаты поиска, если вы не предоставите разрешение на сканирование. Подробнее [о директивах для поисковых роботов](https://developer.chrome.com/docs/lighthouse/seo/is-crawlable/)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"type": "table",
+"headings": [
+{
+"valueType": "code",
+"key": "source",
+"label": "Blocking Directive Source"
+}
+],
+"items": []
+},
+"warnings": []
+},
+"aria-progressbar-name": {
+"id": "aria-progressbar-name",
+"title": "У элементов `progressbar` ARIA есть названия, доступные программам чтения с экрана",
+"description": "Если у элемента `progressbar` нет названия, доступного программам чтения с экрана, пользователи услышат только его общее название и не поймут, для чего он нужен. Подробнее о том, [как присваивать ярлыки элементам `progressbar`](https://dequeuniversity.com/rules/axe/4.13/aria-progressbar-name)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"html-xml-lang-mismatch": {
+"id": "html-xml-lang-mismatch",
+"title": "У элемента `<html>` есть атрибут `[xml:lang]`, основной язык которого совпадает с языком в атрибуте `[lang]`",
+"description": "Если для веб-страницы не указан подходящий язык, программа чтения с экрана может озвучивать текст некорректно. Подробнее [об атрибуте `lang`](https://dequeuniversity.com/rules/axe/4.13/html-xml-lang-mismatch)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"inp-breakdown-insight": {
+"id": "inp-breakdown-insight",
+"title": "Обзор INP",
+"description": "[Улучшите показатель INP](https://developer.chrome.com/docs/performance/insights/inp-breakdown), проанализировав самый длинный этап.",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"origin-isolation": {
+"id": "origin-isolation",
+"title": "Обеспечьте надлежащую изоляцию источников с помощью COOP",
+"description": "С помощью заголовков COOP можно изолировать окно верхнего уровня от других документов, таких как всплывающие окна. Подробнее [об использовании заголовков COOP](https://web.dev/articles/why-coop-coep#coop)…",
+"score": 1,
+"scoreDisplayMode": "informative",
+"details": {
+"headings": [
+{
+"key": "description",
+"valueType": "text",
+"subItemsHeading": {
+"key": "description"
+},
+"label": "Описание"
+},
+{
+"valueType": "code",
+"key": "directive",
+"label": "Директива",
+"subItemsHeading": {
+"key": "directive"
+}
+},
+{
+"subItemsHeading": {
+"key": "severity"
+},
+"key": "severity",
+"label": "Уровень серьезности",
+"valueType": "text"
+}
+],
+"items": [
+{
+"description": "Не найден заголовок COOP.",
+"severity": "Высокая"
+}
+],
+"type": "table"
+}
+},
+"viewport-insight": {
+"id": "viewport-insight",
+"title": "Оптимизация области просмотра для мобильных устройств",
+"description": "Если область просмотра не оптимизирована для мобильных устройств, при касании экрана возможна [задержка до 300 мс](https://developer.chrome.com/docs/performance/insights/viewport).",
+"score": 1,
+"scoreDisplayMode": "numeric",
+"metricSavings": {
+"INP": 0
+},
+"details": {
+"items": [
+{
+"node": {
+"nodeLabel": "head > meta",
+"snippet": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover\">",
+"boundingRect": {
+"bottom": 0,
+"height": 0,
+"right": 0,
+"left": 0,
+"width": 0,
+"top": 0
+},
+"selector": "head > meta",
+"path": "1,HTML,0,HEAD,2,META",
+"type": "node",
+"lhId": "page-8-META"
+}
+}
+],
+"headings": [
+{
+"key": "node",
+"valueType": "node"
+}
+],
+"type": "table"
+}
+},
+"listitem": {
+"id": "listitem",
+"title": "Элементы списка (`<li>`) расположены внутри родительских элементов `<ul>`, `<ol>` или `<menu>`",
+"description": "Чтобы программы чтения с экрана правильно озвучивали списки, элементы `<li>` должны располагаться внутри родительских элементов `<ul>`, `<ol>` или `<menu>`. Подробнее [о правильной структуре списков](https://dequeuniversity.com/rules/axe/4.13/listitem)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"items": [],
+"type": "table",
+"headings": [
+{
+"valueType": "node",
+"subItemsHeading": {
+"valueType": "node",
+"key": "relatedNode"
+},
+"label": "Неподходящие элементы",
+"key": "node"
+}
+]
+}
+},
+"cache-insight": {
+"id": "cache-insight",
+"title": "Выбирайте эффективный период хранения кеша",
+"description": "Благодаря долгому времени хранения кеша страница может быстрее загружаться при повторных посещениях. Подробнее [о кешировании](https://developer.chrome.com/docs/performance/insights/cache)…",
+"score": 0,
+"scoreDisplayMode": "metricSavings",
+"displayValue": "Ожидаемая экономия – 114 КиБ",
+"metricSavings": {
+"LCP": 200,
+"FCP": 0
+},
+"details": {
+"headings": [
+{
+"label": "Запрос",
+"key": "url",
+"valueType": "url"
+},
+{
+"valueType": "ms",
+"label": "Время жизни кеша",
+"key": "cacheLifetimeMs",
+"displayUnit": "duration"
+},
+{
+"granularity": 1,
+"valueType": "bytes",
+"displayUnit": "kb",
+"label": "Объем переданных данных",
+"key": "totalBytes"
+}
+],
+"type": "table",
+"sortedBy": [
+"wastedBytes"
+],
+"items": [
+{
+"wastedBytes": 73670.40000000001,
+"cacheLifetimeMs": 3600000,
+"url": "https://mc.yandex.ru/metrika/tag.js",
+"totalBytes": 92088
+},
+{
+"cacheLifetimeMs": 3600000,
+"wastedBytes": 11126.400000000001,
+"totalBytes": 13908,
+"url": "https://mc.yandex.com/metrika/tag_phono.js"
+}
+],
+"skipSumming": [
+"cacheLifetimeMs"
+]
+}
+},
+"legacy-javascript-insight": {
+"id": "legacy-javascript-insight",
+"title": "Устаревший код JavaScript",
+"description": "Полифилы и преобразования позволяют работать с новыми возможностями JavaScript в более старых браузерах. Однако для современных браузеров большинство из них не требуется. Если поддержка более старых браузеров не требуется, возможно стоит изменить процесс сборки JavaScript, чтобы не транспилировать функции [Baseline](https://web.dev/articles/baseline-and-polyfills). Узнайте, [почему большинство сайтов могут использовать код ES6+ без транспилирования](https://developer.chrome.com/docs/performance/insights/legacy-javascript).",
+"score": 0.5,
+"scoreDisplayMode": "metricSavings",
+"displayValue": "Ожидаемая экономия – 10 КиБ",
+"metricSavings": {
+"LCP": 0,
+"FCP": 0
+},
+"details": {
+"items": [
+{
+"wastedBytes": 10380,
+"subItems": {
+"type": "subitems",
+"items": [
+{
+"location": {
+"column": 7840,
+"url": "https://ost-term.ru/wp-content/plugins/quizle/assets/public/js/scripts.min.js",
+"type": "source-location",
+"urlProvider": "network",
+"line": 0
+},
+"signal": "@babel/plugin-transform-classes"
+},
+{
+"signal": "@babel/plugin-transform-regenerator",
+"location": {
+"type": "source-location",
+"line": 0,
+"urlProvider": "network",
+"url": "https://ost-term.ru/wp-content/plugins/quizle/assets/public/js/scripts.min.js",
+"column": 2252
+}
+},
+{
+"location": {
+"urlProvider": "network",
+"url": "https://ost-term.ru/wp-content/plugins/quizle/assets/public/js/scripts.min.js",
+"line": 0,
+"type": "source-location",
+"column": 15072
+},
+"signal": "Promise.allSettled"
+}
+]
+},
+"url": "https://ost-term.ru/wp-content/plugins/quizle/assets/public/js/scripts.min.js"
+}
+],
+"type": "table",
+"headings": [
+{
+"subItemsHeading": {
+"valueType": "source-location",
+"key": "location"
+},
+"key": "url",
+"valueType": "url",
+"label": "URL"
+},
+{
+"key": null,
+"valueType": "code",
+"subItemsHeading": {
+"key": "signal"
+}
+},
+{
+"valueType": "bytes",
+"label": "Потерянные байты",
+"key": "wastedBytes"
+}
+]
+}
+},
+"document-title": {
+"id": "document-title",
+"title": "Документ содержит элемент `<title>`",
+"description": "Название (элемент title) нужно для того, чтобы программы чтения с экрана могли озвучивать название страницы. Также оно появляется в результатах поиска и позволяет определять, соответствует ли сайт запросу. Подробнее [о названиях документов](https://dequeuniversity.com/rules/axe/4.13/document-title)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"headings": [
+{
+"label": "Неподходящие элементы",
+"valueType": "node",
+"subItemsHeading": {
+"valueType": "node",
+"key": "relatedNode"
+},
+"key": "node"
+}
+],
+"items": [],
+"type": "table"
+}
+},
+"focus-traps": {
+"id": "focus-traps",
+"title": "User focus is not accidentally trapped in a region",
+"description": "A user can tab into and out of any control or region without accidentally trapping their focus. [Learn how to avoid focus traps](https://developer.chrome.com/docs/lighthouse/accessibility/focus-traps/).",
+"score": null,
+"scoreDisplayMode": "manual"
+},
+"long-tasks": {
+"id": "long-tasks",
+"title": "Избегайте длительных задач в основном потоке",
+"description": "Для основного потока создается список самых длительных задач. Это позволяет выявлять главные факторы, которые приводят к задержкам после ввода. Подробнее о том, [как предотвратить появление длительных задач в основном потоке](https://web.dev/articles/optimize-long-tasks)…",
+"score": 1,
+"scoreDisplayMode": "informative",
+"displayValue": "Обнаружено 6 длительных задач",
+"metricSavings": {
+"TBT": 300
+},
+"details": {
+"sortedBy": [
+"duration"
+],
+"items": [
+{
+"startTime": 1198.5044227331855,
+"duration": 327.9999999999998,
+"url": "Unattributable"
+},
+{
+"duration": 292,
+"startTime": 3057.504422733185,
+"url": "_lighthouse-eval.js"
+}
+],
+"headings": [
+{
+"valueType": "url",
+"label": "URL",
+"key": "url"
+},
+{
+"key": "startTime",
+"valueType": "ms",
+"label": "Время начала",
+"granularity": 1
+},
+{
+"key": "duration",
+"label": "Длительность",
+"valueType": "ms",
+"granularity": 1
+}
+],
+"skipSumming": [
+"startTime"
+],
+"type": "table"
+}
+},
+"cls-culprits-insight": {
+"id": "cls-culprits-insight",
+"title": "Причины смещения макета",
+"description": "Смещение макета происходит, когда элементы передвигаются без взаимодействия с пользователем. Это может быть связано с добавлением и удалением элементов или изменением их шрифтов при загрузке страницы. [Выясните причины сдвигов.](https://developer.chrome.com/docs/performance/insights/cls-culprit)",
+"score": 1,
+"scoreDisplayMode": "numeric",
+"metricSavings": {
+"CLS": 0
+},
+"details": {
+"items": [],
+"type": "list"
+}
+},
+"bypass": {
+"id": "bypass",
+"title": "Страница содержит заголовок, ссылку для пропуска контента или указание региона",
+"description": "Чтобы пользователям было проще перемещаться по странице с помощью клавиатуры, добавьте возможность пропускать повторяющийся контент. Подробнее [о пропускаемых блоках данных](https://dequeuniversity.com/rules/axe/4.13/bypass)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"lcp-breakdown-insight": {
+"id": "lcp-breakdown-insight",
+"title": "Разбивка LCP",
+"description": "Для каждого этапа [есть стратегии улучшения](https://developer.chrome.com/docs/performance/insights/lcp-breakdown). В идеале большая часть времени, требуемого на полную отрисовку элементов LCP, должна тратиться на загрузку ресурсов, а не на задержки.",
+"score": 1,
+"scoreDisplayMode": "informative",
+"metricSavings": {
+"LCP": 0
+},
+"details": {
+"type": "list",
+"items": [
+{
+"type": "table",
+"headings": [
+{
+"label": "Этап",
+"key": "label",
+"valueType": "text"
+},
+{
+"label": "Длительность",
+"key": "duration",
+"valueType": "ms"
+}
+],
+"items": [
+{
+"subpart": "timeToFirstByte",
+"duration": 75.192,
+"label": "Time to First Byte"
+},
+{
+"duration": 1068.438,
+"subpart": "resourceLoadDelay",
+"label": "Задержка загрузки ресурса"
+},
+{
+"duration": 149.3,
+"subpart": "resourceLoadDuration",
+"label": "Продолжительность загрузки ресурса"
+},
+{
+"label": "Задержка при отрисовке элемента",
+"subpart": "elementRenderDelay",
+"duration": 668.279
+}
+]
+},
+{
+"boundingRect": {
+"left": 0,
+"height": 800,
+"right": 412,
+"bottom": 890,
+"top": 90,
+"width": 412
+},
+"path": "1,HTML,1,BODY,2,DIV,1,MAIN,0,DIV,0,ARTICLE,0,DIV,0,DIV",
+"type": "node",
+"snippet": "<div class=\"wp-block-greenshift-blocks-row alignfull gspb_row gspb_row-id-gsbp-6cf0500\" id=\"gspb_row-id-gsbp-6cf0500\">",
+"selector": "div.ct-container-full > article#post-2 > div.entry-content > div#gspb_row-id-gsbp-6cf0500",
+"nodeLabel": "ОСТ-ТЕРМИНАЛ\nБолее 20 лет занимаемся таможенным оформлением грузов для юридичес…",
+"lhId": "page-5-DIV"
+}
+]
+}
+},
+"aria-allowed-role": {
+"id": "aria-allowed-role",
+"title": "Роли ARIA назначены только совместимым элементам",
+"description": "Многим элементам HTML разрешается назначать только определенные роли ARIA. Если роли ARIA используются неподходящим способом, это может ухудшить доступность веб-страницы. Подробнее [о ролях ARIA](https://dequeuniversity.com/rules/axe/4.13/aria-allowed-role)…",
+"score": 1,
+"scoreDisplayMode": "informative",
+"details": {
+"items": [
+{
+"node": {
+"nodeLabel": "ПОПУЛЯРНО\nРастаможка рыбы",
+"lhId": "1-0-A",
+"boundingRect": {
+"height": 229,
+"bottom": 9605,
+"right": 351,
+"left": 61,
+"top": 9377,
+"width": 291
+},
+"type": "node",
+"path": "1,HTML,1,BODY,2,DIV,4,DIV,0,DIV,0,ARTICLE,0,DIV,0,DIV,0,DIV,1,DIV,5,DIV,0,A",
+"selector": "div.rb-sitemap > div.rb-sitemap-container > div.rb-sitemap-grid > a.rb-sitemap-card",
+"snippet": "<a href=\"https://ost-term.ru/tamozhennoe-oformlenie/ryby\" class=\"rb-sitemap-card\" role=\"listitem\">",
+"explanation": "Fix any of the following:\n  ARIA role listitem is not allowed for given element"
+}
+},
+{
+"node": {
+"nodeLabel": "ПОПУЛЯРНО\nРастаможка мяса",
+"path": "1,HTML,1,BODY,2,DIV,4,DIV,0,DIV,0,ARTICLE,0,DIV,0,DIV,0,DIV,1,DIV,5,DIV,1,A",
+"snippet": "<a href=\"https://ost-term.ru/tamozhennoe-oformlenie/myasa\" class=\"rb-sitemap-card\" role=\"listitem\">",
+"explanation": "Fix any of the following:\n  ARIA role listitem is not allowed for given element",
+"boundingRect": {
+"right": 351,
+"bottom": 9854,
+"height": 229,
+"width": 291,
+"left": 61,
+"top": 9625
+},
+"selector": "div.rb-sitemap > div.rb-sitemap-container > div.rb-sitemap-grid > a.rb-sitemap-card",
+"lhId": "1-1-A",
+"type": "node"
+}
+}
+],
+"type": "table",
+"headings": [
+{
+"key": "node",
+"label": "Неподходящие элементы",
+"subItemsHeading": {
+"valueType": "node",
+"key": "relatedNode"
+},
+"valueType": "node"
+}
+]
+}
+},
+"aria-deprecated-role": {
+"id": "aria-deprecated-role",
+"title": "Устаревшие роли ARIA не использовались",
+"description": "Функции специальных возможностей могут некорректно обрабатывать устаревшие роли ARIA. Подробнее [об устаревших ролях ARIA](https://dequeuniversity.com/rules/axe/4.13/aria-deprecated-role)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"headings": [
+{
+"key": "node",
+"valueType": "node",
+"label": "Неподходящие элементы",
+"subItemsHeading": {
+"key": "relatedNode",
+"valueType": "node"
+}
+}
+],
+"type": "table",
+"items": []
+}
+},
+"custom-controls-labels": {
+"id": "custom-controls-labels",
+"title": "Custom controls have associated labels",
+"description": "Custom interactive controls have associated labels, provided by aria-label or aria-labelledby. [Learn more about custom controls and labels](https://developer.chrome.com/docs/lighthouse/accessibility/custom-controls-labels/).",
+"score": null,
+"scoreDisplayMode": "manual"
+},
+"use-landmarks": {
+"id": "use-landmarks",
+"title": "HTML5 landmark elements are used to improve navigation",
+"description": "Landmark elements (`<main>`, `<nav>`, etc.) are used to improve the keyboard navigation of the page for assistive technology. [Learn more about landmark elements](https://developer.chrome.com/docs/lighthouse/accessibility/use-landmarks/).",
+"score": null,
+"scoreDisplayMode": "manual"
+},
+"meta-description": {
+"id": "meta-description",
+"title": "В документе есть метаописание",
+"description": "Метаописания содержат общие сведения о контенте страницы и могут быть показаны в результатах поиска. Подробнее [о метаописании](https://developer.chrome.com/docs/lighthouse/seo/meta-description/)…",
+"score": 1,
+"scoreDisplayMode": "binary"
+},
+"image-delivery-insight": {
+"id": "image-delivery-insight",
+"title": "Улучшите загрузку изображений",
+"description": "Если изображения будут быстрее скачиваться, то время загрузки страницы и значение LCP могут стать меньше. Узнайте, [как оптимизировать размер изображений](https://developer.chrome.com/docs/performance/insights/image-delivery).",
+"score": 0,
+"scoreDisplayMode": "metricSavings",
+"displayValue": "Ожидаемая экономия – 3 588 КиБ",
+"metricSavings": {
+"LCP": 1000,
+"FCP": 0
+},
+"details": {
+"headings": [
+{
+"valueType": "node",
+"key": "node"
+},
+{
+"label": "URL",
+"subItemsHeading": {
+"valueType": "text",
+"key": "reason"
+},
+"valueType": "url",
+"key": "url"
+},
+{
+"valueType": "bytes",
+"label": "Размер файла",
+"key": "totalBytes"
+},
+{
+"label": "Ожидаемая экономия",
+"valueType": "bytes",
+"key": "wastedBytes",
+"subItemsHeading": {
+"valueType": "bytes",
+"key": "wastedBytes"
+}
+}
+],
+"items": [
+{
+"wastedBytes": 1692025,
+"url": "https://ost-term.ru/wp-content/uploads/2026/02/chestnyy-znak.png",
+"subItems": {
+"items": [
+{
+"reason": "Если использовать современный графический формат (WebP или AVIF) или увеличить коэффициент сжатия изображения, размер файла будет меньше.",
+"wastedBytes": 1572997
+},
+{
+"wastedBytes": 1017104,
+"reason": "Размер изображения (1086x1152) превышает размер контейнера (634x846). Используйте адаптивный стиль, чтобы размер графического файла был меньше."
+}
+],
+"type": "subitems"
+},
+"node": {
+"snippet": "<img decoding=\"async\" class=\"card-img gsbp-ec6806a\" src=\"https://ost-term.ru/wp-content/uploads/2026/02/chestnyy-znak.png\" alt=\"Главная\" width=\"360\" height=\"265\" loading=\"lazy\">",
+"boundingRect": {
+"top": 1720,
+"width": 363,
+"height": 385,
+"left": 25,
+"bottom": 2105,
+"right": 387
+},
+"path": "1,HTML,1,BODY,2,DIV,1,MAIN,0,DIV,0,ARTICLE,0,DIV,1,DIV,1,DIV,0,DIV,2,DIV,0,A,2,IMG",
+"nodeLabel": "Главная",
+"selector": "div.gsbp-08cbd00 > div > a.gs-parent-hover > img.card-img",
+"lhId": "page-0-IMG",
+"type": "node"
+},
+"totalBytes": 1781476
+},
+{
+"subItems": {
+"items": [
+{
+"wastedBytes": 770204,
+"reason": "Если использовать современный графический формат (WebP или AVIF) или увеличить коэффициент сжатия изображения, размер файла будет меньше."
+},
+{
+"reason": "Размер изображения (896x951) превышает размер контейнера (634x850). Используйте адаптивный стиль, чтобы размер графического файла был меньше.",
+"wastedBytes": 334825
+}
+],
+"type": "subitems"
+},
+"node": {
+"nodeLabel": "Главная",
+"path": "1,HTML,1,BODY,2,DIV,1,MAIN,0,DIV,0,ARTICLE,0,DIV,1,DIV,1,DIV,0,DIV,0,DIV,0,A,2,IMG",
+"selector": "div.gsbp-08cbd00 > div > a.gs-parent-hover > img.card-img",
+"type": "node",
+"snippet": "<img decoding=\"async\" class=\"card-img gsbp-ec6806a\" src=\"https://ost-term.ru/wp-content/uploads/2026/02/svh.jpeg\" alt=\"Главная\" width=\"872\" height=\"764\" loading=\"lazy\">",
+"boundingRect": {
+"top": 970,
+"left": 25,
+"height": 385,
+"right": 387,
+"bottom": 1355,
+"width": 363
+},
+"lhId": "page-1-IMG"
+},
+"url": "https://ost-term.ru/wp-content/uploads/2026/02/svh.jpeg",
+"totalBytes": 912163,
+"wastedBytes": 822312
+}
+],
+"type": "table"
+}
+},
+"non-composited-animations": {
+"id": "non-composited-animations",
+"title": "Избегайте некомбинированных анимаций",
+"description": "Некомбинированные анимации могут пропускать кадры и усиливать совокупное смещение макета. Подробнее о том, [как убрать некомбинированные анимации](https://developer.chrome.com/docs/lighthouse/performance/non-composited-animations/)…",
+"score": null,
+"scoreDisplayMode": "notApplicable",
+"metricSavings": {
+"CLS": 0
+},
+"details": {
+"items": [],
+"type": "table",
+"headings": [
+{
+"label": "Элемент",
+"key": "node",
+"subItemsHeading": {
+"key": "failureReason",
+"valueType": "text"
+},
+"valueType": "node"
+}
+]
+}
+},
+"interactive-element-affordance": {
+"id": "interactive-element-affordance",
+"title": "Interactive elements indicate their purpose and state",
+"description": "Interactive elements, such as links and buttons, should indicate their state and be distinguishable from non-interactive elements. [Learn how to decorate interactive elements with affordance hints](https://developer.chrome.com/docs/lighthouse/accessibility/interactive-element-affordance/).",
+"score": null,
+"scoreDisplayMode": "manual"
+},
+"clickjacking-mitigation": {
+"id": "clickjacking-mitigation",
+"title": "Защита от кликджекинга с использованием заголовка XFO или CSP",
+"description": "Заголовок `X-Frame-Options` (XFO) или директива `frame-ancestors` в заголовке `Content-Security-Policy` (CSP) указывает, куда можно встроить страницу. Таким образом можно защититься от кликджекинга, запретив сайтам встраивать страницы. Подробнее о [защите от кликджекинга](https://developer.chrome.com/docs/lighthouse/best-practices/clickjacking-mitigation)…",
+"score": 1,
+"scoreDisplayMode": "informative",
+"details": {
+"type": "table",
+"items": [
+{
+"description": "Правило управления фреймом отсутствует",
+"severity": "Высокая"
+}
+],
+"headings": [
+{
+"key": "description",
+"valueType": "text",
+"label": "Описание",
+"subItemsHeading": {
+"key": "description"
+}
+},
+{
+"valueType": "text",
+"label": "Уровень серьезности",
+"key": "severity",
+"subItemsHeading": {
+"key": "severity"
+}
+}
+]
+}
+},
+"meta-refresh": {
+"id": "meta-refresh",
+"title": "В документе не используется метатег `<meta http-equiv=\"refresh\">`",
+"description": "Когда страница обновляется автоматически, фокус, используемый программами для чтения с экрана, перемещается в верхнюю часть. Это может мешать работе пользователей и вызывать у них негативные эмоции. Подробнее [о метатеге refresh](https://dequeuniversity.com/rules/axe/4.13/meta-refresh)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"html-lang-valid": {
+"id": "html-lang-valid",
+"title": "Для элемента `<html>` указано действительное значение атрибута `[lang]`",
+"description": "Чтобы программы чтения с экрана правильно озвучивали текст, укажите допустимый [языковой тег BCP 47](https://www.w3.org/International/questions/qa-choosing-language-tags#question). Подробнее о том, [как использовать атрибут `lang`](https://dequeuniversity.com/rules/axe/4.13/html-lang-valid)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"type": "table",
+"items": [],
+"headings": [
+{
+"subItemsHeading": {
+"valueType": "node",
+"key": "relatedNode"
+},
+"key": "node",
+"label": "Неподходящие элементы",
+"valueType": "node"
+}
+]
+}
+},
+"final-screenshot": {
+"id": "final-screenshot",
+"title": "Final Screenshot",
+"description": "The last screenshot captured of the pageload.",
+"score": 1,
+"scoreDisplayMode": "informative",
+"details": {
+"timing": 2326,
+"type": "screenshot",
+"timestamp": 126388034284,
+"data": "data:image/jpeg;base64,FINAL"
+}
+},
+"th-has-data-cells": {
+"id": "th-has-data-cells",
+"title": "В элементах `<th>` и элементах с атрибутом `[role=\"columnheader\"/\"rowheader\"]` есть описываемые ими ячейки с данными",
+"description": "Чтобы пользователям было проще перемещаться по таблицам с помощью программ чтения с экрана, убедитесь, что все заголовки в таблицах ссылаются на тот или иной набор ячеек. Подробнее [о заголовках таблиц](https://dequeuniversity.com/rules/axe/4.13/th-has-data-cells)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"font-display-insight": {
+"id": "font-display-insight",
+"title": "Используемые шрифты",
+"description": "Рекомендуем использовать свойство [font-display](https://developer.chrome.com/docs/performance/insights/font-display) со значением swap или optional, чтобы весь текст был одинаково виден. Значение swap можно дополнительно оптимизировать, чтобы с помощью [переопределения показателей шрифта](https://developer.chrome.com/blog/font-fallbacks) уменьшить смещения макета.",
+"score": 1,
+"scoreDisplayMode": "metricSavings",
+"metricSavings": {
+"INP": 0
+},
+"details": {
+"headings": [
+{
+"label": "URL",
+"valueType": "url",
+"key": "url"
+},
+{
+"valueType": "ms",
+"key": "wastedMs",
+"label": "Ожидаемая экономия"
+}
+],
+"type": "table",
+"skipSumming": [
+"wastedMs"
+],
+"items": []
+}
+},
+"presentation-role-conflict": {
+"id": "presentation-role-conflict",
+"title": "У элементов с атрибутом `role=\"none\"` (или `role=\"presentation\"`) нет конфликтов",
+"description": "В некоторых случаях семантическая роль элемента с атрибутом `role=\"none\"` (или `role=\"presentation\"`) не распознается как none (или presentation). Чтобы элемент оставался исключенным из дерева доступности, не добавляйте к нему глобальные атрибуты ARIA и не делайте его фокусируемым. Подробнее [о конфликте с ролью presentation](https://dequeuniversity.com/rules/axe/4.13/presentation-role-conflict)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"type": "table",
+"items": [],
+"headings": [
+{
+"subItemsHeading": {
+"valueType": "node",
+"key": "relatedNode"
+},
+"valueType": "node",
+"label": "Неподходящие элементы",
+"key": "node"
+}
+]
+}
+},
+"screenshot-thumbnails": {
+"id": "screenshot-thumbnails",
+"title": "Screenshot Thumbnails",
+"description": "This is what the load of your site looked like.",
+"score": 1,
+"scoreDisplayMode": "informative",
+"details": {
+"type": "filmstrip",
+"scale": 3000,
+"items": [
+{
+"timestamp": 126386083542,
+"timing": 375,
+"data": "data:image/jpeg;base64,THUMB"
+},
+{
+"timing": 750,
+"data": "data:image/jpeg;base64,THUMB",
+"timestamp": 126386458542
+}
+]
+}
+},
+"aria-input-field-name": {
+"id": "aria-input-field-name",
+"title": "У полей ввода ARIA есть доступные названия",
+"description": "Если у поля ввода нет названия, доступного программам чтения с экрана, пользователи услышат его общее название и не поймут, для чего оно нужно. Подробнее [о ярлыках для полей ввода](https://dequeuniversity.com/rules/axe/4.13/aria-input-field-name)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"has-hsts": {
+"id": "has-hsts",
+"title": "Использование строгого механизма HSTS",
+"description": "При использовании заголовков HSTS существенно снижается риск изменения протокола HTTPS на HTTP и несанкционированного прослушивания. Рекомендуется внедрять этот механизм постепенно, начиная с малых значений max-age. Подробнее [об использовании строгого механизма HSTS](https://developer.chrome.com/docs/lighthouse/best-practices/has-hsts)…",
+"score": 1,
+"scoreDisplayMode": "informative",
+"details": {
+"type": "table",
+"items": [
+{
+"description": "Не найден заголовок HSTS.",
+"severity": "Высокая"
+}
+],
+"headings": [
+{
+"subItemsHeading": {
+"key": "description"
+},
+"valueType": "text",
+"label": "Описание",
+"key": "description"
+},
+{
+"subItemsHeading": {
+"key": "directive"
+},
+"valueType": "code",
+"label": "Директива",
+"key": "directive"
+},
+{
+"label": "Уровень серьезности",
+"valueType": "text",
+"subItemsHeading": {
+"key": "severity"
+},
+"key": "severity"
+}
+]
+}
+},
+"speed-index": {
+"id": "speed-index",
+"title": "Speed Index",
+"description": "Speed Index отражает, как быстро на странице появляется контент. Подробнее [о Speed Index](https://developer.chrome.com/docs/lighthouse/performance/speed-index/)…",
+"score": 0.93,
+"scoreDisplayMode": "numeric",
+"displayValue": "3,1 сек.",
+"numericValue": 3106.1397513422985,
+"numericUnit": "millisecond"
+},
+"unused-javascript": {
+"id": "unused-javascript",
+"title": "Удалите неиспользуемый код JavaScript",
+"description": "Чтобы сократить расход трафика, удалите неиспользуемый код JavaScript и отложите загрузку скриптов до тех пор, пока они не понадобятся. Подробнее о том, [как удалить неиспользуемый код JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/)…",
+"score": 0.5,
+"scoreDisplayMode": "metricSavings",
+"displayValue": "Ожидаемая экономия – 45 КиБ",
+"metricSavings": {
+"LCP": 0,
+"FCP": 0
+},
+"details": {
+"sortedBy": [
+"wastedBytes"
+],
+"overallSavingsMs": 0,
+"headings": [
+{
+"subItemsHeading": {
+"valueType": "code",
+"key": "source"
+},
+"label": "URL",
+"valueType": "url",
+"key": "url"
+},
+{
+"valueType": "bytes",
+"label": "Объем переданных данных",
+"subItemsHeading": {
+"key": "sourceBytes"
+},
+"key": "totalBytes"
+},
+{
+"subItemsHeading": {
+"key": "sourceWastedBytes"
+},
+"key": "wastedBytes",
+"valueType": "bytes",
+"label": "Ожидаемая экономия"
+}
+],
+"items": [
+{
+"wastedBytes": 46437,
+"wastedPercent": 50.99425016291805,
+"url": "https://mc.yandex.ru/metrika/tag.js",
+"totalBytes": 91063
+}
+],
+"overallSavingsBytes": 46437,
+"type": "opportunity"
+},
+"numericValue": 0,
+"numericUnit": "millisecond"
+},
+"main-thread-tasks": {
+"id": "main-thread-tasks",
+"title": "Tasks",
+"description": "Lists the toplevel main thread tasks that executed during page load.",
+"score": 1,
+"scoreDisplayMode": "informative",
+"details": {
+"items": [
+{
+"startTime": 761.196,
+"duration": 26.038
+},
+{
+"startTime": 788.056,
+"duration": 9.196
+}
+],
+"headings": [
+{
+"label": "Start Time",
+"key": "startTime",
+"granularity": 1,
+"valueType": "ms"
+},
+{
+"label": "End Time",
+"valueType": "ms",
+"key": "duration",
+"granularity": 1
+}
+],
+"type": "table"
+}
+},
+"duplicate-id-aria": {
+"id": "duplicate-id-aria",
+"title": "Идентификаторы ARIA уникальны",
+"description": "Значение идентификатора ARIA должно быть уникальным, поскольку технологии специальных возможностей могут игнорировать повторяющиеся идентификаторы. Подробнее о том, [как убрать копии идентификаторов ARIA](https://dequeuniversity.com/rules/axe/4.13/duplicate-id-aria)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"resource-summary": {
+"id": "resource-summary",
+"title": "Resources Summary",
+"description": "Aggregates all network requests and groups them by type",
+"score": 1,
+"scoreDisplayMode": "informative",
+"details": {
+"items": [
+{
+"resourceType": "total",
+"transferSize": 4829449,
+"requestCount": 68,
+"label": "Всего"
+},
+{
+"label": "Изображение",
+"resourceType": "image",
+"transferSize": 4168695,
+"requestCount": 12
+}
+],
+"headings": [
+{
+"valueType": "text",
+"label": "Тип ресурса",
+"key": "label"
+},
+{
+"valueType": "numeric",
+"key": "requestCount",
+"label": "Запросы"
+},
+{
+"valueType": "bytes",
+"label": "Объем переданных данных",
+"key": "transferSize"
+}
+],
+"type": "table"
+}
+},
+"aria-dialog-name": {
+"id": "aria-dialog-name",
+"title": "У элементов с атрибутом `role=\"dialog\"` или `role=\"alertdialog\"` есть доступные названия",
+"description": "Если у элементов диалогового окна ARIA нет доступных имен, пользователи программ чтения с экрана могут не понимать назначение этих элементов. Подробнее о том, [как сделать элементы диалогового окна ARIA более доступными](https://dequeuniversity.com/rules/axe/4.13/aria-dialog-name)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"td-headers-attr": {
+"id": "td-headers-attr",
+"title": "Ячейки внутри элемента `<table>`, в которых используется атрибут `[headers]`, ссылаются на ячейки той же таблицы.",
+"description": "Чтобы пользователям было проще перемещаться по таблицам с помощью программ чтения с экрана, убедитесь, что ячейки (элементы `<td>`) с атрибутом `[headers]` ссылаются только на другие ячейки в той же таблице. Подробнее [об атрибуте `headers`](https://dequeuniversity.com/rules/axe/4.13/td-headers-attr)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"doctype": {
+"id": "doctype",
+"title": "Тип страницы (DOCTYPE): HTML",
+"description": "Если для страницы указан параметр DOCTYPE, браузер не будет переключаться в режим совместимости. Подробнее [об указании DOCTYPE](https://developer.chrome.com/docs/lighthouse/best-practices/doctype/)…",
+"score": 1,
+"scoreDisplayMode": "binary"
+},
+"first-contentful-paint": {
+"id": "first-contentful-paint",
+"title": "First Contentful Paint",
+"description": "Первая отрисовка контента – показатель, который отражает время между началом загрузки страницы и появлением первого изображения или блока текста. Подробнее [о первой отрисовке контента](https://developer.chrome.com/docs/lighthouse/performance/first-contentful-paint/)…",
+"score": 0.95,
+"scoreDisplayMode": "numeric",
+"displayValue": "1,6 сек.",
+"numericValue": 1553.5070763730967,
+"numericUnit": "millisecond"
+},
+"is-on-https": {
+"id": "is-on-https",
+"title": "Используется протокол HTTPS",
+"description": "Все сайты (даже если они не обрабатывают конфиденциальные данные) должны быть защищены протоколом HTTPS. Это в том числе означает, что не следует использовать [смешанный контент](https://developers.google.com/web/fundamentals/security/prevent-mixed-content/what-is-mixed-content): не должно быть ситуаций, когда некоторые ресурсы загружаются по протоколу HTTP, хотя первоначальный запрос передается с применением HTTPS. HTTPS обеспечивает защиту от взлома и не позволяет посторонним узнавать, как пользователи взаимодействуют с приложением. Кроме того, использование этого протокола обязательно при работе с версией HTTP/2 и многими новыми API для веб-платформ. Подробнее [об HTTPS](https://developer.chrome.com/docs/lighthouse/pwa/is-on-https/)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"items": [],
+"headings": [
+{
+"valueType": "url",
+"label": "Небезопасный URL",
+"key": "url"
+},
+{
+"label": "Обработка запросов",
+"key": "resolution",
+"valueType": "text"
+}
+],
+"type": "table"
+}
+},
+"td-has-header": {
+"id": "td-has-header",
+"title": "У элементов `<td>` есть один или несколько заголовков в большой таблице `<table>`",
+"description": "Чтобы пользователям было проще перемещаться по таблицам с помощью программ чтения с экрана, рекомендуем добавлять заголовки для элементов `<td>` в больших таблицах (состоящих из трех или более ячеек в высоту и ширину). Подробнее [о заголовках таблиц](https://dequeuniversity.com/rules/axe/4.13/td-has-header)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"dom-size-insight": {
+"id": "dom-size-insight",
+"title": "Оптимизация размера DOM-дерева",
+"description": "Из-за большого размера дерева DOM может замедляться расчет стиля и компоновка макета. Это повлияет на скорость отклика страницы и увеличит объем используемой памяти. Узнайте, [как уменьшить размер дерева DOM](https://developer.chrome.com/docs/performance/insights/dom-size).",
+"score": 1,
+"scoreDisplayMode": "informative",
+"metricSavings": {
+"INP": 0
+},
+"details": {
+"type": "table",
+"headings": [
+{
+"valueType": "text",
+"label": "Статистические показатели",
+"key": "statistic"
+},
+{
+"valueType": "node",
+"label": "Элемент",
+"key": "node"
+},
+{
+"valueType": "numeric",
+"key": "value",
+"label": "Значение"
+}
+],
+"items": [
+{
+"statistic": "Всего элементов",
+"value": {
+"value": 1533,
+"granularity": 1,
+"type": "numeric"
+}
+},
+{
+"statistic": "Глубина DOM",
+"value": {
+"value": 19,
+"granularity": 1,
+"type": "numeric"
+},
+"node": {
+"path": "1,HTML,1,BODY,2,DIV,3,DIV,0,DIV,0,ARTICLE,0,DIV,0,DIV,0,DIV,0,DIV,0,DIV,0,DIV,1,DIV,0,DIV,0,DIV,0,DIV,0,DIV,0,DIV,0,DIV,0,SPAN",
+"boundingRect": {
+"right": 78,
+"bottom": 8833,
+"height": 40,
+"top": 8793,
+"left": 38,
+"width": 40
+},
+"type": "node",
+"snippet": "<span class=\"rb-review-card__avatar-placeholder\" style=\"background-color:#8b5cf6;\">",
+"selector": "div.rb-review-card > div.rb-review-card__header > div.rb-review-card__avatar > span.rb-review-card__avatar-placeholder",
+"lhId": "page-10-SPAN",
+"nodeLabel": "И"
+}
+}
+]
+},
+"numericValue": 1533,
+"numericUnit": "element"
+},
+"unminified-css": {
+"id": "unminified-css",
+"title": "Уменьшите размер кода CSS",
+"description": "Уменьшив файлы CSS, вы можете сократить объем полезной сетевой нагрузки. Подробнее о том, [как уменьшить файл CSS](https://developer.chrome.com/docs/lighthouse/performance/unminified-css/)…",
+"score": 0.5,
+"scoreDisplayMode": "metricSavings",
+"displayValue": "Ожидаемая экономия – 7 КиБ",
+"metricSavings": {
+"LCP": 0,
+"FCP": 0
+},
+"details": {
+"overallSavingsBytes": 6674,
+"headings": [
+{
+"valueType": "url",
+"label": "URL",
+"key": "url"
+},
+{
+"label": "Объем переданных данных",
+"valueType": "bytes",
+"key": "totalBytes"
+},
+{
+"key": "wastedBytes",
+"label": "Ожидаемая экономия",
+"valueType": "bytes"
+}
+],
+"items": [
+{
+"url": "https://ost-term.ru/wp-content/plugins/rb-blocks/blocks/uniblock/presets/cards-grid/style.css",
+"totalBytes": 8454,
+"wastedPercent": 45.55503450123937,
+"wastedBytes": 3851
+},
+{
+"url": "https://ost-term.ru/wp-content/plugins/rb-core/assets/css/core.css",
+"wastedPercent": 38.514198782961465,
+"wastedBytes": 2823,
+"totalBytes": 7329
+}
+],
+"type": "opportunity",
+"sortedBy": [
+"wastedBytes"
+],
+"overallSavingsMs": 0
+},
+"numericValue": 0,
+"numericUnit": "millisecond"
+},
+"aria-toggle-field-name": {
+"id": "aria-toggle-field-name",
+"title": "У переключателей ARIA есть доступные названия",
+"description": "Если у переключателя нет названия, доступного программам чтения с экрана, пользователи услышат его общее название и не поймут, для чего он нужен. Подробнее [о переключателях](https://dequeuniversity.com/rules/axe/4.13/aria-toggle-field-name)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"geolocation-on-start": {
+"id": "geolocation-on-start",
+"title": "Разрешение на определение местоположения не запрашивается при загрузке страницы",
+"description": "Сайты, которые беспричинно запрашивают доступ к местоположению, вызывают у пользователей недоверие или недоумение. Рекомендуем связать этот запрос с определенными действиями пользователя. Узнайте больше [о разрешении на определение местоположения](https://developer.chrome.com/docs/lighthouse/best-practices/geolocation-on-start/). Также можно использовать [элемент `<geolocation>`](https://developer.chrome.com/blog/geolocation-html-element).",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"type": "table",
+"items": [],
+"headings": [
+{
+"key": "source",
+"label": "Источник",
+"valueType": "source-location"
+}
+]
+}
+},
+"aria-roles": {
+"id": "aria-roles",
+"title": "Недействительные значения атрибутов `[role]` отсутствуют",
+"description": "Значения ролей ARIA должны быть допустимыми, иначе связанные с ними функции специальных возможностей будут работать неправильно. Подробнее о том, [какие роли ARIA можно указывать](https://dequeuniversity.com/rules/axe/4.13/aria-roles)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"type": "table",
+"headings": [
+{
+"valueType": "node",
+"label": "Неподходящие элементы",
+"key": "node",
+"subItemsHeading": {
+"valueType": "node",
+"key": "relatedNode"
+}
+}
+],
+"items": []
+}
+},
+"svg-img-alt": {
+"id": "svg-img-alt",
+"title": "У SVG-элементов с ролью `img` есть доступный альтернативный текст",
+"description": "У SVG-элементов с ролью `img`, `graphics-document` или `graphics-symbol` должен быть доступный альтернативный текст. Подробнее [об альтернативном тексте для SVG](https://dequeuniversity.com/rules/axe/4.13/svg-img-alt)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"aria-text": {
+"id": "aria-text",
+"title": "У элементов атрибута `role=text` нет фокусируемых потомков",
+"description": "Если добавить отделенный разметкой атрибут `role=text` перед текстовым узлом и после него, VoiceOver будет определять текст как одну фразу, но фокусируемые потомки не будут озвучиваться. Подробнее [об атрибуте `role=text`](https://dequeuniversity.com/rules/axe/4.13/aria-text)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"metrics": {
+"id": "metrics",
+"title": "Metrics",
+"description": "Collects all available metrics.",
+"score": 1,
+"scoreDisplayMode": "informative",
+"details": {
+"type": "debugdata",
+"items": [
+{
+"lcpLoadDuration": 2872,
+"observedFirstPaint": 1266,
+"observedTimeOrigin": 0,
+"observedFirstContentfulPaintAllFramesTs": 126386974367,
+"observedLastVisualChange": 2230,
+"timeToFirstByte": 607,
+"observedLargestContentfulPaintAllFramesTs": 126387669751,
+"observedLoad": 2482,
+"speedIndex": 3106,
+"observedDomContentLoaded": 2079,
+"observedFirstPaintTs": 126386974367,
+"maxPotentialFID": 292,
+"observedDomContentLoadedTs": 126387787966,
+"observedTimeOriginTs": 126385708542,
+"observedFirstVisualChangeTs": 126386975542,
+"observedSpeedIndex": 1342,
+"firstContentfulPaint": 1554,
+"observedLargestContentfulPaintAllFrames": 1961,
+"cumulativeLayoutShift": 0,
+"observedLargestContentfulPaint": 1961,
+"observedSpeedIndexTs": 126387050367,
+"observedFirstVisualChange": 1267,
+"observedLastVisualChangeTs": 126387938542,
+"observedLoadTs": 126388190566,
+"observedNavigationStart": 0,
+"observedTraceEnd": 4961,
+"observedFirstContentfulPaintAllFrames": 1266,
+"observedFirstContentfulPaintTs": 126386974367,
+"observedNavigationStartTs": 126385708542,
+"observedLargestContentfulPaintTs": 126387669751,
+"cumulativeLayoutShiftMainFrame": 0,
+"observedCumulativeLayoutShiftMainFrame": 0,
+"largestContentfulPaint": 4357,
+"observedTraceEndTs": 126390669787,
+"lcpLoadDelay": 2542,
+"totalBlockingTime": 322,
+"observedCumulativeLayoutShift": 0,
+"interactive": 4372,
+"observedFirstContentfulPaint": 1266
+},
+{
+"lcpInvalidated": false
+}
+]
+},
+"numericValue": 4372,
+"numericUnit": "millisecond"
+},
+"total-byte-weight": {
+"id": "total-byte-weight",
+"title": "Предотвратите чрезмерную нагрузку на сеть",
+"description": "Чрезмерная полезная нагрузка на сеть приводит к финансовым затратам пользователей и может замедлять время загрузки контента. Подробнее о том, [как сократить объем полезной нагрузки](https://developer.chrome.com/docs/lighthouse/performance/total-byte-weight/)…",
+"score": 0.5,
+"scoreDisplayMode": "metricSavings",
+"displayValue": "Общий размер достиг 4 716 КиБ",
+"details": {
+"headings": [
+{
+"key": "url",
+"label": "URL",
+"valueType": "url"
+},
+{
+"valueType": "bytes",
+"label": "Объем переданных данных",
+"key": "totalBytes"
+}
+],
+"type": "table",
+"items": [
+{
+"totalBytes": 1781774,
+"url": "https://ost-term.ru/wp-content/uploads/2026/02/chestnyy-znak.png"
+},
+{
+"url": "https://ost-term.ru/wp-content/uploads/2026/02/svh.jpeg",
+"totalBytes": 912460
+}
+],
+"sortedBy": [
+"totalBytes"
+]
+},
+"numericValue": 4829449,
+"numericUnit": "byte"
+},
+"identical-links-same-purpose": {
+"id": "identical-links-same-purpose",
+"title": "У одинаковых ссылок одно назначение",
+"description": "У ссылок с одним назначением должно быть одинаковое описание. Так пользователь поймет, куда они ведут, и решит, следует ли по ним переходить. Подробнее [об одинаковых ссылках](https://dequeuniversity.com/rules/axe/4.13/identical-links-same-purpose)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"tabindex": {
+"id": "tabindex",
+"title": "Нет элементов со значением атрибута `[tabindex]` выше 0",
+"description": "Значение больше 0 подразумевает явное указание порядка навигации. Это может создавать трудности для пользователей с ограниченными возможностями. Подробнее [об атрибуте `tabindex`](https://dequeuniversity.com/rules/axe/4.13/tabindex)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"type": "table",
+"items": [],
+"headings": [
+{
+"valueType": "node",
+"key": "node",
+"label": "Неподходящие элементы",
+"subItemsHeading": {
+"key": "relatedNode",
+"valueType": "node"
+}
+}
+]
+}
+},
+"object-alt": {
+"id": "object-alt",
+"title": "У элементов `<object>` есть альтернативный текст",
+"description": "Чтобы программы чтения с экрана могли зачитывать содержимое элементов `<object>`, добавьте к ним альтернативный текст. Подробнее [об альтернативном тексте для элементов `object`](https://dequeuniversity.com/rules/axe/4.13/object-alt)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"input-image-alt": {
+"id": "input-image-alt",
+"title": "Элементы `<input type=\"image\">` содержат атрибут `[alt]`",
+"description": "Если в элементе `<input>` в качестве кнопки используется изображение, добавьте альтернативный текст, описывающий назначение этой кнопки для программ чтения с экрана. Подробнее [об альтернативном тексте для изображения в элементе ввода](https://dequeuniversity.com/rules/axe/4.13/input-image-alt)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"lcp-discovery-insight": {
+"id": "lcp-discovery-insight",
+"title": "Информация об LCP и связанных запросах",
+"description": "[Оптимизируйте LCP](https://developer.chrome.com/docs/performance/insights/lcp-discovery): сделайте так, чтобы самое крупное изображение было доступно прямо в HTML-коде, и не используйте отложенную загрузку.",
+"score": 0,
+"scoreDisplayMode": "numeric",
+"metricSavings": {
+"LCP": 0
+},
+"details": {
+"type": "list",
+"items": [
+{
+"type": "checklist",
+"items": {
+"priorityHinted": {
+"value": false,
+"label": "Требуется значение fetchpriority=high."
+},
+"requestDiscoverable": {
+"value": true,
+"label": "Запрос можно найти в исходном документе"
+},
+"eagerlyLoaded": {
+"value": true,
+"label": "Не используйте loading=lazy для ресурсов LCP."
+}
+}
+},
+{
+"lhId": "page-5-DIV",
+"snippet": "<div class=\"wp-block-greenshift-blocks-row alignfull gspb_row gspb_row-id-gsbp-6cf0500\" id=\"gspb_row-id-gsbp-6cf0500\">",
+"type": "node",
+"boundingRect": {
+"left": 0,
+"height": 800,
+"right": 412,
+"bottom": 890,
+"top": 90,
+"width": 412
+},
+"path": "1,HTML,1,BODY,2,DIV,1,MAIN,0,DIV,0,ARTICLE,0,DIV,0,DIV",
+"selector": "div.ct-container-full > article#post-2 > div.entry-content > div#gspb_row-id-gsbp-6cf0500",
+"nodeLabel": "ОСТ-ТЕРМИНАЛ\nБолее 20 лет занимаемся таможенным оформлением грузов для юридичес…"
+}
+]
+}
+},
+"third-parties-insight": {
+"id": "third-parties-insight",
+"title": "Сторонний код",
+"description": "Сторонний код может сильно замедлить загрузку страниц сайта. [Сократите и отсрочьте загрузку стороннего кода,](https://developer.chrome.com/docs/performance/insights/third-parties) чтобы ускорить показ своего контента.",
+"score": 1,
+"scoreDisplayMode": "informative",
+"details": {
+"type": "table",
+"items": [
+{
+"subItems": {
+"items": [
+{
+"url": "https://mc.yandex.ru/metrika/tag.js",
+"mainThreadTime": 281.01900017261505,
+"transferSize": 92088
+},
+{
+"transferSize": 6476,
+"url": "https://mc.yandex.com/metrika/match.html",
+"mainThreadTime": 8.74499998986721
+},
+{
+"mainThreadTime": 7.437999993562698,
+"transferSize": 13908,
+"url": "https://mc.yandex.com/metrika/tag_phono.js"
+},
+{
+"mainThreadTime": 0,
+"url": "https://mc.yandex.com/watch/99296594/1?wmode=7&page-url=https%3A%2F%2Fost-term.ru%2F&charset=utf-8&uah=chu%0A%22Chromium%22%3Bv%3D%22153%22%2C%22Google%20Chrome%22%3Bv%3D%22153%22%0Achb%0A64%0Achf%0A153.0.0.0%0Achl%0A%22HeadlessChrome%22%3Bv%3D%22153.0.8010.36%22%2C%22Not_A%20Brand%22%3Bv%3D%228.0.0.0%22%2C%22Chromium%22%3Bv%3D%22153.0.8010.36%22%0Achm%0A%3F1%0Acho%0Amoto%20g%20power%20%282022%29%0Achp%0AAndroid%0Achv%0A11.0&browser-info=pv%3A1%3Avf%3Ajeu2ees5yi9qi1u8go1yz2nmugpom3%3Afu%3A0%3Aen%3Autf-8%3Ala%3Aen-US%3Av%3A2660%3Acn%3A1%3Adp%3A0%3Als%3A1095775793271%3Ahid%3A24761699%3Az%3A-420%3Ai%3A20260927003406%3Aet%3A1790494446%3Ac%3A1%3Arn%3A212211630%3Arqn%3A1%3Au%3A1790494446940734018%3Aw%3A412x823%3As%3A412x823x24%3Ask%3A1.75%3Afp%3A1268%3Awv%3A2%3Ads%3A0%2C0%2C758%2C0%2C0%2C0%2C%2C1231%2C28%2C%2C%2C%2C2051%3Aco%3A0%3Antf%3A1%3Ans%3A1790494444015%3Aadb%3A2%3Arqnl%3A1%3Ast%3A1790494446%3At%3A%D0%A1%D0%BA%D0%BB%D0%B0%D0%B4%20%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%BE%D0%B3%D0%BE%20%D1%85%D1%80%D0%B0%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%B8%20%D1%82%D0%B0%D0%BC%D0%BE%D0%B6%D0%B5%D0%BD%D0%BD%D0%BE%D0%B5%20%D0%BE%D1%84%D0%BE%D1%80%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%B2%20%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B5%20%E2%80%93%20%D0%9E%D0%A1%D0%A2-%D0%A2%D0%95%D0%A0%D0%9C%D0%98%D0%9D%D0%90%D0%9B&t=clt%281477%29gdpr%2814%29clc%280-0-0%29rqnt%281%29aw%281%29rcm%281%29cdl%28na%29eco%2842009092%29ti%281%29&redirnss=1",
+"transferSize": 1982
+},
+{
+"transferSize": 939,
+"mainThreadTime": 0,
+"url": "https://mc.yandex.com/metrika/advert.gif?t=gdpr(14)ti(4)"
+},
+{
+"mainThreadTime": 0,
+"url": "https://mc.yandex.com/watch/26302566?browser-info=ar%3A1%3Apv%3A1%3Av%3A2660%3Avf%3Ajeu2ees5yi9qi1u8go1yz2nmugpom3&page-url=https%3A%2F%2Fost-term.ru%2F&site-info=%7B%22wserrs%22%3A%7B%222660%22%3A%7B%22so.csp.t%22%3A%7B%22t.b1%22%3A%22https%3A%2F%2Fost-term.ru%2F%22%7D%7D%7D%7D",
+"transferSize": 646
+},
+{
+"mainThreadTime": 0,
+"transferSize": 646,
+"url": "https://mc.yandex.com/watch/26302566?browser-info=ar%3A1%3Apv%3A1%3Av%3A2660%3Avf%3Ajeu2ees5yi9qi1u8go1yz2nmugpom3&page-url=https%3A%2F%2Fost-term.ru%2F&site-info=%7B%22wserrs%22%3A%7B%222660%22%3A%7B%22so.csp.f%22%3A%7B%22f.2%22%3A%22https%3A%2F%2Fost-term.ru%2F%22%7D%7D%7D%7D"
+},
+{
+"url": "https://mc.yandex.ru/sync_cookie_image_finish_secondary?cid=99296594&redirect_domain=mc.yandex.com&scid=b87cfec0-b045-9b58-2879-590ed3c70e29&token=11167.OdgpBFx_K1LQobxCx7zviuZn009hiM74lFZ5V89DBiP3ocGsvMyS5GCOPqB53bTWuWj62W-_AMf5AzEmY7yDWbgF6dmLwu9XpfqBYI4lMd1BXi-TvQQQORIU6OeDZTTSxx_SFp89JRbDAL-tC3RUpd5gcum1vXZ7Hz7n6P9NFZyWWfTCNCZOzCWQf_VMJ0dCBg7ljaPqRKnwBW2tDjT2JQ%2C%2C.uWVACObuemvB0lcpxgQiXk1V_kQ%2C",
+"transferSize": 638,
+"mainThreadTime": 0
+},
+{
+"url": "https://mc.yandex.com/sync_cookie_image_decide?cid=99296594&scid=6a3c7806-1abe-0119-84b2-ae3f6c56d032&token=11167.O2FRFXX58aZ1lCqkwuBZy2zbKiYqFMpJifRPX-0fVv3Pg1pPCowZxRUjQJ_2-Ks0BtD8B4diU1QKr3C46_DznEPSfYOk7srNE90hMABf5IE%2C.NrCaImm2TI8nKndnuoU__uySCI4%2C",
+"transferSize": 180,
+"mainThreadTime": 0
+}
+],
+"type": "subitems"
+},
+"transferSize": 117503,
+"entity": "Yandex Metrica",
+"mainThreadTime": 297.20200015604496
+},
+{
+"subItems": {
+"items": [
+{
+"transferSize": 0,
+"mainThreadTime": 0.09399999678134918,
+"url": "https://mdd.yandex.net/"
+},
+{
+"transferSize": 0,
+"url": "https://hdrc.yandex.net/",
+"mainThreadTime": 0.06299999356269836
+}
+],
+"type": "subitems"
+},
+"transferSize": 0,
+"mainThreadTime": 0.15699999034404755,
+"entity": "yandex.net"
+}
+],
+"isEntityGrouped": true,
+"headings": [
+{
+"key": "entity",
+"label": "Сторонний поставщик",
+"subItemsHeading": {
+"key": "url",
+"valueType": "url"
+},
+"valueType": "text"
+},
+{
+"key": "transferSize",
+"granularity": 1,
+"valueType": "bytes",
+"label": "Объем передаваемых данных",
+"subItemsHeading": {
+"key": "transferSize"
+}
+},
+{
+"subItemsHeading": {
+"key": "mainThreadTime"
+},
+"valueType": "ms",
+"key": "mainThreadTime",
+"label": "Время выполнения в основном потоке",
+"granularity": 1
+}
+]
+}
+},
+"aria-meter-name": {
+"id": "aria-meter-name",
+"title": "У элементов `meter` ARIA есть названия, доступные программам чтения с экрана",
+"description": "Если у элемента счетчика нет названия, доступного программам чтения с экрана, пользователи услышат только общее название и не поймут, для чего он нужен. Подробнее о том, [как присваивать названия элементам \"`meter`\"](https://dequeuniversity.com/rules/axe/4.13/aria-meter-name)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"skip-link": {
+"id": "skip-link",
+"title": "Ссылки для пропуска контента фокусируемые",
+"description": "Добавьте ссылку для пропуска контента, чтобы пользователи могли сразу перейти к основному контенту. [Подробнее…](https://dequeuniversity.com/rules/axe/4.13/skip-link)",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"type": "table",
+"headings": [
+{
+"key": "node",
+"subItemsHeading": {
+"valueType": "node",
+"key": "relatedNode"
+},
+"valueType": "node",
+"label": "Неподходящие элементы"
+}
+],
+"items": []
+}
+},
+"inspector-issues": {
+"id": "inspector-issues",
+"title": "Нет записей ошибок на панели `Issues` в инструментах разработчика в Chrome",
+"description": "Ошибки, записанные на панели `Issues` в инструментах разработчика в Chrome, указывают на нерешенные проблемы. Это могут быть невыполненные сетевые запросы, низкий уровень защиты и другие сбои в работе браузера. Чтобы получить подробную информацию о каждой неполадке, откройте панель.",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"type": "table",
+"headings": [
+{
+"valueType": "text",
+"label": "Тип нарушения",
+"subItemsHeading": {
+"valueType": "url",
+"key": "url"
+},
+"key": "issueType"
+}
+],
+"items": []
+}
+},
+"http-status-code": {
+"id": "http-status-code",
+"title": "Код статуса HTTP действителен",
+"description": "Если страница возвращает код статуса HTTP, который говорит об ошибках, она может не индексироваться правильно. Подробнее [о кодах статусов HTTP](https://developer.chrome.com/docs/lighthouse/seo/http-status-code/)…",
+"score": 1,
+"scoreDisplayMode": "binary"
+},
+"diagnostics": {
+"id": "diagnostics",
+"title": "Diagnostics",
+"description": "Collection of useful page vitals.",
+"score": 1,
+"scoreDisplayMode": "informative",
+"details": {
+"items": [
+{
+"numTasksOver10ms": 23,
+"numRequests": 70,
+"numStylesheets": 16,
+"numTasksOver50ms": 7,
+"numScripts": 22,
+"mainDocumentTransferSize": 56059,
+"maxServerLatency": 6.5,
+"numTasksOver100ms": 3,
+"numTasksOver500ms": 1,
+"rtt": 0.00033539873189738264,
+"totalTaskTime": 1985.0140000000079,
+"numTasks": 1382,
+"throughput": 113147643929.76353,
+"totalByteWeight": 4829449,
+"numFonts": 3,
+"numTasksOver25ms": 12,
+"maxRtt": 1.5874499999999998
+}
+],
+"type": "debugdata"
+}
+},
+"baseline": {
+"id": "baseline",
+"title": "Функции Baseline",
+"description": "Список веб-функций, используемых на странице, и их статус Baseline на 2026-09-17. Подробнее [о Baseline](https://webstatus.dev/)…",
+"score": 1,
+"scoreDisplayMode": "informative",
+"details": {
+"type": "table",
+"items": [
+{
+"displayStatus": {
+"status": "limited",
+"displayString": "Limited Availability",
+"type": "baseline-status"
+},
+"source": {
+"urlProvider": "network",
+"line": 1,
+"column": 50642,
+"type": "source-location",
+"url": "https://ost-term.ru/wp-includes/js/jquery/jquery.min.js"
+},
+"featureId": {
+"text": "background-clip-text",
+"type": "link",
+"url": "https://webstatus.dev/features/background-clip-text"
+}
+},
+{
+"displayStatus": {
+"displayString": "Limited Availability",
+"type": "baseline-status",
+"status": "limited"
+},
+"source": {
+"url": "https://ost-term.ru/",
+"column": -2,
+"line": -2,
+"urlProvider": "network",
+"type": "source-location"
+},
+"featureId": {
+"url": "https://webstatus.dev/features/sizes-auto",
+"text": "sizes-auto",
+"type": "link"
+}
+}
+],
+"headings": [
+{
+"label": "Веб-функции",
+"key": "featureId",
+"valueType": "link"
+},
+{
+"valueType": "baseline-status",
+"key": "displayStatus",
+"label": "Статус Baseline"
+},
+{
+"key": "source",
+"valueType": "source-location",
+"label": "Источник"
+}
+]
+}
+},
+"select-name": {
+"id": "select-name",
+"title": "У элементов select есть связанные элементы label",
+"description": "Элементы формы без эффективных меток могут доставить неудобства пользователям программы чтения с экрана. Подробнее [об элементе `select`](https://dequeuniversity.com/rules/axe/4.13/select-name)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"canonical": {
+"id": "canonical",
+"title": "Для документа указан действительный атрибут `rel=canonical`",
+"description": "Канонические ссылки помогают определить, какой URL будет показан в результатах поиска. Подробнее [о канонических ссылках](https://developer.chrome.com/docs/lighthouse/seo/canonical/)…",
+"score": 1,
+"scoreDisplayMode": "binary"
+},
+"redirects": {
+"id": "redirects",
+"title": "Избегайте большого количества переадресаций",
+"description": "Переадресации могут стать причиной дополнительных задержек при загрузке страницы. Подробнее о том, [как избежать переадресаций страниц](https://developer.chrome.com/docs/lighthouse/performance/redirects/)…",
+"score": 1,
+"scoreDisplayMode": "metricSavings",
+"metricSavings": {
+"LCP": 0,
+"FCP": 0
+},
+"details": {
+"type": "opportunity",
+"headings": [],
+"items": [],
+"overallSavingsMs": 0
+},
+"numericValue": 0,
+"numericUnit": "millisecond"
+},
+"hreflang": {
+"id": "hreflang",
+"title": "Для документа указан действительный атрибут `hreflang`",
+"description": "Добавьте на страницу элементы link с атрибутом hreflang. Тогда в результатах поиска будут представлены те версии ваших страниц, которые лучше всего подходят для языка и региона пользователя. Подробнее [об атрибуте `hreflang`](https://developer.chrome.com/docs/lighthouse/seo/hreflang/)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"items": [],
+"headings": [
+{
+"valueType": "code",
+"key": "source",
+"subItemsHeading": {
+"valueType": "text",
+"key": "reason"
+}
+}
+],
+"type": "table"
+}
+},
+"image-redundant-alt": {
+"id": "image-redundant-alt",
+"title": "У изображений нет атрибутов `[alt]`, представляющих собой избыточный текст",
+"description": "В информационных элементах должен содержаться короткий и ясный альтернативный текст. Если он будет повторять текст рядом со ссылкой или изображением, то одна и та же фраза может прозвучать дважды, что собьет с толку пользователей программы чтения с экрана. Подробнее [об атрибуте `alt`](https://dequeuniversity.com/rules/axe/4.13/image-redundant-alt)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"aria-hidden-body": {
+"id": "aria-hidden-body",
+"title": "Элемент `<body>` в документе не содержит атрибут `[aria-hidden=\"true\"]`",
+"description": "Программы чтения с экрана и другие технологии специальных возможностей могут работать некорректно, если для `<body>` задан атрибут `aria-hidden=\"true\"`. Подробнее о том, [как `aria-hidden` влияет на элемент body](https://dequeuniversity.com/rules/axe/4.13/aria-hidden-body)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"items": [],
+"headings": [
+{
+"key": "node",
+"subItemsHeading": {
+"key": "relatedNode",
+"valueType": "node"
+},
+"valueType": "node",
+"label": "Неподходящие элементы"
+}
+],
+"type": "table"
+}
+},
+"focusable-controls": {
+"id": "focusable-controls",
+"title": "Interactive controls are keyboard focusable",
+"description": "Custom interactive controls are keyboard focusable and display a focus indicator. [Learn how to make custom controls focusable](https://developer.chrome.com/docs/lighthouse/accessibility/focusable-controls/).",
+"score": null,
+"scoreDisplayMode": "manual"
+},
+"link-text": {
+"id": "link-text",
+"title": "У ссылок есть описания",
+"description": "Сделайте текст ссылок содержательным, чтобы поисковые системы лучше распознавали ваш контент. Подробнее о том, [как повысить доступность ссылок](https://developer.chrome.com/docs/lighthouse/seo/link-text/)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"headings": [
+{
+"key": "href",
+"label": "Link destination",
+"valueType": "url"
+},
+{
+"valueType": "text",
+"label": "Link Text",
+"key": "text"
+}
+],
+"items": [],
+"type": "table"
+}
+},
+"render-blocking-insight": {
+"id": "render-blocking-insight",
+"title": "Запросы, блокирующие отрисовку страницы",
+"description": "Запросы блокируют обработку при первоначальной загрузке страницы. Это может привести к увеличению значения LCP. [Отсрочка или встраивание](https://developer.chrome.com/docs/performance/insights/render-blocking) могут избавить от негативного воздействия этих сетевых запросов.",
+"score": 0,
+"scoreDisplayMode": "metricSavings",
+"displayValue": "Ожидаемая экономия – 1 620 мс",
+"metricSavings": {
+"LCP": 0,
+"FCP": 1600
+},
+"details": {
+"headings": [
+{
+"label": "URL",
+"valueType": "url",
+"key": "url"
+},
+{
+"key": "totalBytes",
+"valueType": "bytes",
+"label": "Объем переданных данных"
+},
+{
+"label": "Длительность",
+"key": "wastedMs",
+"valueType": "timespanMs"
+}
+],
+"items": [
+{
+"url": "https://ost-term.ru/wp-content/plugins/rb-core/assets/css/core.css",
+"wastedMs": 421,
+"totalBytes": 7329
+},
+{
+"url": "https://ost-term.ru/wp-content/themes/blocksy/static/bundle/cf-7.min.css",
+"totalBytes": 568,
+"wastedMs": 219
+}
+],
+"type": "table"
+}
+},
+"unused-css-rules": {
+"id": "unused-css-rules",
+"title": "Удалите неиспользуемый код CSS",
+"description": "Чтобы сократить расход трафика, удалите ненужные правила из таблиц стилей и используйте отложенную загрузку кода CSS, который не используется в видимой части страницы. Подробнее о том, [как уменьшить объем неиспользуемого кода CSS](https://developer.chrome.com/docs/lighthouse/performance/unused-css-rules/)…",
+"score": 0.5,
+"scoreDisplayMode": "metricSavings",
+"displayValue": "Ожидаемая экономия – 14 КиБ",
+"metricSavings": {
+"LCP": 0,
+"FCP": 0
+},
+"details": {
+"overallSavingsBytes": 13835,
+"items": [
+{
+"wastedBytes": 13835,
+"totalBytes": 17557,
+"url": "https://ost-term.ru/wp-content/themes/blocksy/static/bundle/main.min.css",
+"wastedPercent": 78.79830962644438
+}
+],
+"headings": [
+{
+"valueType": "url",
+"key": "url",
+"label": "URL"
+},
+{
+"label": "Объем переданных данных",
+"valueType": "bytes",
+"key": "totalBytes"
+},
+{
+"label": "Ожидаемая экономия",
+"valueType": "bytes",
+"key": "wastedBytes"
+}
+],
+"type": "opportunity",
+"sortedBy": [
+"wastedBytes"
+],
+"overallSavingsMs": 0
+},
+"numericValue": 0,
+"numericUnit": "millisecond"
+},
+"charset": {
+"id": "charset",
+"title": "Правильно заданный набор символов",
+"description": "Требуется задать кодировку символов. Это можно сделать с помощью тега `<meta>` в первых 1024 байтах HTML-страницы или в заголовке ответа HTTP Content-Type. Подробнее о том, [как задать кодировку символов](https://developer.chrome.com/docs/lighthouse/best-practices/charset/)…",
+"score": 1,
+"scoreDisplayMode": "binary"
+},
+"meta-viewport": {
+"id": "meta-viewport",
+"title": "Атрибут `[user-scalable=\"no\"]` не используется в элементе `<meta name=\"viewport\">`, и значение атрибута `[maximum-scale]` больше или равно 5",
+"description": "Не отключайте масштабирование. Эта функция помогает слабовидящим пользователям читать информацию на веб-страницах. Подробнее [о метатеге viewport](https://dequeuniversity.com/rules/axe/4.13/meta-viewport)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"type": "table",
+"headings": [
+{
+"label": "Неподходящие элементы",
+"valueType": "node",
+"subItemsHeading": {
+"valueType": "node",
+"key": "relatedNode"
+},
+"key": "node"
+}
+],
+"items": []
+}
+},
+"aria-required-children": {
+"id": "aria-required-children",
+"title": "В элементах с ролью ARIA `[role]` присутствуют все обязательные дочерние элементы, которые должны содержать определенный элемент `[role]`.",
+"description": "Указав роль ARIA для родительского элемента, в некоторых случаях вы должны также задать определенные роли его дочерним элементам. Если этого не сделать, связанные с ARIA функции специальных возможностей будут работать неправильно. Подробнее [о ролях и необходимых дочерних элементах](https://dequeuniversity.com/rules/axe/4.13/aria-required-children)…",
+"score": 1,
+"scoreDisplayMode": "binary",
+"details": {
+"headings": [
+{
+"label": "Неподходящие элементы",
+"valueType": "node",
+"subItemsHeading": {
+"valueType": "node",
+"key": "relatedNode"
+},
+"key": "node"
+}
+],
+"type": "table",
+"items": []
+}
+},
+"definition-list": {
+"id": "definition-list",
+"title": "Элементы `<dl>` содержат только правильно размещенные группы `<dt>` и `<dd>` и элементы `<script>`, `<template>` или `<div>`.",
+"description": "Если списки определений размечены с ошибками, программы чтения с экрана могут озвучивать их некорректно. Подробнее о том, [как правильно создавать списки определений](https://dequeuniversity.com/rules/axe/4.13/definition-list)…",
+"score": null,
+"scoreDisplayMode": "notApplicable"
+},
+"max-potential-fid": {
+"id": "max-potential-fid",
+"title": "Макс. потенц. задержка после первого ввода",
+"description": "Максимальная потенциальная задержка после первого ввода показывает время выполнения самой длительной задачи. Подробнее [о максимальной потенциальной задержке после первого ввода](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-max-potential-fid/)…",
+"score": 0.38,
+"scoreDisplayMode": "numeric",
+"displayValue": "290 мс",
+"numericValue": 292,
+"numericUnit": "millisecond"
+}
+},
+"categories": {
+"performance": {
+"id": "performance",
+"title": "Производительность",
+"score": 0.77,
+"auditRefs": [
+{
+"id": "first-contentful-paint",
+"weight": 10,
+"group": "metrics",
+"acronym": "FCP"
+},
+{
+"id": "largest-contentful-paint",
+"weight": 25,
+"group": "metrics",
+"acronym": "LCP"
+},
+{
+"id": "total-blocking-time",
+"weight": 30,
+"group": "metrics",
+"acronym": "TBT"
+},
+{
+"id": "cumulative-layout-shift",
+"weight": 25,
+"group": "metrics",
+"acronym": "CLS"
+},
+{
+"id": "speed-index",
+"weight": 10,
+"group": "metrics",
+"acronym": "SI"
+},
+{
+"id": "cache-insight",
+"weight": 0,
+"group": "insights"
+},
+{
+"id": "cls-culprits-insight",
+"weight": 0,
+"group": "insights"
+},
+{
+"id": "document-latency-insight",
+"weight": 0,
+"group": "insights"
+},
+{
+"id": "dom-size-insight",
+"weight": 0,
+"group": "insights"
+},
+{
+"id": "duplicated-javascript-insight",
+"weight": 0,
+"group": "insights"
+},
+{
+"id": "font-display-insight",
+"weight": 0,
+"group": "insights"
+},
+{
+"id": "forced-reflow-insight",
+"weight": 0,
+"group": "insights"
+},
+{
+"id": "image-delivery-insight",
+"weight": 0,
+"group": "insights"
+},
+{
+"id": "inp-breakdown-insight",
+"weight": 0,
+"group": "insights"
+},
+{
+"id": "lcp-breakdown-insight",
+"weight": 0,
+"group": "insights"
+},
+{
+"id": "lcp-discovery-insight",
+"weight": 0,
+"group": "insights"
+},
+{
+"id": "legacy-javascript-insight",
+"weight": 0,
+"group": "insights"
+},
+{
+"id": "network-dependency-tree-insight",
+"weight": 0,
+"group": "insights"
+},
+{
+"id": "render-blocking-insight",
+"weight": 0,
+"group": "insights"
+},
+{
+"id": "third-parties-insight",
+"weight": 0,
+"group": "insights"
+},
+{
+"id": "viewport-insight",
+"weight": 0,
+"group": "insights"
+},
+{
+"id": "interactive",
+"weight": 0,
+"group": "hidden",
+"acronym": "TTI"
+},
+{
+"id": "max-potential-fid",
+"weight": 0,
+"group": "hidden"
+},
+{
+"id": "unminified-css",
+"weight": 0,
+"group": "diagnostics"
+},
+{
+"id": "unminified-javascript",
+"weight": 0,
+"group": "diagnostics"
+},
+{
+"id": "unused-css-rules",
+"weight": 0,
+"group": "diagnostics"
+},
+{
+"id": "unused-javascript",
+"weight": 0,
+"group": "diagnostics"
+},
+{
+"id": "total-byte-weight",
+"weight": 0,
+"group": "diagnostics"
+},
+{
+"id": "user-timings",
+"weight": 0,
+"group": "diagnostics"
+},
+{
+"id": "bootup-time",
+"weight": 0,
+"group": "diagnostics"
+},
+{
+"id": "mainthread-work-breakdown",
+"weight": 0,
+"group": "diagnostics"
+},
+{
+"id": "long-tasks",
+"weight": 0,
+"group": "diagnostics"
+},
+{
+"id": "non-composited-animations",
+"weight": 0,
+"group": "diagnostics"
+},
+{
+"id": "unsized-images",
+"weight": 0,
+"group": "diagnostics"
+},
+{
+"id": "network-requests",
+"weight": 0,
+"group": "hidden"
+},
+{
+"id": "network-rtt",
+"weight": 0,
+"group": "hidden"
+},
+{
+"id": "network-server-latency",
+"weight": 0,
+"group": "hidden"
+},
+{
+"id": "main-thread-tasks",
+"weight": 0,
+"group": "hidden"
+},
+{
+"id": "diagnostics",
+"weight": 0,
+"group": "hidden"
+},
+{
+"id": "metrics",
+"weight": 0,
+"group": "hidden"
+},
+{
+"id": "screenshot-thumbnails",
+"weight": 0,
+"group": "hidden"
+},
+{
+"id": "final-screenshot",
+"weight": 0,
+"group": "hidden"
+},
+{
+"id": "script-treemap-data",
+"weight": 0,
+"group": "hidden"
+},
+{
+"id": "resource-summary",
+"weight": 0,
+"group": "hidden"
+},
+{
+"id": "redirects",
+"weight": 0,
+"group": "hidden"
+},
+{
+"id": "server-response-time",
+"weight": 0,
+"group": "hidden"
+},
+{
+"id": "layout-shifts",
+"weight": 0,
+"group": "hidden"
+}
+]
+},
+"accessibility": {
+"id": "accessibility",
+"title": "Специальные возможности",
+"description": "Узнайте, какие трудности могут возникнуть у людей с ограниченными возможностями при использовании вашего веб-приложения, и [сделайте его доступнее](https://developer.chrome.com/docs/lighthouse/accessibility/). Автоматические проверки не гарантируют доступность приложения, поэтому мы рекомендуем выполнять [тестирование вручную](https://web.dev/articles/how-to-review). Оно поможет выявить оставшиеся проблемы.",
+"score": 0.87,
+"manualDescription": "Ручная проверка позволяет охватить области, которые невозможно протестировать автоматически. Подробнее [о проверке специальных возможностей](https://web.dev/articles/how-to-review)…",
+"auditRefs": [
+{
+"id": "accesskeys",
+"weight": 0,
+"group": "a11y-navigation"
+},
+{
+"id": "aria-allowed-attr",
+"weight": 10,
+"group": "a11y-aria"
+},
+{
+"id": "aria-command-name",
+"weight": 0,
+"group": "a11y-aria"
+},
+{
+"id": "aria-conditional-attr",
+"weight": 7,
+"group": "a11y-aria"
+},
+{
+"id": "aria-deprecated-role",
+"weight": 1,
+"group": "a11y-aria"
+},
+{
+"id": "aria-dialog-name",
+"weight": 0,
+"group": "a11y-aria"
+},
+{
+"id": "aria-hidden-body",
+"weight": 10,
+"group": "a11y-aria"
+},
+{
+"id": "aria-hidden-focus",
+"weight": 7,
+"group": "a11y-aria"
+},
+{
+"id": "aria-input-field-name",
+"weight": 0,
+"group": "a11y-aria"
+},
+{
+"id": "aria-meter-name",
+"weight": 0,
+"group": "a11y-aria"
+},
+{
+"id": "aria-progressbar-name",
+"weight": 0,
+"group": "a11y-aria"
+},
+{
+"id": "aria-prohibited-attr",
+"weight": 7,
+"group": "a11y-aria"
+},
+{
+"id": "aria-required-attr",
+"weight": 10,
+"group": "a11y-aria"
+},
+{
+"id": "aria-required-children",
+"weight": 10,
+"group": "a11y-aria"
+},
+{
+"id": "aria-required-parent",
+"weight": 10,
+"group": "a11y-aria"
+},
+{
+"id": "aria-roles",
+"weight": 10,
+"group": "a11y-aria"
+},
+{
+"id": "aria-text",
+"weight": 0,
+"group": "a11y-aria"
+},
+{
+"id": "aria-toggle-field-name",
+"weight": 0,
+"group": "a11y-aria"
+},
+{
+"id": "aria-tooltip-name",
+"weight": 0,
+"group": "a11y-aria"
+},
+{
+"id": "aria-treeitem-name",
+"weight": 0,
+"group": "a11y-aria"
+},
+{
+"id": "aria-valid-attr-value",
+"weight": 10,
+"group": "a11y-aria"
+},
+{
+"id": "aria-valid-attr",
+"weight": 10,
+"group": "a11y-aria"
+},
+{
+"id": "button-name",
+"weight": 10,
+"group": "a11y-names-labels"
+},
+{
+"id": "bypass",
+"weight": 0,
+"group": "a11y-navigation"
+},
+{
+"id": "color-contrast",
+"weight": 7,
+"group": "a11y-color-contrast"
+},
+{
+"id": "definition-list",
+"weight": 0,
+"group": "a11y-tables-lists"
+},
+{
+"id": "dlitem",
+"weight": 0,
+"group": "a11y-tables-lists"
+},
+{
+"id": "document-title",
+"weight": 7,
+"group": "a11y-names-labels"
+},
+{
+"id": "duplicate-id-aria",
+"weight": 0,
+"group": "a11y-aria"
+},
+{
+"id": "form-field-multiple-labels",
+"weight": 0,
+"group": "a11y-names-labels"
+},
+{
+"id": "frame-title",
+"weight": 0,
+"group": "a11y-names-labels"
+},
+{
+"id": "heading-order",
+"weight": 3,
+"group": "a11y-navigation"
+},
+{
+"id": "html-has-lang",
+"weight": 7,
+"group": "a11y-language"
+},
+{
+"id": "html-lang-valid",
+"weight": 7,
+"group": "a11y-language"
+},
+{
+"id": "html-xml-lang-mismatch",
+"weight": 0,
+"group": "a11y-language"
+},
+{
+"id": "image-alt",
+"weight": 10,
+"group": "a11y-names-labels"
+},
+{
+"id": "input-button-name",
+"weight": 10,
+"group": "a11y-names-labels"
+},
+{
+"id": "input-image-alt",
+"weight": 0,
+"group": "a11y-names-labels"
+},
+{
+"id": "label",
+"weight": 10,
+"group": "a11y-names-labels"
+},
+{
+"id": "link-in-text-block",
+"weight": 7,
+"group": "a11y-color-contrast"
+},
+{
+"id": "link-name",
+"weight": 7,
+"group": "a11y-names-labels"
+},
+{
+"id": "list",
+"weight": 7,
+"group": "a11y-tables-lists"
+},
+{
+"id": "listitem",
+"weight": 7,
+"group": "a11y-tables-lists"
+},
+{
+"id": "meta-refresh",
+"weight": 0,
+"group": "a11y-best-practices"
+},
+{
+"id": "meta-viewport",
+"weight": 10,
+"group": "a11y-best-practices"
+},
+{
+"id": "object-alt",
+"weight": 0,
+"group": "a11y-names-labels"
+},
+{
+"id": "select-name",
+"weight": 0,
+"group": "a11y-names-labels"
+},
+{
+"id": "skip-link",
+"weight": 3,
+"group": "a11y-names-labels"
+},
+{
+"id": "tabindex",
+"weight": 7,
+"group": "a11y-navigation"
+},
+{
+"id": "target-size",
+"weight": 7,
+"group": "a11y-best-practices"
+},
+{
+"id": "td-headers-attr",
+"weight": 0,
+"group": "a11y-tables-lists"
+},
+{
+"id": "th-has-data-cells",
+"weight": 0,
+"group": "a11y-tables-lists"
+},
+{
+"id": "valid-lang",
+"weight": 7,
+"group": "a11y-language"
+},
+{
+"id": "video-caption",
+"weight": 0,
+"group": "a11y-audio-video"
+},
+{
+"id": "landmark-one-main",
+"weight": 3,
+"group": "a11y-best-practices"
+},
+{
+"id": "autocomplete-valid",
+"weight": 0,
+"group": "a11y-best-practices"
+},
+{
+"id": "presentation-role-conflict",
+"weight": 1,
+"group": "a11y-best-practices"
+},
+{
+"id": "svg-img-alt",
+"weight": 0,
+"group": "a11y-best-practices"
+},
+{
+"id": "focusable-controls",
+"weight": 0
+},
+{
+"id": "interactive-element-affordance",
+"weight": 0
+},
+{
+"id": "logical-tab-order",
+"weight": 0
+},
+{
+"id": "visual-order-follows-dom",
+"weight": 0
+},
+{
+"id": "focus-traps",
+"weight": 0
+},
+{
+"id": "managed-focus",
+"weight": 0
+},
+{
+"id": "use-landmarks",
+"weight": 0
+},
+{
+"id": "offscreen-content-hidden",
+"weight": 0
+},
+{
+"id": "custom-controls-labels",
+"weight": 0
+},
+{
+"id": "custom-controls-roles",
+"weight": 0
+},
+{
+"id": "table-duplicate-name",
+"weight": 0,
+"group": "a11y-best-practices"
+},
+{
+"id": "empty-heading",
+"weight": 0,
+"group": "a11y-best-practices"
+},
+{
+"id": "aria-allowed-role",
+"weight": 0,
+"group": "a11y-best-practices"
+},
+{
+"id": "image-redundant-alt",
+"weight": 0,
+"group": "a11y-names-labels"
+},
+{
+"id": "identical-links-same-purpose",
+"weight": 0,
+"group": "a11y-best-practices"
+},
+{
+"id": "label-content-name-mismatch",
+"weight": 0,
+"group": "hidden"
+},
+{
+"id": "table-fake-caption",
+"weight": 0,
+"group": "hidden"
+},
+{
+"id": "td-has-header",
+"weight": 0,
+"group": "hidden"
+}
+]
+},
+"best-practices": {
+"id": "best-practices",
+"title": "Рекомендации",
+"score": 0.96,
+"auditRefs": [
+{
+"id": "is-on-https",
+"weight": 5,
+"group": "best-practices-trust-safety"
+},
+{
+"id": "redirects-http",
+"weight": 0,
+"group": "best-practices-trust-safety"
+},
+{
+"id": "geolocation-on-start",
+"weight": 1,
+"group": "best-practices-trust-safety"
+},
+{
+"id": "notification-on-start",
+"weight": 1,
+"group": "best-practices-trust-safety"
+},
+{
+"id": "csp-xss",
+"weight": 0,
+"group": "best-practices-trust-safety"
+},
+{
+"id": "has-hsts",
+"weight": 0,
+"group": "best-practices-trust-safety"
+},
+{
+"id": "origin-isolation",
+"weight": 0,
+"group": "best-practices-trust-safety"
+},
+{
+"id": "clickjacking-mitigation",
+"weight": 0,
+"group": "best-practices-trust-safety"
+},
+{
+"id": "trusted-types-xss",
+"weight": 0,
+"group": "best-practices-trust-safety"
+},
+{
+"id": "paste-preventing-inputs",
+"weight": 3,
+"group": "best-practices-ux"
+},
+{
+"id": "image-aspect-ratio",
+"weight": 1,
+"group": "best-practices-ux"
+},
+{
+"id": "image-size-responsive",
+"weight": 1,
+"group": "best-practices-ux"
+},
+{
+"id": "doctype",
+"weight": 1,
+"group": "best-practices-browser-compat"
+},
+{
+"id": "charset",
+"weight": 1,
+"group": "best-practices-browser-compat"
+},
+{
+"id": "baseline",
+"weight": 0,
+"group": "best-practices-browser-compat"
+},
+{
+"id": "js-libraries",
+"weight": 0,
+"group": "best-practices-general"
+},
+{
+"id": "deprecations",
+"weight": 5,
+"group": "best-practices-general"
+},
+{
+"id": "third-party-cookies",
+"weight": 5,
+"group": "best-practices-general"
+},
+{
+"id": "errors-in-console",
+"weight": 1,
+"group": "best-practices-general"
+},
+{
+"id": "valid-source-maps",
+"weight": 0,
+"group": "best-practices-general"
+},
+{
+"id": "inspector-issues",
+"weight": 1,
+"group": "best-practices-general"
+}
+]
+},
+"seo": {
+"id": "seo",
+"title": "Поисковая оптимизация",
+"description": "Эти проверки позволяют узнать, соответствует ли страница основным рекомендациям к поисковой оптимизации. Lighthouse оценивает не все факторы, которые могут повлиять на позицию сайта в результатах поиска (например, производительность по [основным интернет-показателям](https://web.dev/explore/vitals)). Подробнее [о факторах, важных для Google Поиска](https://support.google.com/webmasters/answer/35769)…",
+"score": 0.92,
+"manualDescription": "Проверьте, соответствует ли ваш сайт рекомендациям по поисковой оптимизации (SEO), с помощью этих дополнительных сервисов.",
+"auditRefs": [
+{
+"id": "is-crawlable",
+"weight": 4.043478260869565,
+"group": "seo-crawl"
+},
+{
+"id": "document-title",
+"weight": 1,
+"group": "seo-content"
+},
+{
+"id": "meta-description",
+"weight": 1,
+"group": "seo-content"
+},
+{
+"id": "http-status-code",
+"weight": 1,
+"group": "seo-crawl"
+},
+{
+"id": "link-text",
+"weight": 1,
+"group": "seo-content"
+},
+{
+"id": "crawlable-anchors",
+"weight": 1,
+"group": "seo-crawl"
+},
+{
+"id": "robots-txt",
+"weight": 1,
+"group": "seo-crawl"
+},
+{
+"id": "image-alt",
+"weight": 1,
+"group": "seo-content"
+},
+{
+"id": "hreflang",
+"weight": 1,
+"group": "seo-content"
+},
+{
+"id": "canonical",
+"weight": 1,
+"group": "seo-content"
+},
+{
+"id": "structured-data",
+"weight": 0
+}
+]
+}
+},
+"stackPacks": [
+{
+"id": "wordpress",
+"title": "WordPress",
+"iconDataURL": "data:image/svg+xml;base64,ICON",
+"descriptions": {
+"offscreen-images": "Чтобы отложить загрузку скрытых страниц, установите [плагин WordPress](https://wordpress.org/plugins/search/lazy+load/) или подберите тему, которая поддерживает такую возможность. Мы также рекомендуем [плагин AMP](https://wordpress.org/plugins/amp/).",
+"unminified-javascript": "Ускорьте загрузку сайта с помощью [плагинов WordPress](https://wordpress.org/plugins/search/minify+javascript/), которые позволяют объединять, уменьшать и сжимать скрипты. Рекомендуем использовать такие плагины на этапе сборки.",
+"uses-long-cache-ttl": "Подробнее [о кешировании в браузере на платформе WordPress](https://wordpress.org/support/article/optimization/#browser-caching)…",
+"server-response-time": "Используйте легкую тему (предпочтительно блочную) и применяйте полностраничное кеширование или решение для страниц со статичным контентом. Отключите ненужные плагины, чтобы уменьшить ресурсопотребление сервера. Установите выделенный сервер для своего хостинга или настройте удаленное управление.",
+"unused-javascript": "Рекомендуем заменить или удалить [плагины WordPress](https://wordpress.org/plugins/), которые загружают неиспользуемый код JavaScript на вашей странице. Чтобы найти такие плагины, запустите [анализ покрытия кода](https://developer.chrome.com/docs/devtools/coverage/) в инструментах разработчика в Chrome. Определить нужный плагин или тему можно по URL скрипта. Обращайте внимание на плагины с большим количеством скриптов, в которых при анализе покрытия кода преобладает красный цвет. Скрипт должен попадать в очередь, только если он используется на странице.",
+"render-blocking-resources": "Используйте плагины WordPress, которые позволяют [встроить критическую часть данных](https://wordpress.org/plugins/search/critical+css/) или [отложить загрузку менее важных ресурсов](https://wordpress.org/plugins/search/defer+css+javascript/). Обратите внимание, что такие плагины могут привести к сбоям в работе других используемых вами тем или плагинов. Не исключено, что вам потребуется внести изменения в код.",
+"unused-css-rules": "Рекомендуем заменить или удалить [плагины WordPress](https://wordpress.org/plugins/), которые загружают неиспользуемый код CSS на вашей странице. Чтобы найти такие плагины, запустите [анализ покрытия кода](https://developer.chrome.com/docs/devtools/coverage/) в инструментах разработчика в Chrome. Определить нужный плагин или тему можно по URL таблицы стилей. Обращайте внимание на плагины с большим количеством таблиц стилей, в которых при анализе покрытия кода преобладает красный цвет. Таблица стилей должна попадать в очередь, только если она используется на странице.",
+"uses-responsive-images": "Чтобы привести размеры ваших изображений в соответствие с требованиями, загрузите их в [библиотеку файлов](https://wordpress.org/support/article/media-library-screen/). Затем вставьте их на сайт прямо из библиотеки или используйте виджет изображений. Таким образом вы сможете обеспечить оптимальный размер изображений (в том числе для контрольных точек адаптивного дизайна). Старайтесь не использовать для изображения значение `Full Size` без особой необходимости. [Подробнее…](https://wordpress.org/support/article/inserting-images-into-posts-and-pages/)",
+"efficient-animated-content": "Используйте сервисы, которые позволяют встраивать GIF-файлы на страницы сайта в формате видео HTML5.",
+"total-byte-weight": "Мы рекомендуем включить показ только начального фрагмента записей (например, с помощью тега More). Вы также можете сократить количество записей на одной странице, разбить длинные записи на несколько страниц или использовать отложенную загрузку комментариев.",
+"uses-text-compression": "Включить сжатие текста можно в настройках веб-сервера.",
+"uses-optimized-images": "Чтобы сжимать изображения без потери качества, используйте [специальный плагин WordPress](https://wordpress.org/plugins/search/optimize+images/).",
+"unminified-css": "Ускорьте загрузку сайта с помощью [плагинов WordPress](https://wordpress.org/plugins/search/minify+css/), которые позволяют объединять, уменьшать и сжимать стили. Рекомендуем использовать такие плагины на этапе сборки.",
+"modern-image-formats": "Чтобы автоматически конвертировать загруженные изображения из формата JPEG в WebP (если это поддерживается), используйте плагин [Performance Lab](https://wordpress.org/plugins/performance-lab/)."
+}
+}
+],
+"entities": [
+{
+"name": "ost-term.ru",
+"isFirstParty": true,
+"isUnrecognized": true,
+"origins": [
+"https://ost-term.ru"
+]
+},
+{
+"name": "Yandex Metrica",
+"homepage": "https://metrica.yandex.com/about?",
+"category": "analytics",
+"origins": [
+"https://mc.yandex.ru",
+"https://mc.yandex.com"
+]
+},
+{
+"name": "yandex.net",
+"isUnrecognized": true,
+"origins": [
+"https://hdrc.yandex.net",
+"https://mdd.yandex.net"
+]
+}
+],
+"fullPageScreenshot": {
+"screenshot": {
+"data": "data:image/jpeg;base64,FULL",
+"width": 412,
+"height": 2000
+},
+"nodes": {}
+}
+},
+"analysisUTCTimestamp": "2026-09-27T07:34:03.920Z"
+}

@@ -6,7 +6,7 @@ import pytest
 
 import gsc
 from gsc.core import services
-from gsc.testing import FakePageSpeed, FakeSearchConsole
+from gsc.testing import FakeCrUX, FakePageSpeed, FakeSearchConsole
 
 from .test_cli import invoke, invoke_json
 
@@ -152,7 +152,7 @@ def test_inspect_keeps_partial_results_on_daily_quota(sc: FakeSearchConsole) -> 
 def test_sitemaps(sc: FakeSearchConsole) -> None:
     _, payload = invoke_json("sitemaps", "-s", SITE)
     assert payload["sitemaps"][0]["errors"] == 1
-    assert "sitemap.xml" in invoke("sitemaps", "-s", SITE).stdout
+    assert "example.com" in invoke("sitemaps", "-s", SITE).stdout
     sc.sitemaps = []
     assert "Карт сайта нет" in invoke("sitemaps", "-s", SITE).stdout
 
@@ -194,7 +194,7 @@ def test_fakes_mirror_real_api() -> None:
     """Фейки должны оставаться совместимыми с настоящими клиентами по публичным методам."""
     import inspect
 
-    for real, fake in ((gsc.SearchConsole, FakeSearchConsole), (gsc.PageSpeed, FakePageSpeed)):
+    for real, fake in ((gsc.SearchConsole, FakeSearchConsole), (gsc.PageSpeed, FakePageSpeed), (gsc.CrUX, FakeCrUX)):
         public = {n for n in dir(real) if not n.startswith("_") and callable(getattr(real, n))}
         for name in public:
             assert hasattr(fake, name), f"{fake.__name__} нет {name}"
@@ -217,3 +217,114 @@ def test_fake_search_console_extras() -> None:
     daily = FakePageSpeed({"u": gsc.QuotaExceeded("pagespeed", "day", retry_after=60, daily=True)})
     with pytest.raises(gsc.QuotaExceeded):
         next(daily.analyze_many(["u"]))
+
+
+@pytest.fixture
+def cx(monkeypatch: pytest.MonkeyPatch) -> FakeCrUX:
+    record = gsc.CruxRecord(
+        origin="https://example.com",
+        period=gsc.CruxPeriod(first_date="2026-08-29", last_date="2026-09-25"),
+        metrics={
+            "round_trip_time": gsc.CruxApiMetric(p75=157),
+            "cumulative_layout_shift": gsc.CruxApiMetric(p75=0.05, good=0.97, needs_improvement=0.02, poor=0.01),
+            "largest_contentful_paint": gsc.CruxApiMetric(p75=1884, good=0.88, needs_improvement=0.09, poor=0.03),
+            "form_factors": gsc.CruxApiMetric(fractions={"phone": 0.52, "desktop": 0.48}),
+        },
+    )
+    history = gsc.CruxHistory(
+        origin="https://example.com",
+        form_factor="PHONE",
+        periods=[
+            gsc.CruxPeriod(first_date="2026-03-08", last_date="2026-04-04"),
+            gsc.CruxPeriod(first_date="2026-08-23", last_date="2026-09-19"),
+        ],
+        metrics={
+            "largest_contentful_paint": gsc.CruxHistoryMetric(p75=[1708, 2009], good=[0.9, 0.85]),
+            "navigation_types": gsc.CruxHistoryMetric(fractions={"navigate": [0.8, 0.7]}),
+        },
+    )
+    fake = FakeCrUX(
+        records={"https://example.com": record, "https://example.com/boom": gsc.ApiError("crux", "boom")},
+        histories={"https://example.com": history, "https://example.com/empty": gsc.CruxHistory()},
+    )
+    monkeypatch.setattr(services, "crux", lambda: fake)
+    return fake
+
+
+def test_crux_record(cx: FakeCrUX) -> None:
+    code, payload = invoke_json("crux", "--origin", "https://example.com", "--form-factor", "phone")
+    assert code == 0 and payload["record"]["metrics"]["largest_contentful_paint"]["good"] == 0.88
+    assert cx.calls[-1] == ("record", "https://example.com", "phone")
+    human = invoke("crux", "--origin", "https://example.com").stdout
+    assert "1884 мс" in human and "88%" in human and "0.05" in human and "phone 52%" in human
+    assert human.index("largest_contentful_paint") < human.index("round_trip_time")  # основные метрики первыми
+
+    code, payload = invoke_json("crux", "https://example.com/rare")
+    assert code == 0 and payload["record"] is None
+    assert "нет данных" in invoke("crux", "https://example.com/rare").stdout
+    code, payload = invoke_json("crux", "https://example.com/boom")
+    assert code == 5
+
+
+def test_crux_history(cx: FakeCrUX) -> None:
+    code, payload = invoke_json("crux", "--origin", "https://example.com", "--history")
+    assert code == 0 and payload["history"]["metrics"]["largest_contentful_paint"]["p75"] == [1708, 2009]
+    human = invoke("crux", "--origin", "https://example.com", "--history").stdout
+    assert "1708 мс" in human and "2009 мс" in human and "85%" in human
+    assert "Нет периодов" in invoke("crux", "--origin", "https://example.com/empty", "--history").stdout
+    assert "нет данных" in invoke("crux", "https://nope.com/", "--history").stdout
+
+
+def test_crux_needs_exactly_one_target(cx: FakeCrUX) -> None:
+    assert invoke_json("crux")[0] == 2
+    assert invoke_json("crux", "https://a.com/", "--origin", "https://a.com")[0] == 2
+
+
+def test_analytics_filters_aggregation_by_day(sc: FakeSearchConsole) -> None:
+    sc.first_incomplete_date = "2026-09-26"
+    code, payload = invoke_json(
+        "analytics", "-s", SITE, "-f", "page:contains:https://example.com/blog/", "--aggregation", "byPage", "--by-day"
+    )
+    assert code == 0 and payload["first_incomplete_date"] == "2026-09-26"
+    assert sc.calls[-1][1][5:] == ("byPage", True)
+    code, payload = invoke_json("analytics", "-s", SITE, "-f", "page:like:x")
+    assert code == 2 and "equals" in payload["error"]["message"]
+    assert invoke_json("analytics", "-s", SITE, "-f", "page")[0] == 2
+
+
+def test_parse_filter_keeps_colons_in_expression() -> None:
+    assert services.parse_filter("page:equals:https://example.com/a") == {
+        "dimension": "page",
+        "operator": "equals",
+        "expression": "https://example.com/a",
+    }
+
+
+def test_pagespeed_warnings_and_distribution(psi: FakePageSpeed) -> None:
+    result = psi.results["https://example.com/"]
+    assert isinstance(result, gsc.PageSpeedResult)
+    result.runtime_error = "FAILED_DOCUMENT_REQUEST: timeout"
+    result.run_warnings = ["redirected"]
+    assert result.crux_origin is not None and result.crux_origin.lcp is not None
+    result.crux_origin.lcp.good = 0.8
+    human = invoke("pagespeed", "https://example.com/")
+    assert "FAILED_DOCUMENT_REQUEST" in human.stderr and "redirected" in human.stderr
+    assert "хороших 80%" in human.stdout
+    invoke_json("pagespeed", "https://example.com/", "--screenshots")
+    assert psi.calls[-1][2] == ("performance", "accessibility", "best-practices", "seo")
+
+
+def test_sitemap_contents_in_output(sc: FakeSearchConsole) -> None:
+    sc.sitemaps = [
+        gsc.Sitemap(path="https://example.com/s.xml", contents=[gsc.SitemapContent(type="web", submitted=120)])
+    ]
+    _, payload = invoke_json("sitemaps", "-s", SITE)
+    assert payload["sitemaps"][0]["contents"] == [{"type": "web", "submitted": 120, "indexed": None}]
+    assert "web: 120" in invoke("sitemaps", "-s", SITE).stdout
+    assert "URL (web)" in invoke("sitemap", "-s", SITE, "https://example.com/s.xml").stdout
+
+
+def test_fake_crux_raises_configured_error() -> None:
+    fake = FakeCrUX(histories={"x": gsc.ApiError("crux", "boom")})
+    with pytest.raises(gsc.ApiError):
+        fake.history("x")

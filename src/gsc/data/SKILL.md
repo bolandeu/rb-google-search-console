@@ -1,6 +1,6 @@
 ---
 name: gsc
-description: Данные Google Search Console (ресурсы, поисковая аналитика — клики/показы/CTR/позиции, инспекция URL — индексация, canonical, покрытие; карты сайта) и PageSpeed Insights (Lighthouse, Core Web Vitals, CrUX, аудиты) через CLI `gsc` или Python-библиотеку `gsc`. Использовать, когда задаче нужны данные GSC, статус индексации страниц, скорость сайта (Search Console, GSC, URL inspection, PageSpeed, PSI, Core Web Vitals, CrUX, Lighthouse). Здесь — установка, --json, коды выхода, доступы, квоты.
+description: Данные Google Search Console (ресурсы, поисковая аналитика — клики/показы/CTR/позиции, инспекция URL — индексация, canonical, покрытие; карты сайта) , PageSpeed Insights (Lighthouse, Core Web Vitals, аудиты) и Chrome UX Report (реальные посетители, история по неделям) через CLI `gsc` или Python-библиотеку `gsc`. Использовать, когда задаче нужны данные GSC, статус индексации страниц, скорость сайта (Search Console, GSC, URL inspection, PageSpeed, PSI, Core Web Vitals, CrUX, Lighthouse). Здесь — установка, --json, коды выхода, доступы, квоты.
 ---
 
 # gsc
@@ -45,13 +45,25 @@ uv tool install "git+ssh://git@github.com/bolandeu/google-search-console.git"
   или `PROVIDER_ERROR` с `daily: true` и `retry_after`; до сброса (полночь
   по тихоокеанскому времени) не повторять. PageSpeed — 25 000 в сутки на ключ.
 - **Данные Search Console — с задержкой 2–3 дня**; по умолчанию `analytics`
-  берёт 28 дней, заканчивая 3 днями назад.
+  берёт 28 дней, заканчивая 3 днями назад. Google отдаёт не больше ~50 000
+  строк на запрос — для полного `page,query` на большом сайте `--by-day
+  --limit 0` (строки подневные, суммировать самому; позицию — взвешивая по
+  показам). Клики по страницам и по сайту считаются по-разному — для
+  сравнения явно `--aggregation byPage` или `byProperty`.
+- **CrUX** (`gsc crux`) — реальные посетители Chrome, есть только у страниц
+  и сайтов с заметным трафиком: `"record": null` — не ошибка, а «данных нет»;
+  тогда пробовать `--origin`. Квота 150 запросов в минуту.
+- **PageSpeed `--json` большой** (сотни КБ на URL): все аудиты с деталями.
+  `runtime_error` не пуст — Lighthouse не смог замерить страницу, цифрам не
+  верить. `--screenshots` — только если картинки правда нужны.
 - **Доступы** — только keychain ОС или переменные окружения, никогда не в
   аргументах или настройках. Search Console — ключ сервисного аккаунта
   (`gsc auth login --file key.json`, env `GSC_GOOGLE_SERVICE_ACCOUNT_JSON`);
   email аккаунта должен быть добавлен пользователем в Search Console каждого
-  ресурса. PageSpeed — API-ключ (`gsc auth login --provider pagespeed`, env
-  `GSC_PAGESPEED_API_KEY`); без ключа квота Google нулевая. Проверка —
+  ресурса. PageSpeed и CrUX — один API-ключ (`gsc auth login --provider
+  pagespeed`, env `GSC_PAGESPEED_API_KEY`); без ключа квота Google нулевая; для
+  CrUX в проекте ключа должен быть включён Chrome UX Report API (иначе exit 3
+  с подсказкой). Проверка —
   `gsc auth status --json`. Никогда не просить пользователя вставить секрет
   в командную строку.
 - **Команды, меняющие состояние в Google** — те, у которых в `--help` есть

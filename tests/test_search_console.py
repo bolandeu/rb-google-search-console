@@ -330,3 +330,66 @@ def test_sitemaps(tmp_path: Path) -> None:
     )
     with pytest.raises(gsc.CliError):
         sc.submit_sitemap("sc-domain:example.com", "sitemap.xml")
+
+
+def test_aggregation_by_day_and_metadata(tmp_path: Path) -> None:
+    bodies: list[dict] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        body = json.loads(request.content)
+        bodies.append(body)
+        rows = [{"keys": ["https://example.com/"], "clicks": 1, "impressions": 2}]
+        return json_response(200, {"rows": rows, "metadata": {"firstIncompleteDate": "2026-09-26"}})
+
+    it = client(handler, tmp_path).iter_search_analytics(
+        "sc-domain:example.com",
+        "2026-09-01",
+        "2026-09-03",
+        ["page"],
+        data_state="all",
+        aggregation_type="byPage",
+        by_day=True,
+    )
+    assert it.first_incomplete_date is None  # до первой страницы
+    rows = list(it)
+    assert [r.keys["date"] for r in rows] == ["2026-09-01", "2026-09-02", "2026-09-03"]
+    assert [(b["startDate"], b["endDate"]) for b in bodies] == [
+        ("2026-09-01", "2026-09-01"),
+        ("2026-09-02", "2026-09-02"),
+        ("2026-09-03", "2026-09-03"),
+    ]
+    assert all(b["aggregationType"] == "byPage" and b["dataState"] == "all" for b in bodies)
+    assert it.first_incomplete_date == "2026-09-26"
+    assert iter(it) is it
+
+
+def test_by_day_keeps_date_dimension_and_limit(tmp_path: Path) -> None:
+    def handler(request: httpx.Request) -> httpx.Response:
+        body = json.loads(request.content)
+        return json_response(200, {"rows": [{"keys": [body["startDate"], "q"]}] * body["rowLimit"]})
+
+    rows = list(
+        client(handler, tmp_path).iter_search_analytics(
+            "sc-domain:example.com", "2026-09-01", "2026-09-05", ["date", "query"], by_day=True, limit=3, page_size=2
+        )
+    )
+    assert len(rows) == 3
+    assert rows[0].keys == {"date": "2026-09-01", "query": "q"}
+
+
+def test_by_day_rejects_inverted_range(tmp_path: Path) -> None:
+    with pytest.raises(gsc.CliError):
+        list(
+            client(lambda r: json_response(200, {}), tmp_path).iter_search_analytics(
+                "sc-domain:example.com", "2026-09-05", "2026-09-01", by_day=True
+            )
+        )
+
+
+def test_sitemap_contents(tmp_path: Path) -> None:
+    raw = {
+        "path": "https://example.com/sitemap.xml",
+        "contents": [{"type": "web", "submitted": "120", "indexed": "0"}, {"type": "image", "submitted": "40"}],
+    }
+    s = client(lambda r: json_response(200, raw), tmp_path).get_sitemap("sc-domain:example.com", raw["path"])
+    assert [(c.type, c.submitted, c.indexed) for c in s.contents] == [("web", 120, 0), ("image", 40, None)]

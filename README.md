@@ -1,8 +1,9 @@
-# gsc — Google Search Console и PageSpeed Insights
+# gsc — Google Search Console, PageSpeed Insights и CrUX
 
 Данные [Search Console](https://search.google.com/search-console) (ресурсы, поисковая
-аналитика, инспекция URL, карты сайта) и [PageSpeed Insights](https://pagespeed.web.dev/)
-(Lighthouse, CrUX, все аудиты). Работает как CLI (`gsc analytics …`) и как Python-библиотека
+аналитика, инспекция URL, карты сайта), [PageSpeed Insights](https://pagespeed.web.dev/)
+(Lighthouse, CrUX, все аудиты) и [Chrome UX Report API](https://developer.chrome.com/docs/crux/api)
+(реальные посетители Chrome, история по неделям). Работает как CLI (`gsc analytics …`) и как Python-библиотека
 (`import gsc`). Пакет, импорт и команда — `gsc`. Поддерживаются macOS и Linux.
 
 ## Установка
@@ -49,6 +50,8 @@ uv tool install "git+ssh://git@github.com/bolandeu/google-search-console.git"
 2. *Credentials → Create credentials → API key*; желательно ограничить ключ этим API.
 3. `gsc auth login --provider pagespeed` (спросит скрытым вводом; Keychain `google-oauth:api_key`)
    или env `GSC_PAGESPEED_API_KEY` (а также `GOOGLE_PAGESPEED_API_KEY`, `GOOGLE_OAUTH_PAGESPEED_API_KEY`).
+4. Для `gsc crux` тот же ключ: включить **Chrome UX Report API** и добавить его в ограничения ключа
+   (в списке ограничений видны только уже включённые API). Изменения доходят за 1–5 минут.
 
 ```bash
 gsc auth status          # что найдено; --check — ещё и спросить у Google, принят ли ключ
@@ -67,10 +70,14 @@ gsc --ai                              # памятка для AI-агентов
 gsc sites                                              # ресурсы аккаунта
 gsc sites --for https://blog.example.com/post          # какой ресурс покрывает URL
 gsc analytics -s sc-domain:example.com -d page,query --limit 100
+gsc analytics -s sc-domain:example.com -d page,query --by-day --limit 0 --json > full.json   # без предела 50 000
+gsc analytics -s sc-domain:example.com -d query -f page:contains:/blog/ --aggregation byPage
 gsc inspect -s sc-domain:example.com https://example.com/a https://example.com/b
 gsc sitemaps -s sc-domain:example.com
 gsc submit-sitemap -s sc-domain:example.com https://example.com/sitemap.xml --dry-run
-gsc pagespeed https://example.com --strategy desktop -c performance,seo --audits
+gsc pagespeed https://example.com --strategy desktop --audits          # все 4 категории
+gsc crux --origin https://example.com --form-factor phone               # реальные посетители, 28 дней
+gsc crux --origin https://example.com --history --periods 40            # тренд по неделям
 ```
 
 `--json` у каждой команды; коды выхода: 0 успех, 2 неверные аргументы / нет доступа к
@@ -91,8 +98,18 @@ sc = gsc.SearchConsole()
 site = sc.property_for("https://example.com/")  # доменный ресурс важнее URL-prefix
 start, end = gsc.default_range()  # 28 дней с задержкой данных 3 дня
 
-for row in sc.iter_search_analytics(site, start, end, dimensions=["page", "query"]):
-    row.keys["page"], row.clicks, row.impressions, row.ctr, row.position  # постранично по 25 000
+rows = sc.iter_search_analytics(
+    site,
+    start,
+    end,
+    dimensions=["page", "query"],
+    filters=[{"dimension": "page", "operator": "contains", "expression": "/blog/"}],
+    aggregation_type="byPage",  # byPage / byProperty считают клики и показы по-разному
+    by_day=True,  # по запросу на день: обходит предел ~50 000 строк на запрос
+)
+for row in rows:  # постранично по 25 000
+    row.keys["page"], row.keys["date"], row.clicks, row.impressions, row.ctr, row.position
+rows.first_incomplete_date  # при data_state="all": с какой даты данные неполные
 
 for item in sc.inspect_many(urls, site, limit=500):  # темп 600/мин, стоп на дневной квоте
     if isinstance(item, gsc.InspectionError):
@@ -101,10 +118,17 @@ for item in sc.inspect_many(urls, site, limit=500):  # темп 600/мин, ст
         item.coverage_state, item.google_canonical, item.rich_results
 
 ps = gsc.PageSpeed()
-r = ps.analyze("https://example.com/", "mobile", ["performance", "seo"])
-r.scores, r.lab.lcp_ms, r.crux_url, r.crux_origin, r.crux_origin_fallback, r.audit("render-blocking-resources")
+r = ps.analyze("https://example.com/", "mobile")  # все 4 категории за одну единицу квоты
+r.scores, r.lab.lcp_ms, r.crux_origin.lcp.good, r.crux_origin_fallback
+a = r.audit("render-blocking-insight")
+a.description, a.categories, a.details, a.metric_savings  # категория, вес, группа; советы
+r.stack_packs, r.entities, r.run_warnings, r.runtime_error  # платформа, сторонние сервисы, сбои замера
 for res in ps.analyze_many(urls, "mobile", concurrency=4):
     ...
+
+crux = gsc.CrUX()  # тот же ключ; нет данных у Google → None
+crux.record(origin="https://example.com", form_factor="PHONE").metrics["largest_contentful_paint"]
+crux.history("https://example.com/", periods=40).metrics["largest_contentful_paint"].p75  # по неделям
 
 gsc.auth_status()  # AuthStatus(google="ok"|"missing"|"expired", pagespeed_key=bool, account=…)
 ```
@@ -120,9 +144,15 @@ gsc.auth_status()  # AuthStatus(google="ok"|"missing"|"expired", pagespeed_key=b
 `inspect_many` / `analyze_many` не прерывают обход — приходят как `InspectionError` /
 `PageSpeedError`.
 
-**Тесты без сети:** `gsc.testing.FakeSearchConsole` / `FakePageSpeed` — те же методы, данные
+**Тесты без сети:** `gsc.testing.FakeSearchConsole` / `FakePageSpeed` / `FakeCrUX` — те же методы, данные
 задаются моделями (`gsc.Row`, `gsc.Inspection`, `gsc.PageSpeedResult`), исключение в словаре —
-ошибка по этому URL. Разобрать записанный ответ API: `gsc.parse_inspection`, `gsc.parse_pagespeed`.
+ошибка по этому URL. Разобрать записанный ответ API: `gsc.parse_inspection`, `gsc.parse_pagespeed`,
+`gsc.parse_crux_record`, `gsc.parse_crux_history`.
+
+**Чего нет ни в одном API** (только интерфейс Search Console): сводный отчёт об индексировании,
+отчёт Core Web Vitals, ссылки, ручные меры, безопасность, статистика сканирования. Полные данные
+поиска без предела строк — только [выгрузка в BigQuery](https://support.google.com/webmasters/answer/12918484)
+(настраивается в интерфейсе GSC).
 
 **Квота URL Inspection** учитывается локально (файл в папке состояния пользователя, общий для
 процессов на машине): `sc.quota_remaining(site)`. Запросы с других машин он не видит — это оценка;

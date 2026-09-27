@@ -6,7 +6,7 @@ import typer
 from typer import rich_utils
 
 from . import output
-from .commands import analytics, auth, doctor, init, inspect, pagespeed, sitemaps, sites, skill, status
+from .commands import analytics, auth, crux, doctor, init, inspect, pagespeed, sitemaps, sites, skill, status
 from .commands import config as config_cmd
 from .core.version import CLI_NAME, DEV_VERSION, installed_version, package_summary
 
@@ -44,6 +44,7 @@ app.command(name="sitemaps")(sitemaps.sitemaps)
 app.command(name="sitemap")(sitemaps.sitemap)
 app.command(name="submit-sitemap")(sitemaps.submit_sitemap)
 app.command(name="pagespeed")(pagespeed.pagespeed)
+app.command(name="crux")(crux.crux)
 
 
 def _version_callback(value: bool) -> None:
