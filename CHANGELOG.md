@@ -8,6 +8,8 @@ write them at release time.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-09-27
+
 Пакет переименован: `rb-google-search-console` / `rb_gsc` / команда `rb-gsc` →
 **`gsc`** (дистрибутив, импорт и команда). Переведён на архитектуру cli-generator.
 
