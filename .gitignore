@@ -1,9 +1,11 @@
-.venv/
 __pycache__/
 *.py[cod]
-*.egg-info/
+.venv/
+.pytest_cache/
+.ruff_cache/
 dist/
-build/
-.env
-.env.shared
+*.egg-info/
+.python-version
+.coverage
+htmlcov/
 .claude/settings.local.json
