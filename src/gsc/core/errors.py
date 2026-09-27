@@ -1,33 +1,36 @@
 from __future__ import annotations
 
+# Общие ошибки — из google-oauth: `output.guard` ловит именно этот `CliError`,
+# поэтому ошибки авторизации (ключи, keychain, токен) выводятся тем же конвертом,
+# что и собственные ошибки gsc. Каждая несёт `code`, `message`, `action` и код выхода;
+# всё прочее `output.guard` превращает в конверт `UNEXPECTED`.
+from google_oauth.errors import (
+    CliError,
+    CredentialStoreUnavailable,
+    InvalidArguments,
+    NotAuthorized,
+    TokenRequestFailed,
+)
+
+__all__ = [
+    "Aborted",
+    "ApiError",
+    "AuthRequired",
+    "CliError",
+    "CliTooOld",
+    "CredentialStoreUnavailable",
+    "InvalidArguments",
+    "NotAuthorized",
+    "ProjectNotInitialized",
+    "PropertyNotFound",
+    "ProviderError",
+    "QuotaExceeded",
+    "TokenRequestFailed",
+]
+
 # Derived from this package's own name so error messages can name the real
 # command without this module needing template substitution.
 _CLI = __name__.split(".")[0]
-
-
-class CliError(Exception):
-    """Base error for all expected, user-facing CLI failures.
-
-    Every raise carries a stable `code`, a human `message`, an optional
-    `action` telling the caller (human or agent) how to recover, and the
-    process exit code to use. Only named, expected failure modes get a
-    subclass here; anything else that escapes a command is turned into an
-    `UNEXPECTED` envelope by `output.guard`, so `--json` callers always get
-    JSON back.
-    """
-
-    def __init__(self, code: str, message: str, *, action: str | None = None, exit_code: int = 1) -> None:
-        super().__init__(message)
-        self.code = code
-        self.message = message
-        self.action = action
-        self.exit_code = exit_code
-
-    def to_dict(self) -> dict:
-        payload: dict = {"code": self.code, "message": self.message}
-        if self.action:
-            payload["action"] = self.action
-        return payload
 
 
 class ProjectNotInitialized(CliError):
@@ -40,28 +43,14 @@ class ProjectNotInitialized(CliError):
         )
 
 
-class AuthRequired(CliError):
+class AuthRequired(NotAuthorized):
+    """API отверг запрос как неавторизованный (401/403 в HttpProvider). Это тоже `NotAuthorized`."""
+
     def __init__(self, provider: str) -> None:
         super().__init__(
-            "AUTH_REQUIRED",
+            provider,
             f"Authentication is required for provider '{provider}'.",
             action=f"Run '{_CLI} auth login --provider {provider}'.",
-            exit_code=3,
-        )
-
-
-class InvalidArguments(CliError):
-    def __init__(self, message: str) -> None:
-        super().__init__("INVALID_ARGUMENTS", message, exit_code=2)
-
-
-class CredentialStoreUnavailable(CliError):
-    def __init__(self, provider: str, reason: str) -> None:
-        super().__init__(
-            "CREDENTIAL_STORE_UNAVAILABLE",
-            f"Could not access the OS credential store for provider '{provider}': {reason}",
-            action="Set the credential via an environment variable instead of 'auth login' (see 'auth login --help').",
-            exit_code=1,
         )
 
 
@@ -106,20 +95,9 @@ class Aborted(CliError):
         super().__init__("ABORTED", f"{description}: aborted by user.", exit_code=1)
 
 
-# --- Ошибки публичного API библиотеки (gsc.NotAuthorized и т. д.) ---------------
+# --- Ошибки публичного API библиотеки (gsc.NotAuthorized — из google-oauth, и др.) ---
 # Они же — обычные CliError: CLI показывает их тем же конвертом и кодом выхода,
 # а библиотечный потребитель ловит по типу.
-
-
-class NotAuthorized(AuthRequired):
-    """Нет учётных данных (или Google их отверг). `action` — команда, которая это исправит."""
-
-    def __init__(self, provider: str, reason: str, *, action: str) -> None:
-        super().__init__(provider)
-        self.provider = provider
-        self.message = reason
-        self.action = action
-        self.args = (reason,)
 
 
 class PropertyNotFound(CliError):

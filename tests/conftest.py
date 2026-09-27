@@ -25,6 +25,9 @@ def isolated(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> dict[tuple[str,
         "GOOGLE_SERVICE_ACCOUNT_FILE",
         "GSC_PAGESPEED_API_KEY",
         "GOOGLE_PAGESPEED_API_KEY",
+        "GOOGLE_OAUTH_SERVICE_ACCOUNT_JSON",
+        "GOOGLE_OAUTH_SERVICE_ACCOUNT_FILE",
+        "GOOGLE_OAUTH_PAGESPEED_API_KEY",
     ):
         monkeypatch.delenv(name, raising=False)
     store: dict[tuple[str, str], str] = {}

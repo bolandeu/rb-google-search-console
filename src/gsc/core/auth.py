@@ -1,38 +1,54 @@
 """Учётные данные Google: ключ сервисного аккаунта (Search Console) и API-ключ PageSpeed.
 
+Хранение и поиск — общий пакет google-oauth: один слот keychain на все
+Google-инструменты (`google-oauth:service_account`, `google-oauth:api_key/pagespeed`).
 Всё неинтерактивно: библиотека только читает то, что положили `gsc auth login`
-(keychain ОС) или переменные окружения. Порядок поиска ключа сервисного аккаунта:
-GSC_GOOGLE_SERVICE_ACCOUNT_JSON → GOOGLE_SERVICE_ACCOUNT_JSON →
-GOOGLE_SERVICE_ACCOUNT_FILE (путь к файлу) → keychain `gsc:google`.
-Ключа PSI: GSC_PAGESPEED_API_KEY → GOOGLE_PAGESPEED_API_KEY → keychain `gsc:pagespeed`.
+или переменные окружения. Порядок поиска ключа сервисного аккаунта:
+GSC_GOOGLE_SERVICE_ACCOUNT_JSON → GOOGLE_SERVICE_ACCOUNT_JSON → GOOGLE_OAUTH_SERVICE_ACCOUNT_JSON →
+GOOGLE_SERVICE_ACCOUNT_FILE / GOOGLE_OAUTH_SERVICE_ACCOUNT_FILE (путь к файлу) → keychain.
+Ключа PSI: GSC_PAGESPEED_API_KEY → GOOGLE_PAGESPEED_API_KEY → GOOGLE_OAUTH_PAGESPEED_API_KEY → keychain.
 """
 
 from __future__ import annotations
 
-import json
-import os
-from pathlib import Path
 from typing import Any, Literal
 
+from google_oauth import ApiKey, GoogleAuth, Profile, parse_service_account
 from pydantic import BaseModel
 
-from ..credentials import manager as credentials
-from .errors import InvalidArguments, NotAuthorized
+from .errors import ApiError, NotAuthorized, TokenRequestFailed
 from .version import CLI_NAME
 
-GOOGLE = "google"  # provider в keychain: gsc:google
-PAGESPEED = "pagespeed"  # provider в keychain: gsc:pagespeed
-SA_FIELD = "service_account_json"
+__all__ = ["AuthStatus", "auth_status", "parse_service_account"]
+
+GOOGLE = "google"  # --provider сервисного аккаунта
+PAGESPEED = "pagespeed"  # --provider и имя API-ключа PSI
 
 SCOPE_READONLY = "https://www.googleapis.com/auth/webmasters.readonly"
 SCOPE_FULL = "https://www.googleapis.com/auth/webmasters"
 
-_LEGACY_SA_JSON_ENV = "GOOGLE_SERVICE_ACCOUNT_JSON"
-_LEGACY_SA_FILE_ENV = "GOOGLE_SERVICE_ACCOUNT_FILE"
-_LEGACY_PSI_ENV = "GOOGLE_PAGESPEED_API_KEY"
+PROFILE = Profile(
+    cli_name=CLI_NAME,
+    service="Google Search Console",
+    scopes=(SCOPE_READONLY, SCOPE_FULL),
+    service_account_env=("GSC_GOOGLE_SERVICE_ACCOUNT_JSON", "GOOGLE_SERVICE_ACCOUNT_JSON"),
+    service_account_file_env=("GOOGLE_SERVICE_ACCOUNT_FILE",),
+    api_keys=(
+        ApiKey(
+            PAGESPEED,
+            "PageSpeed Insights",
+            env=("GSC_PAGESPEED_API_KEY", "GOOGLE_PAGESPEED_API_KEY"),
+            hint="Ключ — Google Cloud Console → APIs & Services → Credentials, с включённым PageSpeed Insights API.",
+        ),
+    ),
+    login_hint="Добавьте email сервисного аккаунта в Search Console → Настройки → Пользователи и разрешения "
+    "каждого ресурса.",
+    provider=GOOGLE,
+)
+GOOGLE_AUTH = GoogleAuth(PROFILE)
 
-LOGIN_GOOGLE = f"{CLI_NAME} auth login --file <service-account.json>"
-LOGIN_PAGESPEED = f"{CLI_NAME} auth login --provider pagespeed"
+LOGIN_GOOGLE = PROFILE.login_cmd
+LOGIN_PAGESPEED = PROFILE.api_key_login_cmd(PAGESPEED)
 
 
 class AuthStatus(BaseModel):
@@ -50,96 +66,45 @@ class AuthStatus(BaseModel):
     detail: str | None = None  # почему не ok
 
 
-def parse_service_account(text: str) -> dict[str, Any]:
-    """Разобрать и проверить JSON ключа сервисного аккаунта; ошибка — InvalidArguments."""
-    try:
-        info = json.loads(text)
-    except ValueError as exc:
-        raise InvalidArguments(f"Ключ сервисного аккаунта — не JSON: {exc}") from exc
-    if not isinstance(info, dict) or info.get("type") != "service_account":
-        raise InvalidArguments('Это не ключ сервисного аккаунта: нужен JSON с "type": "service_account".')
-    missing = [f for f in ("client_email", "private_key", "token_uri") if not info.get(f)]
-    if missing:
-        raise InvalidArguments(f"В ключе сервисного аккаунта нет полей: {', '.join(missing)}.")
-    return info
-
-
 def service_account_source() -> tuple[str, str] | None:
     """(JSON ключа, источник) или None, если ключа нигде нет. Не проверяет содержимое."""
-    env_value = credentials.read_secret_from_env(GOOGLE, SA_FIELD) or os.environ.get(_LEGACY_SA_JSON_ENV)
-    if env_value:
-        return env_value, "env"
-    path = os.environ.get(_LEGACY_SA_FILE_ENV)
-    if path:
-        file = Path(path).expanduser()
-        if not file.is_file():
-            raise NotAuthorized(
-                GOOGLE, f"{_LEGACY_SA_FILE_ENV} указывает на несуществующий файл: {file}", action=LOGIN_GOOGLE
-            )
-        return file.read_text(encoding="utf-8"), "file"
-    stored = credentials.get_secret(GOOGLE, SA_FIELD)
-    if stored:
-        return stored, "keychain"
-    return None
+    found = GOOGLE_AUTH.find_service_account()
+    return (found.value, found.source) if found else None
 
 
 def load_service_account() -> dict[str, Any]:
     """Словарь ключа сервисного аккаунта; нет или битый — NotAuthorized с командой-исправлением."""
-    found = service_account_source()
-    if found is None:
-        raise NotAuthorized(GOOGLE, "Нет ключа сервисного аккаунта Google.", action=f"Выполните '{LOGIN_GOOGLE}'.")
-    try:
-        return parse_service_account(found[0])
-    except InvalidArguments as exc:
-        raise NotAuthorized(
-            GOOGLE, f"Ключ из {found[1]}: {exc.message}", action=f"Выполните '{LOGIN_GOOGLE}'."
-        ) from exc
+    return GOOGLE_AUTH.load_service_account()
 
 
 def pagespeed_key() -> str | None:
-    return credentials.get_secret(PAGESPEED) or os.environ.get(_LEGACY_PSI_ENV) or None
+    return GOOGLE_AUTH.api_key(PAGESPEED)
 
 
 def google_credentials(*, readonly: bool = True) -> Any:
     """google-auth Credentials сервисного аккаунта (токен ещё не получен — это сделает первый запрос)."""
-    from google.oauth2 import service_account
-
-    scopes = [SCOPE_READONLY if readonly else SCOPE_FULL]
-    return service_account.Credentials.from_service_account_info(load_service_account(), scopes=scopes)
+    return GOOGLE_AUTH.credentials([SCOPE_READONLY if readonly else SCOPE_FULL])
 
 
 def refresh_token(creds: Any) -> str:
     """Получить/обновить access token. Отказ Google → NotAuthorized, сеть → ApiError."""
-    import google.auth.exceptions
-    import google.auth.transport.requests
-
-    from .errors import ApiError
-
     try:
-        creds.refresh(google.auth.transport.requests.Request())
-    except google.auth.exceptions.RefreshError as exc:
-        raise NotAuthorized(
-            GOOGLE,
-            f"Google отверг ключ сервисного аккаунта: {exc}",
-            action=f"Выполните '{LOGIN_GOOGLE}' с новым ключом.",
-        ) from exc
-    except google.auth.exceptions.TransportError as exc:
-        raise ApiError(GOOGLE, f"не удалось получить токен: {exc}") from exc
-    return creds.token
+        return GOOGLE_AUTH.refresh(creds)
+    except TokenRequestFailed as exc:
+        raise ApiError(GOOGLE, f"не удалось получить токен: {exc.__cause__ or exc.message}") from exc
 
 
 def auth_status(*, check: bool = False) -> AuthStatus:
     """Что есть из авторизации. Без check — без сети; check=True — ещё и получает токен у Google."""
-    has_psi = pagespeed_key() is not None
-    try:
-        found = service_account_source()
-        if found is None:
-            return AuthStatus(google="missing", pagespeed_key=has_psi, detail=f"выполните '{LOGIN_GOOGLE}'")
-        info = parse_service_account(found[0])
-    except (NotAuthorized, InvalidArguments) as exc:
-        return AuthStatus(google="missing", pagespeed_key=has_psi, detail=exc.message)
-    status = AuthStatus(google="ok", pagespeed_key=has_psi, account=info["client_email"], source=found[1])
-    if check:
+    found = GOOGLE_AUTH.status()
+    status = AuthStatus(
+        google=found.state,
+        pagespeed_key=found.api_keys[PAGESPEED],
+        account=found.account,
+        source=found.source,
+        detail=found.detail,
+    )
+    if check and status.google == "ok":
         try:
             refresh_token(google_credentials())
         except NotAuthorized as exc:

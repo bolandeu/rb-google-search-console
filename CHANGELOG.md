@@ -35,9 +35,21 @@ write them at release time.
 
 ### Changed
 
-- Доступы — только связка ключей ОС (`gsc:google`, `gsc:pagespeed`) и переменные
-  окружения: `gsc auth login --file key.json`, `gsc auth login --provider pagespeed`.
+- Доступы — только связка ключей ОС и переменные окружения:
+  `gsc auth login --file key.json`, `gsc auth login --provider pagespeed`.
   Старые переменные `GOOGLE_SERVICE_ACCOUNT_*` и `GOOGLE_PAGESPEED_API_KEY` работают.
+- Авторизация вынесена в общий пакет **google-oauth** (как yandex-oauth у Яндекс-инструментов):
+  ключи лежат в общем слоте keychain всех Google-инструментов —
+  `google-oauth:service_account` / `default` (JSON ключа сервисного аккаунта) и
+  `google-oauth:api_key` / `pagespeed`; вход в одном инструменте авторизует остальные,
+  `gsc auth logout` выходит из всех. Записи `gsc:google` / `gsc:pagespeed` больше не
+  читаются — перенесите ключ заново: `gsc auth login --file key.json`.
+  Добавлены общие переменные `GOOGLE_OAUTH_SERVICE_ACCOUNT_JSON` / `_FILE` и
+  `GOOGLE_OAUTH_PAGESPEED_API_KEY` (ниже по приоритету, чем переменные gsc).
+  Любая переменная окружения с ключом PSI теперь приоритетнее keychain (раньше
+  `GOOGLE_PAGESPEED_API_KEY` проверялась после keychain). `gsc.NotAuthorized` теперь
+  базовый класс и для `AuthRequired` (401/403 от API) — `except gsc.NotAuthorized`
+  ловит оба случая; сигнатуры публичного API не менялись.
 - HTTP к Google — `httpx` + `google-auth` вместо `google-api-python-client`;
   ошибки Google больше не выходят трейсбеком.
 - `analytics`: период по умолчанию — 28 дней до «сегодня − 3», срез по умолчанию

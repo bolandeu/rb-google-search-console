@@ -15,6 +15,10 @@ from gsc.core import auth
 from .conftest import SA_INFO, json_response
 from .test_cli import invoke, invoke_json
 
+# Общий слот google-oauth — один на все Google-инструменты.
+SA_SLOT = ("google-oauth:service_account", "default")
+PSI_SLOT = ("google-oauth:api_key", "pagespeed")
+
 
 def test_auth_status_missing() -> None:
     status = gsc.auth_status()
@@ -111,7 +115,7 @@ def test_login_from_file_then_status_and_logout(tmp_path: Path, fake_keyring) ->
     key.write_text(json.dumps(SA_INFO))
     code, payload = invoke_json("auth", "login", "--file", str(key))
     assert code == 0 and payload["account"] == SA_INFO["client_email"]
-    assert ("gsc:google", "google") in fake_keyring
+    assert SA_SLOT in fake_keyring
 
     _, payload = invoke_json("auth", "status")
     assert (payload["google"], payload["source"]) == ("ok", "keychain")
@@ -137,20 +141,20 @@ def test_login_non_interactive_needs_source() -> None:
 
 def test_login_google_from_env_and_prompt(tmp_path: Path, monkeypatch: pytest.MonkeyPatch, fake_keyring) -> None:
     code, _ = invoke_json("auth", "login", env={"GSC_GOOGLE_SERVICE_ACCOUNT_JSON": json.dumps(SA_INFO)})
-    assert code == 0 and ("gsc:google", "google") in fake_keyring
+    assert code == 0 and SA_SLOT in fake_keyring
     fake_keyring.clear()
     key = tmp_path / "key.json"
     key.write_text(json.dumps(SA_INFO))
     result = invoke("auth", "login", input=f"{key}\n")
-    assert result.exit_code == 0 and ("gsc:google", "google") in fake_keyring
+    assert result.exit_code == 0 and SA_SLOT in fake_keyring
 
 
 def test_login_pagespeed_prompt_and_env(fake_keyring) -> None:
     assert invoke("auth", "login", "--provider", "pagespeed", input="  psi-key \n").exit_code == 0
-    assert json.loads(fake_keyring[("gsc:pagespeed", "pagespeed")]) == {"api_key": "psi-key"}
+    assert fake_keyring[PSI_SLOT] == "psi-key"
     assert gsc.auth_status().pagespeed_key is True
     code, _ = invoke_json("auth", "login", "--provider", "pagespeed", env={"GSC_PAGESPEED_API_KEY": "env-key"})
-    assert code == 0 and json.loads(fake_keyring[("gsc:pagespeed", "pagespeed")]) == {"api_key": "env-key"}
+    assert code == 0 and fake_keyring[PSI_SLOT] == "env-key"
 
 
 def test_env_var_works_when_keyring_is_unavailable(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -173,3 +177,37 @@ def test_doctor_reports_credential_checks(tmp_path: Path, sa_env: dict) -> None:
     assert "credential_store" in checks
     assert checks["credential:google"]["ok"] is True
     assert checks["credential:pagespeed"]["ok"] is False
+
+
+def test_keys_are_shared_with_other_google_tools(fake_keyring) -> None:
+    """Ключ, положенный любым Google-инструментом в общий слот, виден gsc — и наоборот."""
+    from google_oauth import GoogleAuth, Profile
+
+    other = GoogleAuth(Profile(cli_name="other", service="Другой", scopes=("s",)))
+    other.store_service_account(json.dumps(SA_INFO))
+    assert fake_keyring[SA_SLOT] == json.dumps(SA_INFO)
+    assert gsc.auth_status().source == "keychain"
+
+
+@pytest.mark.parametrize(
+    ("var", "value"),
+    [("GOOGLE_PAGESPEED_API_KEY", "legacy"), ("GOOGLE_OAUTH_PAGESPEED_API_KEY", "shared")],
+)
+def test_pagespeed_env_overrides_keychain(fake_keyring, monkeypatch: pytest.MonkeyPatch, var: str, value: str) -> None:
+    fake_keyring[PSI_SLOT] = "stored"
+    monkeypatch.setenv(var, value)
+    assert auth.pagespeed_key() == value
+
+
+def test_revoked_key_via_real_refresh_path(monkeypatch: pytest.MonkeyPatch, sa_env: dict) -> None:
+    """RefreshError google-auth → NotAuthorized из google-oauth = gsc.NotAuthorized (публичный тип не сменился)."""
+    import google.auth.exceptions
+
+    class Revoked:
+        def refresh(self, request) -> None:
+            raise google.auth.exceptions.RefreshError("invalid_grant")
+
+    monkeypatch.setattr(auth, "google_credentials", lambda readonly=True: Revoked())
+    status = gsc.auth_status(check=True)
+    assert status.google == "expired" and "invalid_grant" in (status.detail or "")
+    assert issubclass(gsc.NotAuthorized, gsc.CliError)

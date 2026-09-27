@@ -71,10 +71,17 @@ a **major** release. Rules:
   otherwise. Add a method to both.
 - Quotas are handled here, not by callers: `core/quota.py` (`RateLimiter`,
   `InspectionQuota` — local daily counter in the user state dir).
-- Credentials: `core/auth.py` — service-account JSON (env
-  `GSC_GOOGLE_SERVICE_ACCOUNT_JSON`, legacy `GOOGLE_SERVICE_ACCOUNT_JSON` /
-  `_FILE`, keychain `gsc:google`) and the PSI key (`GSC_PAGESPEED_API_KEY`,
-  legacy `GOOGLE_PAGESPEED_API_KEY`, keychain `gsc:pagespeed`). No `.env`.
+- Credentials come from the shared package **google-oauth** (sibling repo
+  `../google-oauth`, the Google counterpart of yandex-oauth). `core/auth.py`
+  holds gsc's `Profile` + `GOOGLE_AUTH` and thin wrappers that keep the public
+  API; `commands/auth.py` is `make_auth_app(GOOGLE_AUTH, output)`;
+  `credentials/manager.py` re-exports the store (and `keyring` as the test patch
+  target); `CliError` / `InvalidArguments` / `NotAuthorized` are imported from
+  `google_oauth.errors` so `output.guard` catches shared errors. Keychain slot is
+  shared by all Google tools: `google-oauth:service_account` / `default` and
+  `google-oauth:api_key` / `pagespeed`. Env (gsc names first, then shared
+  `GOOGLE_OAUTH_*`) overrides keychain. No `.env`. Change key lookup/storage in
+  google-oauth, not here.
 
 ## Releasing
 

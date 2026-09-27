@@ -32,20 +32,23 @@ uv tool install "git+ssh://git@github.com/bolandeu/google-search-console.git"
 
 1. [Google Cloud Console](https://console.cloud.google.com/iam-admin/serviceaccounts) →
    создать сервисный аккаунт → *Keys → Add key → JSON*; включить *Google Search Console API*.
-2. `gsc auth login --file ~/Downloads/key.json` — JSON ключа кладётся в Keychain (`gsc:google`),
-   файл после этого можно удалить.
+2. `gsc auth login --file ~/Downloads/key.json` — JSON ключа кладётся в Keychain, в общий слот
+   всех Google-инструментов (`google-oauth:service_account`, пакет
+   [google-oauth](https://github.com/bolandeu/google-oauth)); файл после этого можно удалить.
 3. Email аккаунта (выводится командой) добавить в Search Console → *Настройки → Пользователи
    и разрешения* каждого нужного ресурса. Для `submit-sitemap` — с полными правами.
 
 Порядок поиска ключа: `GSC_GOOGLE_SERVICE_ACCOUNT_JSON` → `GOOGLE_SERVICE_ACCOUNT_JSON` →
-`GOOGLE_SERVICE_ACCOUNT_FILE` (путь к файлу) → Keychain.
+`GOOGLE_OAUTH_SERVICE_ACCOUNT_JSON` → `GOOGLE_SERVICE_ACCOUNT_FILE` / `GOOGLE_OAUTH_SERVICE_ACCOUNT_FILE`
+(путь к файлу) → Keychain. Вход общий: ключ, положенный другим Google-инструментом, gsc тоже видит,
+а `gsc auth logout` удаляет его для всех.
 
 **PageSpeed Insights — API-ключ** (без ключа квота Google нулевая).
 
 1. Cloud Console → *APIs & Services → Library* → включить *PageSpeed Insights API*.
 2. *Credentials → Create credentials → API key*; желательно ограничить ключ этим API.
-3. `gsc auth login --provider pagespeed` (спросит скрытым вводом) или env `GSC_PAGESPEED_API_KEY`
-   (старое имя `GOOGLE_PAGESPEED_API_KEY` тоже работает).
+3. `gsc auth login --provider pagespeed` (спросит скрытым вводом; Keychain `google-oauth:api_key`)
+   или env `GSC_PAGESPEED_API_KEY` (а также `GOOGLE_PAGESPEED_API_KEY`, `GOOGLE_OAUTH_PAGESPEED_API_KEY`).
 
 ```bash
 gsc auth status          # что найдено; --check — ещё и спросить у Google, принят ли ключ
