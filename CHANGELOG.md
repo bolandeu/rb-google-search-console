@@ -9,6 +9,15 @@ change adds a fragment to `changelog.d/`
 
 <!-- towncrier release notes start -->
 
+## [0.4.0] - 2026-09-28
+
+### Changed
+
+- **Ломающее.** `gsc auth status [--check] --json` выдаёт отчёт §8 стандарта tools (`tool`, `version`, `checked_at`, `credentials[]` — записи `google` и `pagespeed` с `status`, `source`, `source_ref`, …) вместо плоского `{google, pagespeed_key, account, source, detail}`; нет ключа сервисного аккаунта или ключ негоден — exit 3, `ok: false` и `error` `CREDENTIALS_UNHEALTHY` рядом с отчётом. `--check` проверяет сервисный аккаунт списком ресурсов, а API-ключ PageSpeed — запросом к Chrome UX Report (не дольше 10 с на ключ). Авторизация — `rb-google-oauth` v0.2.0 (пин на тег). Библиотечные `gsc.auth_status()` / `gsc.AuthStatus` не менялись.
+- **Ломающее.** Дистрибутив переименован: `gsc` → `rb-google-search-console` (стандарт tools §10: `gsc` на PyPI — чужой пакет); команда `gsc` и импорт `gsc` не меняются. Потребителям: новое имя в `dependencies` и ключ `[tool.uv.sources]` с пином на тег (`rb-google-search-console = { git = "https://github.com/bolandeu/google-search-console.git", tag = "v0.4.0" }`), в существующем venv — `uv sync --reinstall-package rb-google-search-console`; установленный инструмент — `uv tool uninstall gsc`, затем `uv tool install "rb-google-search-console @ git+https://github.com/bolandeu/google-search-console.git@v0.4.0"`. Установка под старым именем по-прежнему сообщает свою версию.
+- Стандарт релизов tools: версия из git-тега, changelog из фрагментов `changelog.d/`, `scripts/release.py` и хуки из шаблона cli-generator v1.2.10; в `--help` каждой команды — строка `Example:`, текст в квадратных скобках больше не пропадает из справки. `CLI_TOO_OLD` подсказывает `uv tool upgrade rb-google-search-console`; сборка без тега (`0.0.0…`) не проверяется против `cli.min_version`.
+
+
 ## [0.3.0] - 2026-09-27
 
 ### Added
