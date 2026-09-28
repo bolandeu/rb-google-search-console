@@ -108,10 +108,11 @@ def pagespeed(
     runtime_error не пуст — Lighthouse не смог замерить страницу, цифрам не верить.
 
     \b
-    Примеры:
-      gsc pagespeed https://example.com
-      gsc pagespeed https://example.com --strategy desktop -c performance,seo --audits
-      gsc pagespeed https://example.com/a https://example.com/b --json > psi.json
+    Ещё примеры:
+      {cli} pagespeed https://example.com --strategy desktop -c performance,seo --audits
+      {cli} pagespeed https://example.com/a https://example.com/b --json > psi.json
+
+    Example: {cli} pagespeed https://example.com
     """
     if concurrency < 1:
         raise InvalidArguments("--concurrency должен быть ≥ 1.")

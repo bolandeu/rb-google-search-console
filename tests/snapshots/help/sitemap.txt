@@ -1,0 +1,22 @@
+
+ Usage: gsc sitemap [OPTIONS] {feedpath}
+
+ Одна карта сайта: статус обработки, ошибки, даты.
+
+ --json: {"ok": true, "site", "path", "type", "errors", "warnings", "is_pending",
+ "is_sitemaps_index", "last_submitted", "last_downloaded", "contents": [{type, submitted,
+ indexed}]}.
+
+ Example: gsc sitemap -s sc-domain:example.com https://example.com/sitemap.xml
+
+╭─ Аргументы ──────────────────────────────────────────────────────────────────────────────────────╮
+│ *    feedpath      <str>  Полный URL карты сайта. [обязательный]                                 │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Параметры ──────────────────────────────────────────────────────────────────────────────────────╮
+│ --site   -s      <str>  Ресурс Search Console: sc-domain:example.com или https://example.com/.   │
+│                         По умолчанию — site из .gsc/config.toml проекта.                         │
+│ --json                  Машиночитаемый вывод: JSON в stdout.                                     │
+│ --quiet                 Не печатать ничего, кроме данных.                                        │
+│ --help                  Show this message and exit.                                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

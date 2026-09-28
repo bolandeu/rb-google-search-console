@@ -9,21 +9,25 @@
 ## Установка
 
 ```bash
-uv tool install "git+https://github.com/bolandeu/google-search-console.git"
+uv tool install "rb-google-search-console @ git+https://github.com/bolandeu/google-search-console.git"
 ```
 
-Обновление — `uv tool upgrade gsc`, конкретная версия — `...google-search-console.git@v0.2.0`.
+Обновление — `uv tool upgrade rb-google-search-console`, конкретная версия — `…google-search-console.git@vX.Y.Z`.
+Дистрибутив называется `rb-google-search-console` (`gsc` на PyPI — чужой пакет), команда и импорт — `gsc`.
+Стоит старая установка под именем `gsc` — сначала `uv tool uninstall gsc`, иначе два
+инструмента делят одну команду.
 
 **Репозиторий приватный.** `uv` ходит в git так же, как `git clone`. Если установка падает
 с ошибкой авторизации — один раз `gh auth login` (или `gh auth setup-git`, если `gh`
 залогинен через `--with-token`), либо SSH-вариант:
 
 ```bash
-uv tool install "git+ssh://git@github.com/bolandeu/google-search-console.git"
+uv tool install "rb-google-search-console @ git+ssh://git@github.com/bolandeu/google-search-console.git"
 ```
 
 Как зависимость другого проекта (библиотека):
-`uv add "gsc @ git+https://github.com/bolandeu/google-search-console.git"`.
+`uv add "rb-google-search-console @ git+https://github.com/bolandeu/google-search-console.git@vX.Y.Z"` — пин на тег релиза
+(`[tool.uv.sources] rb-google-search-console = { git = "…", tag = "vX.Y.Z" }`, зависимость `rb-google-search-console>=0.4,<0.5`).
 
 ## Доступы
 
@@ -162,9 +166,10 @@ gsc.auth_status()  # AuthStatus(google="ok"|"missing"|"expired", pagespeed_key=b
 
 ```bash
 uv sync
-uv run ruff check . && uv run ruff format --check . && uv run ty check && uv run pytest
-scripts/install_hooks.sh   # pre-commit предупреждает об устаревших docstring команд (это их --help)
-uv run scripts/release.py minor   # релиз: версия, CHANGELOG, тег, push
+uv run scripts/release.py --check   # весь гейт: lock, ruff, ty, pytest, фрагмент, сборка wheel, osv-scanner
+scripts/install_hooks.sh            # pre-commit: docstring команд (это их --help) и фрагмент changelog
+uv run pytest --snapshot-update     # после изменения справки команды — снапшоты tests/snapshots/help/
+uv run scripts/release.py minor     # релиз с main: CHANGELOG из changelog.d/, коммит, тег vX.Y.Z
 ```
 
 Архитектура — шаблон [cli-generator](https://github.com/bolandeu/cli-generator); правила для

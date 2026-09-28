@@ -7,20 +7,31 @@ that).
 ## Development
 
 ```bash
-uv sync                          # also writes uv.lock — commit it (CI runs `uv lock --check`)
+uv sync                          # also writes uv.lock — commit it (the gate runs `uv lock --check`)
 uv run gsc --help
-uv run ruff check . && uv run ruff format --check . && uv run ty check && uv run pytest
+uv run scripts/release.py --check
 ```
 
-Before calling anything done, that last line must pass — it's exactly
-what CI runs on Linux/macOS (Windows is not supported), followed by `uv tool install .` to
-prove the package still installs as a tool.
+Before calling anything done, `release.py --check` must pass — it is the
+authoritative gate (tools/docs/standard-release.md §3): lock, ruff, ty, pytest
+(incl. the `--help` contract and snapshots, the `auth status` shape), the
+`[[tool.rb.external]]` check, a changelog fragment, a wheel build + install +
+`gsc --version`, osv-scanner. There is no GitHub CI: rb-google-oauth is a
+private dependency and the repo has no read-token secret (standard §9).
 
-Run `scripts/install_hooks.sh` once (`.git/hooks/` isn't versioned by git,
-so this is also needed again after a fresh clone). It installs a
-pre-commit hook that warns — never blocks — when a command's logic changed
-without its docstring changing too, since that docstring is the `--help`
-text agents read as this CLI's API contract.
+Run `scripts/install_hooks.sh` once (`core.hooksPath` → `.githooks/`; the
+Claude Code SessionStart hook does it too). The pre-commit hook **blocks** a
+commit where a command's logic changed without its docstring (the `--help`
+text agents read as this CLI's API contract), and warns when `src/` changed
+without a changelog fragment. After changing any help text:
+`uv run pytest --snapshot-update` and review `tests/snapshots/help/`.
+
+Distribution name is `rb-google-search-console` (`_distribution.DIST_NAME`,
+standard §10); the command and the import package stay `gsc`.
+`DIST_NAME_LEGACY = "gsc"` lets an install made under the old name still
+report its version. In an old dev venv run `uv sync --reinstall-package
+rb-google-search-console` once — otherwise the rename removes `.venv/bin/gsc`
+and `uv run gsc` silently runs another `gsc` from PATH.
 
 ## Architecture (do not violate)
 
@@ -76,10 +87,15 @@ a **major** release. Rules:
   otherwise. Add a method to both.
 - Quotas are handled here, not by callers: `core/quota.py` (`RateLimiter`,
   `InspectionQuota` — local daily counter in the user state dir).
-- Credentials come from the shared package **google-oauth** (sibling repo
+- Credentials come from the shared package **rb-google-oauth** (import
+  `google_oauth`, pinned to a release tag in `[tool.uv.sources]`; sibling repo
   `../google-oauth`, the Google counterpart of yandex-oauth). `core/auth.py`
   holds gsc's `Profile` + `GOOGLE_AUTH` and thin wrappers that keep the public
-  API; `commands/auth.py` is `make_auth_app(GOOGLE_AUTH, output)`;
+  API; `commands/auth.py` is `make_auth_app(GOOGLE_AUTH, output, check=…, api_key_checks=…)`
+  — `auth status [--check] --json` is the standard §8 report (shape tested in
+  `tests/test_auth.py`; changing it is a breaking change); `--check` probes
+  `sites` with the service account and CrUX `queryRecord` with the PSI key
+  (PSI itself runs Lighthouse for 10–60 s);
   `credentials/manager.py` re-exports the store (and `keyring` as the test patch
   target); `CliError` / `InvalidArguments` / `NotAuthorized` are imported from
   `google_oauth.errors` so `output.guard` catches shared errors. Keychain slot is
@@ -90,13 +106,16 @@ a **major** release. Rules:
 
 ## Releasing
 
-Never edit `version =` in `pyproject.toml` by hand. Add a line under
-`## [Unreleased]` in `CHANGELOG.md` with each change, and when it should
-ship run `uv run scripts/release.py patch|minor|major` from a clean
-`main` — it bumps the version, dates the changelog, commits, tags
-`v<version>` and pushes. Projects pin the CLI they need via
-`[cli] min_version` in their config, so a change a project depends on
-needs a release before that project can require it.
+Version comes from the git tag (`vX.Y.Z`, uv-dynamic-versioning) — there is
+no `version =` line. Never edit `CHANGELOG.md` between releases: each change
+with a user-visible effect adds a fragment
+(`uv run towncrier create +<slug>.<type>.md -c "…"`, types: added, changed,
+deprecated, removed, fixed, security). Release from a clean, pushed `main`:
+`uv run scripts/release.py patch|minor|major` (at 0.x: patch — fixes and
+features, minor — anything breaking on the public surface) runs the gate,
+assembles the changelog, commits and tags; push with `git push --follow-tags`.
+Projects pin the CLI they need via `[cli] min_version` in their config, so a
+change a project depends on needs a release before that project can require it.
 
 ## After changing the command surface
 

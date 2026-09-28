@@ -1,0 +1,28 @@
+
+ Usage: gsc submit-sitemap [OPTIONS] {feedpath}
+
+ Отправить карту сайта в Search Console (Google поставит её в очередь на обработку).
+
+ Меняет состояние ресурса в Google (повторная отправка безвредна); --dry-run —
+ только показать, что будет отправлено. Нужны права siteOwner/siteFullUser.
+
+ --json: {"ok": true, "site", "sitemap", "submitted": true | false, "dry_run"}.
+
+
+ Ещё примеры:
+   gsc submit-sitemap -s sc-domain:example.com https://example.com/sitemap.xml
+
+ Example: gsc submit-sitemap -s sc-domain:example.com https://example.com/sitemap.xml --dry-run
+
+╭─ Аргументы ──────────────────────────────────────────────────────────────────────────────────────╮
+│ *    feedpath      <str>  Полный URL карты сайта. [обязательный]                                 │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Параметры ──────────────────────────────────────────────────────────────────────────────────────╮
+│ --site     -s      <str>  Ресурс Search Console: sc-domain:example.com или https://example.com/. │
+│                           По умолчанию — site из .gsc/config.toml проекта.                       │
+│ --dry-run                 Показать, что будет сделано, ничего не меняя.                          │
+│ --json                    Машиночитаемый вывод: JSON в stdout.                                   │
+│ --quiet                   Не печатать ничего, кроме данных.                                      │
+│ --help                    Show this message and exit.                                            │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

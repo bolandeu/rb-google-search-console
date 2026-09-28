@@ -1,0 +1,37 @@
+
+ Usage: gsc crux [OPTIONS] [url]
+
+ Chrome UX Report: реальные посетители Chrome — Core Web Vitals, доли хороших визитов, история.
+
+ Данные только у страниц и сайтов с заметным трафиком из Chrome; нет данных —
+ "record": null (exit 0). Кроме LCP/INP/CLS/FCP/TTFB: фазы LCP (TTFB, задержка и
+ длительность загрузки, отрисовка), round_trip_time, доли устройств (form_factors).
+ Ключ — тот же, что у PageSpeed, с включённым Chrome UX Report API. Квота 150/мин.
+
+ --json: {"ok": true, "record": {url, origin, form_factor, period: {first_date,
+ last_date}, metrics: {имя: {p75, good, needs_improvement, poor, fractions}}} | null};
+ с --history: {"ok": true, "history": {url, origin, form_factor, periods: [...],
+ metrics: {имя: {p75: [...], good: [...], needs_improvement: [...], poor: [...],
+ fractions}}} | null} — ряды от старых недель к новым.
+
+
+ Ещё примеры:
+   gsc crux https://example.com/ --form-factor phone
+   gsc crux --origin https://example.com --history --periods 40 --json
+
+ Example: gsc crux --origin https://example.com
+
+╭─ Аргументы ──────────────────────────────────────────────────────────────────────────────────────╮
+│   url      <str>  URL страницы (или --origin для сайта целиком).                                 │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Параметры ──────────────────────────────────────────────────────────────────────────────────────╮
+│ --origin             <str>  Сайт целиком: https://example.com (без пути).                        │
+│ --form-factor        <str>  phone, desktop или tablet; по умолчанию — все устройства вместе.     │
+│ --history                   История по неделям вместо последних 28 дней.                         │
+│ --periods            <int>  С --history: сколько недель (1–40). [по умолчанию: 25]               │
+│ --metrics            <str>  Только эти метрики CrUX через запятую (largest_contentful_paint, …). │
+│ --json                      Машиночитаемый вывод: JSON в stdout.                                 │
+│ --quiet                     Не печатать ничего, кроме данных.                                    │
+│ --help                      Show this message and exit.                                          │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

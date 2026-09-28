@@ -54,6 +54,8 @@ def doctor(
     результат это сам отчёт; `healthy` говорит, прошли ли все проверки.
 
     --json: {"ok": true, "healthy", "checks": [{name, ok, detail}]}.
+
+    Example: {cli} doctor --json
     """
     checks: list[dict] = [{"name": "python", "ok": True}]
     checks.append({"name": "cli_version", "ok": True, "detail": installed_version() or DEV_VERSION})

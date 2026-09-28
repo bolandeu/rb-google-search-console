@@ -20,7 +20,10 @@ def init(
     quiet: bool = output.QuietOption,
     verbose: bool = output.VerboseOption,
 ) -> None:
-    """Создать проект в папке: .gsc/config.toml с ресурсом по умолчанию (--site) и min_version."""
+    """Создать проект в папке: .gsc/config.toml с ресурсом по умолчанию (--site) и min_version.
+
+    Example: {cli} init --site sc-domain:example.com
+    """
     target = Path(ctx.obj.get("project") or Path.cwd()).resolve()
 
     if not force and services.find_project_root(target) == target:

@@ -8,13 +8,13 @@ from typing import Any
 import httpx
 
 from ..core.errors import AuthRequired, CliError, ProviderError
-from ..core.version import DEV_VERSION, installed_version
+from ..core.version import DEV_VERSION, cli_name, installed_version
 
-_PACKAGE_NAME = __name__.split(".")[0]
 log = logging.getLogger(__name__)
 
 # Responses worth retrying: the server said "not now", not "no".
 _RETRY_STATUSES = frozenset({429, 502, 503, 504})
+PROBE_TIMEOUT = 10.0  # auth status --check budget per provider (standard §8), as the httpx timeout
 
 
 class HttpProvider:
@@ -55,7 +55,7 @@ class HttpProvider:
 
     @functools.cached_property
     def client(self) -> httpx.Client:
-        user_agent = f"{_PACKAGE_NAME}/{installed_version() or DEV_VERSION}"
+        user_agent = f"{cli_name()}/{installed_version() or DEV_VERSION}"
         return httpx.Client(
             base_url=self.base_url,
             timeout=self.timeout,
@@ -90,6 +90,17 @@ class HttpProvider:
             if response.is_error:
                 raise self.error_for(response, f"{method} {path}")
             return response
+
+    def probe(self, path: str, method: str = "GET", **kwargs: Any) -> httpx.Response:
+        """One attempt, at most `PROBE_TIMEOUT` seconds, no retries — for `auth status --check`.
+
+        Same error mapping as `request()` (`error_for`).
+        """
+        retries, self.retries = self.retries, 0
+        try:
+            return self.request(method, path, timeout=PROBE_TIMEOUT, **kwargs)
+        finally:
+            self.retries = retries
 
     def should_retry(self, response: httpx.Response) -> bool:
         """Whether a 429/5xx is worth retrying. Override to say no, e.g. to an exhausted *daily* quota."""

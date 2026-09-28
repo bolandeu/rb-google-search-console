@@ -1,0 +1,35 @@
+
+ Usage: gsc inspect [OPTIONS] {urls}...
+
+ Инспекция URL: индексация, покрытие, canonical, robots.txt, карты сайта, расширенные результаты.
+
+ Квота Google: 2000 инспекций в сутки и 600 в минуту на ресурс; темп gsc держит
+ сам. Ошибка по одному URL не останавливает остальные. Кончилась дневная квота —
+ то, что успели, всё равно выводится, с "quota_exhausted": true (если не успели
+ ничего — PROVIDER_ERROR, exit 5).
+
+ --json: {"ok": true, "site", "count", "results": [{url, verdict, coverage_state,
+ indexing_state, robots_txt_state, page_fetch_state, last_crawl_time, crawled_as,
+ google_canonical, user_canonical, sitemaps, referring_urls, rich_results, …} |
+ {url, code, message, status}], "quota_remaining", "quota_exhausted"}.
+
+
+ Ещё примеры:
+   gsc inspect -s sc-domain:example.com https://example.com/a https://example.com/b --json
+
+ Example: gsc inspect -s sc-domain:example.com https://example.com/page
+
+╭─ Аргументы ──────────────────────────────────────────────────────────────────────────────────────╮
+│ *    urls      <str>  Один или несколько URL внутри ресурса. [обязательный]                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Параметры ──────────────────────────────────────────────────────────────────────────────────────╮
+│ --site      -s      <str>  Ресурс Search Console: sc-domain:example.com или                      │
+│                            https://example.com/. По умолчанию — site из .gsc/config.toml         │
+│                            проекта.                                                              │
+│ --language          <str>  Язык сообщений об ошибках Google (ru, en, …). [по умолчанию: ru]      │
+│ --raw                      В --json добавить исходный ответ Google (raw).                        │
+│ --json                     Машиночитаемый вывод: JSON в stdout.                                  │
+│ --quiet                    Не печатать ничего, кроме данных.                                     │
+│ --help                     Show this message and exit.                                           │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

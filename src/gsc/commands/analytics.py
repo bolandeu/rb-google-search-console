@@ -61,13 +61,14 @@ def analytics(
     position}]}; first_incomplete_date — с какой даты данные неполные (при --data-state all).
 
     \b
-    Примеры:
-      gsc analytics -s sc-domain:example.com
-      gsc analytics -s sc-domain:example.com -d page,query --limit 100
-      gsc analytics -s sc-domain:example.com -d page --limit 0 --json > pages.json
-      gsc analytics -s sc-domain:example.com --start-date 2026-01-01 --end-date 2026-01-31
-      gsc analytics -s sc-domain:example.com -d page,query -f page:contains:/blog/ -f country:equals:rus
-      gsc analytics -s sc-domain:example.com -d page,query --by-day --limit 0 --json > full.json
+    Ещё примеры:
+      {cli} analytics -s sc-domain:example.com -d page,query --limit 100
+      {cli} analytics -s sc-domain:example.com -d page --limit 0 --json > pages.json
+      {cli} analytics -s sc-domain:example.com --start-date 2026-01-01 --end-date 2026-01-31
+      {cli} analytics -s sc-domain:example.com -d page,query -f page:contains:/blog/ -f country:equals:rus
+      {cli} analytics -s sc-domain:example.com -d page,query --by-day --limit 0 --json > full.json
+
+    Example: {cli} analytics -s sc-domain:example.com
     """
     site = resolve_site(ctx, site_url)
     dims = services.split_list(dimensions)

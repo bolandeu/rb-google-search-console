@@ -1,0 +1,25 @@
+
+ Usage: gsc sites [OPTIONS]
+
+ Ресурсы Search Console, доступные сервисному аккаунту.
+
+ С --for URL — какой ресурс покрывает URL: доменный (sc-domain:) предпочтительнее,
+ среди URL-prefix — самый длинный подходящий; нет такого → "site": null.
+
+ --json: {"ok": true, "count": N, "sites": [{site_url, permission_level, kind}]};
+ с --for: {"ok": true, "url": …, "site": "sc-domain:…" | null}.
+
+
+ Ещё примеры:
+   gsc sites --for https://blog.example.com/post --json
+
+ Example: gsc sites
+
+╭─ Параметры ──────────────────────────────────────────────────────────────────────────────────────╮
+│ --for          <str>  Показать только ресурс, который покрывает этот URL (доменный важнее        │
+│                       URL-prefix).                                                               │
+│ --json                Машиночитаемый вывод: JSON в stdout.                                       │
+│ --quiet               Не печатать ничего, кроме данных.                                          │
+│ --help                Show this message and exit.                                                │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

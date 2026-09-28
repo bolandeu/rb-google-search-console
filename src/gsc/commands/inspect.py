@@ -60,9 +60,10 @@ def inspect(
     {url, code, message, status}], "quota_remaining", "quota_exhausted"}.
 
     \b
-    Примеры:
-      gsc inspect -s sc-domain:example.com https://example.com/page
-      gsc inspect -s sc-domain:example.com https://example.com/a https://example.com/b --json
+    Ещё примеры:
+      {cli} inspect -s sc-domain:example.com https://example.com/a https://example.com/b --json
+
+    Example: {cli} inspect -s sc-domain:example.com https://example.com/page
     """
     site = resolve_site(ctx, site_url)
     client = services.search_console()

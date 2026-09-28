@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import subprocess
 import sys
+from collections.abc import Callable
 from pathlib import Path
 
 import httpx
@@ -117,12 +118,13 @@ def test_login_from_file_then_status_and_logout(tmp_path: Path, fake_keyring) ->
     assert code == 0 and payload["account"] == SA_INFO["client_email"]
     assert SA_SLOT in fake_keyring
 
-    _, payload = invoke_json("auth", "status")
-    assert (payload["google"], payload["source"]) == ("ok", "keychain")
+    code, payload = invoke_json("auth", "status")
+    google = _entries(payload)["google"]
+    assert code == 0 and (google["status"], google["source"]) == ("unchecked", "keychain")
 
     assert invoke("auth", "logout").exit_code == 0
-    _, payload = invoke_json("auth", "status")
-    assert payload["google"] == "missing"
+    code, payload = invoke_json("auth", "status")
+    assert code == 3 and _entries(payload)["google"]["status"] == "missing"
 
 
 def test_login_rejects_non_service_account_file(tmp_path: Path) -> None:
@@ -168,7 +170,98 @@ def test_env_var_works_when_keyring_is_unavailable(monkeypatch: pytest.MonkeyPat
 
 def test_human_auth_status(sa_env: dict) -> None:
     result = invoke("auth", "status")
-    assert result.exit_code == 0 and SA_INFO["client_email"] in result.stdout
+    assert result.exit_code == 0
+    assert "google: unchecked (env: GSC_GOOGLE_SERVICE_ACCOUNT_JSON)" in result.stdout
+    assert "pagespeed: missing" in result.stdout
+
+
+# --- auth status: контракт §8 стандарта tools ----------------------------------------------
+
+REPORT_KEYS = {"ok", "tool", "version", "checked_at", "credentials"}
+ENTRY_KEYS = {"provider", "required", "fields", "source", "source_ref", "status", "expires_at", "quota", "message"}
+
+
+def _entries(payload: dict) -> dict[str, dict]:
+    return {entry["provider"]: entry for entry in payload["credentials"]}
+
+
+def test_auth_status_report_shape(sa_env: dict) -> None:
+    code, payload = invoke_json("auth", "status")
+    assert code == 0 and set(payload) == REPORT_KEYS and payload["ok"] is True
+    assert payload["tool"] == "gsc"
+    entries = _entries(payload)
+    assert set(entries) == {"google", "pagespeed"}
+    for entry in entries.values():
+        assert set(entry) == ENTRY_KEYS
+    assert (entries["google"]["required"], entries["pagespeed"]["required"]) == (True, False)
+    assert entries["google"]["source_ref"] == "GSC_GOOGLE_SERVICE_ACCOUNT_JSON"
+    assert SA_INFO["private_key"] not in json.dumps(payload)  # значений секретов в отчёте нет
+
+
+def test_auth_status_missing_required_is_exit_3() -> None:
+    code, payload = invoke_json("auth", "status")
+    assert code == 3 and payload["ok"] is False
+    assert payload["error"]["code"] == "CREDENTIALS_UNHEALTHY"
+    assert _entries(payload)["google"]["status"] == "missing"  # отчёт — рядом с ошибкой
+
+
+@pytest.fixture
+def mock_api(monkeypatch: pytest.MonkeyPatch, no_token_exchange: None):
+    """HTTP проверок `auth status --check`: handler(request) → Response; токен Google — фиктивный."""
+    from gsc.commands import auth as auth_command
+    from gsc.providers.google import CruxProvider, SearchConsoleProvider
+
+    handlers: dict[str, Callable[[httpx.Request], httpx.Response]] = {}
+
+    def transport() -> httpx.MockTransport:
+        return httpx.MockTransport(lambda request: handlers["handler"](request))
+
+    monkeypatch.setattr(auth.GOOGLE_AUTH, "refresh", lambda creds: "test-token")
+    monkeypatch.setattr(auth.GOOGLE_AUTH, "credentials", lambda scopes=None: object())
+    monkeypatch.setattr(auth_command, "SearchConsoleProvider", lambda: SearchConsoleProvider(transport=transport()))
+    monkeypatch.setattr(auth_command, "CruxProvider", lambda: CruxProvider(transport=transport()))
+    return handlers
+
+
+def test_auth_status_check_ok(mock_api: dict, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("GSC_PAGESPEED_API_KEY", "psi-key")
+    seen: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        seen.append(request.url.path)
+        return json_response(404 if "records" in request.url.path else 200, {})  # CrUX: нет данных — ключ принят
+
+    mock_api["handler"] = handler
+    code, payload = invoke_json("auth", "status", "--check")
+    entries = _entries(payload)
+    assert code == 0 and (entries["google"]["status"], entries["pagespeed"]["status"]) == ("ok", "ok")
+    assert seen == ["/webmasters/v3/sites", "/v1/records:queryRecord"]
+
+
+def test_auth_status_check_invalid_key_is_exit_3(mock_api: dict, monkeypatch: pytest.MonkeyPatch) -> None:
+    from .conftest import google_error
+
+    monkeypatch.setenv("GSC_PAGESPEED_API_KEY", "bad-key")
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if "records" in request.url.path:
+            return google_error(400, "API key not valid", "API_KEY_INVALID")
+        return json_response(200, {})
+
+    mock_api["handler"] = handler
+    code, payload = invoke_json("auth", "status", "--check")
+    entries = _entries(payload)
+    assert code == 3 and entries["pagespeed"]["status"] == "invalid" and entries["google"]["status"] == "ok"
+    assert "bad-key" not in json.dumps(payload)
+
+
+def test_auth_status_check_unreachable_optional_key_is_healthy(mock_api: dict, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("GSC_PAGESPEED_API_KEY", "psi-key")
+    mock_api["handler"] = lambda request: (
+        httpx.Response(503) if "records" in request.url.path else json_response(200, {})
+    )
+    code, payload = invoke_json("auth", "status", "--check")
+    assert code == 0 and _entries(payload)["pagespeed"]["status"] == "unreachable"
 
 
 def test_doctor_reports_credential_checks(tmp_path: Path, sa_env: dict) -> None:

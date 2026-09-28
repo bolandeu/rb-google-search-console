@@ -1,6 +1,7 @@
 [project]
-name = "gsc"
-version = "0.3.0"
+name = "rb-google-search-console"  # стандарт §10 (`gsc` на PyPI занят); команда `gsc` и пакет `gsc` — прежние
+# Версия — из git-тега vX.Y.Z (uv-dynamic-versioning); строку `version =` не добавлять.
+dynamic = ["version"]
 description = "Google Search Console и PageSpeed Insights: библиотека gsc и CLI — ресурсы, поисковая аналитика, инспекция URL, карты сайта, скорость страниц"
 readme = "README.md"
 authors = [{ name = "bolandeu" }]
@@ -13,7 +14,7 @@ dependencies = [
     "tomli-w>=1.0",
     "httpx>=0.27",
     "packaging>=24.0",
-    "google-oauth",
+    "rb-google-oauth>=0.2,<0.3",  # на 0.x минорная версия ломающая
 ]
 
 [project.scripts]
@@ -22,17 +23,29 @@ gsc = "gsc.cli:main"
 [project.urls]
 Repository = "https://github.com/bolandeu/google-search-console"
 
-# google-oauth — общая авторизация Google для всех инструментов (ключи в общем слоте keychain).
+# rb-google-oauth — общая авторизация Google для всех инструментов (ключи в общем слоте keychain).
 # git, а не path: uv учитывает [tool.uv.sources] корневого пакета при `uv tool install git+…`,
-# и относительный путь на другой машине не существует. Версия зафиксирована в uv.lock;
-# подтянуть свежий коммит: `uv lock --upgrade-package google-oauth`. Для правок в соседней
-# папке во время разработки: `uv pip install -e ../google-oauth` (до следующего `uv sync`).
+# и относительный путь на другой машине не существует. Закреплён релизный тег; переход на новый:
+# `tag = "vNEW"` + `uv lock --upgrade-package rb-google-oauth` + гейт, одним коммитом.
+# Для правок в соседней папке во время разработки: `uv pip install -e ../google-oauth`, без коммита.
 [tool.uv.sources]
-google-oauth = { git = "https://github.com/bolandeu/google-oauth.git" }
+rb-google-oauth = { git = "https://github.com/bolandeu/google-oauth.git", tag = "v0.2.0" }
 
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "uv-dynamic-versioning"]
 build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "uv-dynamic-versioning"
+
+[tool.uv-dynamic-versioning]
+vcs = "git"
+style = "pep440"
+fallback-version = "0.0.0"
+
+[tool.uv]
+# Rebuild the editable install when a commit or tag moves, so `--version` follows the tag.
+cache-keys = [{ file = "pyproject.toml" }, { git = { commit = true, tags = true } }]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/gsc"]
@@ -42,11 +55,79 @@ dev = [
     "pytest>=8.0",
     "pytest-cov>=5.0",
     "ruff>=0.6",
+    "syrupy>=4.8",
+    "towncrier>=24.8",
     "ty>=0.0.80",
 ]
 
+# Changelog from fragments: each change adds changelog.d/+<slug>.<type>.md
+# (`uv run towncrier create +<slug>.<type>.md -c "..."`); scripts/release.py assembles them.
+[tool.towncrier]
+filename = "CHANGELOG.md"
+directory = "changelog.d"
+start_string = "<!-- towncrier release notes start -->\n"
+title_format = "## [{version}] - {project_date}"
+issue_format = "#{issue}"
+
+[[tool.towncrier.type]]
+directory = "added"
+name = "Added"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "changed"
+name = "Changed"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "deprecated"
+name = "Deprecated"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "removed"
+name = "Removed"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "fixed"
+name = "Fixed"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "security"
+name = "Security"
+showcontent = true
+
+# External (non-Python) dependencies — every CLI this tool runs (require_cli,
+# shutil.which, subprocess with a literal program, npx). The gate checks this
+# list against the code both ways; doctor and require_cli read it at runtime;
+# the tools/ root builds docs/external-deps.md from it (standard §12). gsc runs no external programs.
+# [[tool.rb.external]]
+# name = "ffmpeg"
+# required = true               # false: the tool works without it (doctor stays healthy)
+# min_version = "6.0"           # optional
+# check = "ffmpeg -version"     # prints the version; default "<name> --version"
+# why = "transcodes the downloaded videos"
+# detect = false                # run via an injected runner / absolute path the gate can't see
+# dist = "rb-serp"              # for one of our CLIs: its distribution (default rb-<name>)
+# url = "https://github.com/bolandeu/serp"  # its repo: DEPENDENCY_TOO_OLD then prints a pinned install
+
+[tool.cli-generator]
+# Where scripts/check_command_docstrings.py (git pre-commit + Claude Code hooks)
+# looks for commands: a glob or a list of globs, relative to the repo root.
+commands = ["src/gsc/commands/*.py"]
+# scripts/release.py: extras to install before ruff/ty/pytest in the gate, and
+# the release commit message (e.g. for Conventional Commits hooks).
+# gate_extras = ["browser"]
+# release_commit = "chore(release): v{version}"
+
 [tool.pytest.ini_options]
 addopts = "--cov --cov-report=term-missing:skip-covered"
+# tests/test_help.py keeps help snapshots at tests/snapshots/help/<command>.txt
+# (standard §7), not in syrupy's own `__snapshots__/<test file>/` layout, so
+# syrupy warns it "can not relate" each file to its test. It can — by name.
+filterwarnings = ["ignore:(?s).*Can not relate snapshot:UserWarning"]
 
 [tool.coverage.run]
 source = ["src"]
@@ -55,6 +136,12 @@ source = ["src"]
 # Сейчас ~97%; планку не опускать — новая команда без тестов должна падать здесь.
 fail_under = 95
 show_missing = true
+
+[tool.ty.terminal]
+# Only errors fail the gate; recent ty (>= 0.0.84) otherwise exits 1 on warnings too.
+# Legacy code that can't be fixed yet: downgrade specific rules instead of
+# ignoring them, e.g. [tool.ty.rules] possibly-unbound-attribute = "warn".
+error-on-warning = false
 
 [tool.ruff]
 line-length = 120

@@ -1,0 +1,52 @@
+
+ Usage: gsc analytics [OPTIONS]
+
+ Поисковая аналитика: клики, показы, CTR, средняя позиция по срезам.
+
+ Период по умолчанию — последние 28 дней, заканчивая 3 днями раньше сегодня
+ (данные Search Console приходят с задержкой). URL в ответе — как их отдаёт Google.
+
+ Google отдаёт не больше ~50 000 строк на запрос — для полного page×query на
+ большом сайте нужен --by-day (строки тогда по дням, в keys есть date).
+
+ --json: {"ok": true, "site", "start_date", "end_date", "dimensions", "count",
+ "first_incomplete_date", "rows": [{keys: {срез: значение}, clicks, impressions, ctr,
+ position}]}; first_incomplete_date — с какой даты данные неполные (при --data-state all).
+
+
+ Ещё примеры:
+   gsc analytics -s sc-domain:example.com -d page,query --limit 100
+   gsc analytics -s sc-domain:example.com -d page --limit 0 --json > pages.json
+   gsc analytics -s sc-domain:example.com --start-date 2026-01-01 --end-date 2026-01-31
+   gsc analytics -s sc-domain:example.com -d page,query -f page:contains:/blog/ -f
+ country:equals:rus
+   gsc analytics -s sc-domain:example.com -d page,query --by-day --limit 0 --json > full.json
+
+ Example: gsc analytics -s sc-domain:example.com
+
+╭─ Параметры ──────────────────────────────────────────────────────────────────────────────────────╮
+│ --site         -s      <str>  Ресурс Search Console: sc-domain:example.com или                   │
+│                               https://example.com/. По умолчанию — site из .gsc/config.toml      │
+│                               проекта.                                                           │
+│ --start-date           <str>  Начало периода YYYY-MM-DD.                                         │
+│ --end-date             <str>  Конец периода YYYY-MM-DD.                                          │
+│ --dimensions   -d      <str>  Срезы через запятую: query, page, device, country, date, hour,     │
+│                               searchAppearance.                                                  │
+│                               [по умолчанию: query]                                              │
+│ --search-type          <str>  web, image, video, news, discover, googleNews. [по умолчанию: web] │
+│ --data-state           <str>  final — только устоявшиеся данные; all — со свежими; hourly_all —  │
+│                               почасовые (со срезом hour).                                        │
+│                               [по умолчанию: final]                                              │
+│ --filter       -f      <str>  Фильтр СРЕЗ:ОПЕРАТОР:ВЫРАЖЕНИЕ, можно повторять (все условия       │
+│                               сразу). Операторы: equals, notEquals, contains, notContains,       │
+│                               includingRegex, excludingRegex. Пример: page:contains:/blog/.      │
+│ --aggregation          <str>  Как считать клики/показы: byPage — по страницам, byProperty — по   │
+│                               сайту; по умолчанию решает Google.                                 │
+│ --by-day                      Отдельный запрос на каждый день: обходит предел Google ~50 000     │
+│                               строк на запрос; строки подневные.                                 │
+│ --limit        -n      <int>  Сколько строк; 0 — все (постранично по 25 000). [по умолчанию: 25] │
+│ --json                        Машиночитаемый вывод: JSON в stdout.                               │
+│ --quiet                       Не печатать ничего, кроме данных.                                  │
+│ --help                        Show this message and exit.                                        │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

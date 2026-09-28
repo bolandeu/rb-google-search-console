@@ -107,10 +107,11 @@ def crux(
     fractions}}} | null} — ряды от старых недель к новым.
 
     \b
-    Примеры:
-      gsc crux --origin https://example.com
-      gsc crux https://example.com/ --form-factor phone
-      gsc crux --origin https://example.com --history --periods 40 --json
+    Ещё примеры:
+      {cli} crux https://example.com/ --form-factor phone
+      {cli} crux --origin https://example.com --history --periods 40 --json
+
+    Example: {cli} crux --origin https://example.com
     """
     if (url is None) == (origin is None):
         raise InvalidArguments("Укажите URL или --origin (что-то одно).")

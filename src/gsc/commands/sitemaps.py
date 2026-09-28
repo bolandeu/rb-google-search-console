@@ -21,9 +21,7 @@ def sitemaps(
     is_pending, is_sitemaps_index, last_submitted, last_downloaded, contents: [{type,
     submitted, indexed}]}]}; contents — сколько URL каждого типа (web, image, video) в карте.
 
-    \b
-    Пример:
-      gsc sitemaps -s sc-domain:example.com
+    Example: {cli} sitemaps -s sc-domain:example.com
     """
     site = resolve_site(ctx, site_url)
     items = services.search_console().list_sitemaps(site)
@@ -62,9 +60,7 @@ def sitemap(
     --json: {"ok": true, "site", "path", "type", "errors", "warnings", "is_pending",
     "is_sitemaps_index", "last_submitted", "last_downloaded", "contents": [{type, submitted, indexed}]}.
 
-    \b
-    Пример:
-      gsc sitemap -s sc-domain:example.com https://example.com/sitemap.xml
+    Example: {cli} sitemap -s sc-domain:example.com https://example.com/sitemap.xml
     """
     site = resolve_site(ctx, site_url)
     item = services.search_console().get_sitemap(site, feedpath)
@@ -104,9 +100,10 @@ def submit_sitemap(
     --json: {"ok": true, "site", "sitemap", "submitted": true | false, "dry_run"}.
 
     \b
-    Примеры:
-      gsc submit-sitemap -s sc-domain:example.com https://example.com/sitemap.xml --dry-run
-      gsc submit-sitemap -s sc-domain:example.com https://example.com/sitemap.xml
+    Ещё примеры:
+      {cli} submit-sitemap -s sc-domain:example.com https://example.com/sitemap.xml
+
+    Example: {cli} submit-sitemap -s sc-domain:example.com https://example.com/sitemap.xml --dry-run
     """
     site = resolve_site(ctx, site_url)
     dry = output.is_dry_run(ctx)  # guard уже слил локальный --dry-run в ctx

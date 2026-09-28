@@ -15,7 +15,10 @@ def status(
     quiet: bool = output.QuietOption,
     verbose: bool = output.VerboseOption,
 ) -> None:
-    """Показать проект: имя, путь, ресурс Search Console по умолчанию."""
+    """Показать проект: имя, путь, ресурс Search Console по умолчанию.
+
+    Example: {cli} status --json
+    """
     start = Path(ctx.obj.get("project") or Path.cwd())
     root = services.require_project_root(start)
     output.vecho(ctx, f"Resolved project root: {root}")

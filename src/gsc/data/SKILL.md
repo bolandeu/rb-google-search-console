@@ -13,10 +13,10 @@ description: Данные Google Search Console (ресурсы, поисков�
 ## Установка (если `gsc --version` не работает)
 
 ```bash
-uv tool install "git+https://github.com/bolandeu/google-search-console.git"
+uv tool install "rb-google-search-console @ git+https://github.com/bolandeu/google-search-console.git"
 ```
 
-macOS и Linux; обновление — `uv tool upgrade gsc`. Не запускать из
+macOS и Linux; обновление — `uv tool upgrade rb-google-search-console`. Не запускать из
 исходников, если не просили разрабатывать сам CLI.
 
 Репозиторий приватный. При ошибке авторизации (`Authentication failed`,
@@ -26,7 +26,7 @@ macOS и Linux; обновление — `uv tool upgrade gsc`. Не запус�
 SSH-ключами работает и так:
 
 ```bash
-uv tool install "git+ssh://git@github.com/bolandeu/google-search-console.git"
+uv tool install "rb-google-search-console @ git+ssh://git@github.com/bolandeu/google-search-console.git"
 ```
 
 ## Правила
@@ -64,7 +64,8 @@ uv tool install "git+ssh://git@github.com/bolandeu/google-search-console.git"
   pagespeed`, env `GSC_PAGESPEED_API_KEY`); без ключа квота Google нулевая; для
   CrUX в проекте ключа должен быть включён Chrome UX Report API (иначе exit 3
   с подсказкой). Проверка —
-  `gsc auth status --json`. Никогда не просить пользователя вставить секрет
+  `gsc auth status --json` (exit 3 — обязательного ключа нет или он негоден;
+  отчёт в `credentials[]`). Никогда не просить пользователя вставить секрет
   в командную строку.
 - **Команды, меняющие состояние в Google** — те, у которых в `--help` есть
   `--dry-run` (сейчас `submit-sitemap`; повторная отправка безвредна). Сначала
@@ -87,6 +88,6 @@ uv tool install "git+ssh://git@github.com/bolandeu/google-search-console.git"
     3  нужны доступы              → gsc auth login …
     4  проект не создан           → gsc init
     5  сбой API Google (сеть, 5xx, квота — повторы уже были) → позже; при daily: true — после сброса квоты
-    6  CLI старее, чем нужно проекту → uv tool upgrade gsc
+    6  CLI старее, чем нужно проекту → uv tool upgrade rb-google-search-console
 
 Автоматически повторять имеет смысл только код 5 без `daily: true`.

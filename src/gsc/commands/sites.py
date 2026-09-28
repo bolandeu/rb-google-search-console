@@ -26,9 +26,10 @@ def sites(
     с --for: {"ok": true, "url": …, "site": "sc-domain:…" | null}.
 
     \b
-    Примеры:
-      gsc sites
-      gsc sites --for https://blog.example.com/post --json
+    Ещё примеры:
+      {cli} sites --for https://blog.example.com/post --json
+
+    Example: {cli} sites
     """
     client = services.search_console()
     if for_url:
@@ -70,9 +71,7 @@ def site(
 
     --json: {"ok": true, "site_url", "permission_level", "kind"}.
 
-    \b
-    Пример:
-      gsc site -s sc-domain:example.com
+    Example: {cli} site -s sc-domain:example.com
     """
     prop = services.search_console().get_property(resolve_site(ctx, site_url))
     output.emit_success(

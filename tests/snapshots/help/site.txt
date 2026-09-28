@@ -1,0 +1,19 @@
+
+ Usage: gsc site [OPTIONS]
+
+ Проверить доступ к одному ресурсу: уровень прав.
+
+ Нет доступа → INVALID_ARGUMENTS (exit 2) с подсказкой, кого добавить в Search Console.
+
+ --json: {"ok": true, "site_url", "permission_level", "kind"}.
+
+ Example: gsc site -s sc-domain:example.com
+
+╭─ Параметры ──────────────────────────────────────────────────────────────────────────────────────╮
+│ --site   -s      <str>  Ресурс Search Console: sc-domain:example.com или https://example.com/.   │
+│                         По умолчанию — site из .gsc/config.toml проекта.                         │
+│ --json                  Машиночитаемый вывод: JSON в stdout.                                     │
+│ --quiet                 Не печатать ничего, кроме данных.                                        │
+│ --help                  Show this message and exit.                                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

@@ -1,0 +1,35 @@
+
+ Usage: gsc auth login [OPTIONS]
+
+ Сохранить доступ Google в общий слот keychain ОС (один на все Google-инструменты).
+
+ google: JSON-ключ сервисного аккаунта — из --file, иначе из
+ GSC_GOOGLE_SERVICE_ACCOUNT_JSON / GOOGLE_SERVICE_ACCOUNT_JSON / GOOGLE_OAUTH_SERVICE_ACCOUNT_JSON
+ / GOOGLE_SERVICE_ACCOUNT_FILE / GOOGLE_OAUTH_SERVICE_ACCOUNT_FILE, иначе спросит путь к файлу.
+ Добавьте email сервисного аккаунта в Search Console → Настройки → Пользователи и разрешения
+ каждого ресурса.
+
+ pagespeed: API-ключ PageSpeed Insights из GSC_PAGESPEED_API_KEY / GOOGLE_PAGESPEED_API_KEY /
+ GOOGLE_OAUTH_PAGESPEED_API_KEY, иначе спросит скрытым вводом. Ключ — Google Cloud Console → APIs &
+ Services → Credentials, с включённым PageSpeed Insights API.
+
+ --json: {"ok": true, "provider", "account", "stored"}.
+
+
+ Примеры:
+   gsc auth login --file ~/Downloads/service-account.json
+   gsc auth login --provider pagespeed
+
+ Example: gsc auth login --file ~/Downloads/service-account.json
+
+╭─ Параметры ──────────────────────────────────────────────────────────────────────────────────────╮
+│ --provider                 <str>   google — сервисный аккаунт; pagespeed — API-ключ PageSpeed    │
+│                                    Insights.                                                     │
+│                                    [по умолчанию: google]                                        │
+│ --file             -f      <file>  JSON-ключ сервисного аккаунта (для --provider по умолчанию).  │
+│ --non-interactive                  Никогда не спрашивать; при нехватке данных — ошибка.          │
+│ --json                             Машиночитаемый вывод: JSON в stdout.                          │
+│ --quiet                            Не печатать ничего, кроме данных.                             │
+│ --help                             Show this message and exit.                                   │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

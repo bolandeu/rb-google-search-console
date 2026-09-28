@@ -7,10 +7,13 @@ from __future__ import annotations
 from google_oauth.errors import (
     CliError,
     CredentialStoreUnavailable,
+    CredentialsUnhealthy,
     InvalidArguments,
     NotAuthorized,
     TokenRequestFailed,
 )
+
+from .._distribution import DIST_NAME
 
 __all__ = [
     "Aborted",
@@ -19,6 +22,7 @@ __all__ = [
     "CliError",
     "CliTooOld",
     "CredentialStoreUnavailable",
+    "CredentialsUnhealthy",
     "InvalidArguments",
     "NotAuthorized",
     "ProjectNotInitialized",
@@ -28,9 +32,10 @@ __all__ = [
     "TokenRequestFailed",
 ]
 
-# Derived from this package's own name so error messages can name the real
-# command without this module needing template substitution.
+# The command (same as the package name) for `action` hints; `uv tool upgrade`
+# takes the distribution name, which differs (standard §10).
 _CLI = __name__.split(".")[0]
+_DIST = DIST_NAME
 
 
 class ProjectNotInitialized(CliError):
@@ -85,7 +90,7 @@ class CliTooOld(CliError):
         super().__init__(
             "CLI_TOO_OLD",
             f"This project requires {_CLI} >= {required}, but {installed} is installed.",
-            action=f"Run 'uv tool upgrade {_CLI}' (or lower cli.min_version in the project's config.toml).",
+            action=f"Run 'uv tool upgrade {_DIST}' (or lower cli.min_version in the project's config.toml).",
             exit_code=6,
         )
 

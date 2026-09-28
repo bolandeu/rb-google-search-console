@@ -1,0 +1,45 @@
+
+ Usage: gsc pagespeed [OPTIONS] {urls}...
+
+ PageSpeed Insights: оценки Lighthouse, лабораторные метрики, CrUX (реальные пользователи), аудиты.
+
+ Нужен API-ключ PageSpeed (`gsc auth login --provider pagespeed`) — без ключа
+ квота Google нулевая. Лимит ключа (400 запросов за 100 с) gsc соблюдает сам.
+ Ошибка по одному URL не останавливает остальные.
+
+ --json: {"ok": true, "count", "results": [{url, final_url, strategy, fetch_time,
+ lighthouse_version, scores: {категория: 0..1}, lab: {lcp_ms, fcp_ms, tbt_ms, cls,
+ speed_index_ms, tti_ms}, crux_url, crux_origin: {lcp, inp, cls, fcp, ttfb:
+ {percentile, value, category, good, needs_improvement, poor}}, crux_origin_fallback,
+ category_titles, audits: [{id, title, description, score, score_display_mode,
+ display_value, numeric_value, details, savings_ms, savings_bytes, metric_savings,
+ categories: [{category, weight, group}], warnings, explanation, error_message}],
+ stack_packs: [{id, title, descriptions: {audit_id: текст}}], entities: [{name,
+ is_first_party, category, origins}], run_warnings, runtime_error,
+ final_screenshot, full_page_screenshot} | {url, code, message, status}]}.
+ runtime_error не пуст — Lighthouse не смог замерить страницу, цифрам не верить.
+
+
+ Ещё примеры:
+   gsc pagespeed https://example.com --strategy desktop -c performance,seo --audits
+   gsc pagespeed https://example.com/a https://example.com/b --json > psi.json
+
+ Example: gsc pagespeed https://example.com
+
+╭─ Аргументы ──────────────────────────────────────────────────────────────────────────────────────╮
+│ *    urls      <str>  Один или несколько URL. [обязательный]                                     │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Параметры ──────────────────────────────────────────────────────────────────────────────────────╮
+│ --strategy             <str>  mobile или desktop. [по умолчанию: mobile]                         │
+│ --categories   -c      <str>  Через запятую: performance, accessibility, best-practices, seo     │
+│                               (все — одна единица квоты).                                        │
+│                               [по умолчанию: performance,accessibility,best-practices,seo]       │
+│ --screenshots                 В --json добавить скриншоты (base64, сотни КБ на страницу).        │
+│ --locale               <str>  Язык текстов аудитов (ru, en, …).                                  │
+│ --audits                      В консоли показать проваленные аудиты.                             │
+│ --concurrency          <int>  Сколько URL анализировать параллельно. [по умолчанию: 4]           │
+│ --json                        Машиночитаемый вывод: JSON в stdout.                               │
+│ --quiet                       Не печатать ничего, кроме данных.                                  │
+│ --help                        Show this message and exit.                                        │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+

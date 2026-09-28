@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import re
+import tomllib
 from pathlib import Path
 
 import pytest
@@ -8,6 +10,7 @@ import typer
 from typer.testing import CliRunner
 
 from gsc import output
+from gsc._distribution import DIST_NAME
 from gsc.cli import app
 from gsc.core import services
 
@@ -259,3 +262,34 @@ def test_skill_install_writes_to_project_dir(tmp_path: Path, monkeypatch: pytest
     assert installed.is_file()
     assert "gsc" in installed.read_text()
     assert payload["path"] == str(installed)
+
+
+# --- names ----------------------------------------------------------------------
+
+
+def test_distribution_name_is_declared_once() -> None:
+    """Only _distribution.py assigns DIST_NAME; a merge that re-declares it elsewhere would silently win."""
+    src = Path(__file__).resolve().parents[1] / "src" / "gsc"
+    declaring = sorted(
+        str(path.relative_to(src))
+        for path in src.rglob("*.py")
+        if re.search(r"^DIST_NAME\s*[:=]", path.read_text(), re.M)
+    )
+    assert declaring == ["_distribution.py"]
+
+
+def test_version_falls_back_to_legacy_distribution_name(monkeypatch: pytest.MonkeyPatch) -> None:
+    from gsc.core import version
+
+    installed = version.installed_version()
+    monkeypatch.setattr(version, "DIST_NAME", "no-such-distribution-xyz")
+    monkeypatch.setattr(version, "DIST_NAME_LEGACY", DIST_NAME)  # an install made under the old name
+    assert version.installed_version() == installed
+    monkeypatch.setattr(version, "DIST_NAME_LEGACY", None)
+    assert version.installed_version() is None
+
+
+def test_distribution_name_matches_pyproject() -> None:
+    """_distribution.DIST_NAME is how importlib.metadata finds this package; it must equal [project] name."""
+    pyproject = tomllib.loads((Path(__file__).resolve().parents[1] / "pyproject.toml").read_text())
+    assert pyproject["project"]["name"] == DIST_NAME

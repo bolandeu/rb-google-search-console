@@ -45,6 +45,9 @@ def test_check_cli_compat(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(services, "installed_version", lambda: None)  # bare source run: nothing to compare
     services.check_cli_compat(config)
 
+    monkeypatch.setattr(services, "installed_version", lambda: "0.0.0.post5.dev0+g1234567")  # no v* tag in reach
+    services.check_cli_compat(config)
+
 
 def test_resolve_site(tmp_path: Path) -> None:
     with pytest.raises(InvalidArguments):
