@@ -125,3 +125,13 @@ docstrings — so the docstring *is* the API doc, keep it accurate (the
 pre-commit hook warns when it drifts). `src/gsc/data/SKILL.md`
 deliberately lists no commands, only conventions; touch it only if a
 convention changes (a new exit code, a new credential rule).
+
+## Every user-visible change ships as a release
+
+Servers, other tools and the Mac install only from tags, never from `main`,
+so a merged change without a release is invisible to them. A change that
+needs a fragment is done only after the release: merge to `main`, run
+`uv run scripts/release.py patch|minor|major`, ask the user to push with
+`--follow-tags`, and name the new tag in the report. Maintenance-only commits
+(no fragment) wait for the next release. Don't leave a fragment unreleased on
+`main` without naming the reason (`~/Projects/tools/docs/standard-release.md` §3).
