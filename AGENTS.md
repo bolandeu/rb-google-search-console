@@ -135,3 +135,22 @@ needs a fragment is done only after the release: merge to `main`, run
 `--follow-tags`, and name the new tag in the report. Maintenance-only commits
 (no fragment) wait for the next release. Don't leave a fragment unreleased on
 `main` without naming the reason (`~/Projects/tools/docs/standard-release.md` §3).
+
+## Inside the tools system
+
+This tool is one service among many; the root `~/Projects/tools/` agent
+deploys it, keeps its credentials (Doppler) and backs up its data (S3).
+Full rules: `~/Projects/tools/docs/standard-release.md` §13.
+
+- **Report to the root agent** (in the report to the user, next to the
+  release tag): a new or renamed env var / credential, a new local database
+  or changed data path, a new or dropped dependency on another tool, a
+  refreshed token written back locally, a breaking release.
+- **Consumers**: before a breaking change, check who uses this tool (root
+  `AGENTS.md` → Service map) and name them in the report.
+- **Headless Linux servers**: env vars first, keychain optional (a missing
+  keychain is not an error when the env var is set); reuse existing env var
+  names; no prompts without a TTY; no Mac-only paths.
+- **Local data** lives in `platformdirs.user_data_dir("<tool>")`, never in
+  the repo; all state in the database file, migrations run by the tool; the
+  tool never uploads or syncs its data itself.
