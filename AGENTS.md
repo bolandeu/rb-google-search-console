@@ -134,13 +134,13 @@ needs a fragment is done only after the release: merge to `main`, run
 `uv run scripts/release.py patch|minor|major`, ask the user to push with
 `--follow-tags`, and name the new tag in the report. Maintenance-only commits
 (no fragment) wait for the next release. Don't leave a fragment unreleased on
-`main` without naming the reason (`~/Projects/tools/docs/standard-release.md` §3).
+`main` without naming the reason (`~/Work/tools/docs/standard-release.md` §3).
 
 ## Inside the tools system
 
-This tool is one service among many; the root `~/Projects/tools/` agent
+This tool is one service among many; the root `~/Work/tools/` agent
 deploys it, keeps its credentials (Doppler) and backs up its data (S3).
-Full rules: `~/Projects/tools/docs/standard-release.md` §13.
+Full rules: `~/Work/tools/docs/standard-release.md` §13.
 
 - **Report to the root agent** (in the report to the user, next to the
   release tag): a new or renamed env var / credential, a new local database
