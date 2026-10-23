@@ -1,6 +1,6 @@
 # Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
 _commit: v1.2.10
-_src_path: gh:bolandeu/cli-generator
+_src_path: https://homeserver.tailee01ab.ts.net:3000/bolandeu/cli-generator.git
 author_name: bolandeu
 cli_name: gsc
 description: "Google Search Console и PageSpeed Insights: библиотека gsc и CLI"
@@ -11,4 +11,4 @@ include_ci: false
 include_http_provider: true
 package_name: gsc
 project_name: gsc
-repository_url: https://github.com/bolandeu/google-search-console
+repository_url: https://homeserver.tailee01ab.ts.net:3000/bolandeu/google-search-console
