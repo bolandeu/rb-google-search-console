@@ -5,6 +5,23 @@ All notable changes to this project are documented here. Versions follow
 
 The changelog is written by `antagor publish`; don't edit it by hand.
 
+## v0.5.0 — 2026-10-23
+
+### Main
+
+- daemon: enabled
+- mode: fast
+- antagor init: project gsc (GSC)
+- Template v1.27.1: update from v1.2.10
+- chore: copier answers — источник шаблона и repository_url на Gitea
+- chore: пути ~/Projects → ~/Work после переезда
+- chore(hooks): скрипты tools ищутся относительно репозитория (перенос tools не ломает хуки)
+- chore(claude): при старте сессии агент берёт имя в herdr по команде
+- chore(hooks): pre-push сообщает корневому агенту tools о пушнутых тегах
+- docs: инструмент в системе (стандарт §13)
+- docs: каждое заметное изменение выходит релизом
+
+
 ## [0.4.0] - 2026-09-28
 
 ### Changed
