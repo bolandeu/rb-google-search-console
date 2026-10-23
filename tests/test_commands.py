@@ -8,7 +8,7 @@ import gsc
 from gsc.core import services
 from gsc.testing import FakeCrUX, FakePageSpeed, FakeSearchConsole
 
-from .test_cli import invoke, invoke_json
+from .test_cli import invoke, invoke_json, plain
 
 SITE = "sc-domain:example.com"
 
@@ -181,9 +181,9 @@ def test_pagespeed(psi: FakePageSpeed) -> None:
     assert payload["count"] == 2 and payload["results"][1]["code"] == "PROVIDER_ERROR"
 
     human = invoke("pagespeed", "https://example.com/", "https://example.com/bad", "--audits")
-    assert "performance: 45" in human.stdout and "LCP 3100 мс" in human.stdout
-    assert "по URL данных нет" in human.stdout and "CLS 0.05" in human.stdout
-    assert "render-blocking-resources" in human.stdout and "diagnostics" not in human.stdout
+    assert "performance: 45" in plain(human.stdout) and "LCP 3100 мс" in plain(human.stdout)
+    assert "по URL данных нет" in plain(human.stdout) and "CLS 0.05" in plain(human.stdout)
+    assert "render-blocking-resources" in plain(human.stdout) and "diagnostics" not in plain(human.stdout)
     assert "lighthouse failed" in human.stderr
 
     code, _ = invoke_json("pagespeed", "https://example.com/", "--concurrency", "0")
@@ -309,7 +309,7 @@ def test_pagespeed_warnings_and_distribution(psi: FakePageSpeed) -> None:
     result.crux_origin.lcp.good = 0.8
     human = invoke("pagespeed", "https://example.com/")
     assert "FAILED_DOCUMENT_REQUEST" in human.stderr and "redirected" in human.stderr
-    assert "хороших 80%" in human.stdout
+    assert "хороших 80%" in plain(human.stdout)
     invoke_json("pagespeed", "https://example.com/", "--screenshots")
     assert psi.calls[-1][2] == ("performance", "accessibility", "best-practices", "seo")
 
@@ -320,8 +320,8 @@ def test_sitemap_contents_in_output(sc: FakeSearchConsole) -> None:
     ]
     _, payload = invoke_json("sitemaps", "-s", SITE)
     assert payload["sitemaps"][0]["contents"] == [{"type": "web", "submitted": 120, "indexed": None}]
-    assert "web: 120" in invoke("sitemaps", "-s", SITE).stdout
-    assert "URL (web)" in invoke("sitemap", "-s", SITE, "https://example.com/s.xml").stdout
+    assert "web: 120" in plain(invoke("sitemaps", "-s", SITE).stdout)
+    assert "URL (web)" in plain(invoke("sitemap", "-s", SITE, "https://example.com/s.xml").stdout)
 
 
 def test_fake_crux_raises_configured_error() -> None:

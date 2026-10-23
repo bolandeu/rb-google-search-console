@@ -5,9 +5,7 @@ from __future__ import annotations
 from collections.abc import Sequence
 from typing import Any
 
-import httpx
-
-from ..providers.google import CruxProvider
+from ..providers.google import CruxProvider, Transport
 from .errors import InvalidArguments
 from .models import CruxApiMetric, CruxHistory, CruxHistoryMetric, CruxPeriod, CruxRecord
 from .quota import RateLimiter
@@ -23,7 +21,7 @@ def _number(value: Any) -> float | None:
         return None
     try:
         number = float(value)
-    except (TypeError, ValueError):
+    except TypeError, ValueError:
         return None
     return None if number != number else number  # NaN → None
 
@@ -100,7 +98,7 @@ class CrUX:
         self,
         *,
         api_key: str | None = None,
-        transport: httpx.BaseTransport | None = None,
+        transport: Transport | None = None,
         limiter: RateLimiter | None = None,
     ) -> None:
         self._api = CruxProvider(api_key=api_key, transport=transport)

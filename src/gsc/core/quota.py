@@ -66,7 +66,7 @@ class InspectionQuota:
     def _load(self) -> dict[str, dict]:
         try:
             data = json.loads(self.path.read_text(encoding="utf-8"))
-        except (OSError, ValueError):
+        except OSError, ValueError:
             return {}
         today = quota_day()
         return {site: entry for site, entry in data.items() if isinstance(entry, dict) and entry.get("day") == today}

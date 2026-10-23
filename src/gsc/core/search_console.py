@@ -9,9 +9,7 @@ from collections.abc import Callable, Iterable, Iterator, Sequence
 from typing import Any
 from urllib.parse import urlsplit
 
-import httpx
-
-from ..providers.google import AccessDenied, SearchConsoleProvider, seconds_until_quota_reset
+from ..providers.google import AccessDenied, SearchConsoleProvider, Transport, seconds_until_quota_reset
 from .errors import ApiError, InvalidArguments, QuotaExceeded
 from .models import (
     Inspection,
@@ -192,7 +190,7 @@ class SearchConsole:
         self,
         *,
         quota: InspectionQuota | None = None,
-        transport: httpx.BaseTransport | None = None,
+        transport: Transport | None = None,
         sleep: Callable[[float], None] = time.sleep,
     ) -> None:
         self._transport = transport

@@ -1,0 +1,1968 @@
+{
+  "opencli": "0.1",
+  "info": {
+    "title": "gsc",
+    "version": "<version>",
+    "summary": "Google Search Console и PageSpeed Insights: библиотека gsc и CLI — ресурсы, поисковая аналитика, инспекция URL, карты сайта, скорость страниц"
+  },
+  "command": {
+    "name": "gsc",
+    "options": [
+      {
+        "name": "--json",
+        "description": "Машиночитаемый вывод: JSON в stdout.",
+        "metadata": [
+          {
+            "name": "x-rb-type",
+            "value": "boolean"
+          },
+          {
+            "name": "x-rb-default",
+            "value": false
+          }
+        ]
+      },
+      {
+        "name": "--quiet",
+        "description": "Не печатать ничего, кроме данных.",
+        "metadata": [
+          {
+            "name": "x-rb-type",
+            "value": "boolean"
+          },
+          {
+            "name": "x-rb-default",
+            "value": false
+          }
+        ]
+      },
+      {
+        "name": "--verbose",
+        "description": "Подробная диагностика в stderr.",
+        "metadata": [
+          {
+            "name": "x-rb-type",
+            "value": "boolean"
+          },
+          {
+            "name": "x-rb-default",
+            "value": false
+          }
+        ]
+      },
+      {
+        "name": "--non-interactive",
+        "description": "Никогда не спрашивать; при нехватке данных — ошибка.",
+        "metadata": [
+          {
+            "name": "x-rb-type",
+            "value": "boolean"
+          },
+          {
+            "name": "x-rb-default",
+            "value": false
+          }
+        ]
+      },
+      {
+        "name": "--dry-run",
+        "description": "Показать, что будет сделано, ничего не меняя.",
+        "metadata": [
+          {
+            "name": "x-rb-type",
+            "value": "boolean"
+          },
+          {
+            "name": "x-rb-default",
+            "value": false
+          }
+        ]
+      },
+      {
+        "name": "--version",
+        "description": "Показать версию и выйти.",
+        "metadata": [
+          {
+            "name": "x-rb-type",
+            "value": "boolean"
+          },
+          {
+            "name": "x-rb-default",
+            "value": false
+          }
+        ]
+      },
+      {
+        "name": "--project",
+        "arguments": [
+          {
+            "name": "TEXT",
+            "required": true,
+            "arity": {
+              "maximum": 1
+            }
+          }
+        ],
+        "description": "Path to the project root.",
+        "metadata": [
+          {
+            "name": "x-rb-type",
+            "value": "str"
+          }
+        ]
+      },
+      {
+        "name": "--ai",
+        "description": "Print AI-oriented usage documentation (the bundled skill doc) and exit.",
+        "metadata": [
+          {
+            "name": "x-rb-type",
+            "value": "boolean"
+          },
+          {
+            "name": "x-rb-default",
+            "value": false
+          }
+        ]
+      },
+      {
+        "name": "--install-completion",
+        "description": "Install completion for the current shell.",
+        "metadata": [
+          {
+            "name": "x-rb-type",
+            "value": "boolean"
+          }
+        ]
+      },
+      {
+        "name": "--show-completion",
+        "description": "Show completion for the current shell, to copy it or customize the installation.",
+        "metadata": [
+          {
+            "name": "x-rb-type",
+            "value": "boolean"
+          }
+        ]
+      }
+    ],
+    "commands": [
+      {
+        "name": "doctor",
+        "description": "Диагностика: версия, проект, настройки, связка ключей, доступы Google и PageSpeed.\n\nБез сети: ключ сервисного аккаунта проверяется разбором, а не запросом —\nживая проверка `gsc auth status --check`. Всегда завершается с кодом 0 —\nрезультат это сам отчёт; `healthy` говорит, прошли ли все проверки.\n\n--json: {\"ok\": true, \"healthy\", \"checks\": [{name, ok, detail}]}.\n\nExample: gsc doctor --json",
+        "options": [
+          {
+            "name": "--json",
+            "description": "Машиночитаемый вывод: JSON в stdout.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "--quiet",
+            "description": "Не печатать ничего, кроме данных.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "--verbose",
+            "description": "Подробная диагностика в stderr.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sites",
+        "description": "Ресурсы Search Console, доступные сервисному аккаунту.\n\nС --for URL — какой ресурс покрывает URL: доменный (sc-domain:) предпочтительнее,\nсреди URL-prefix — самый длинный подходящий; нет такого → \"site\": null.\n\n--json: {\"ok\": true, \"count\": N, \"sites\": [{site_url, permission_level, kind}]};\nс --for: {\"ok\": true, \"url\": …, \"site\": \"sc-domain:…\" | null}.\n\n\b\nЕщё примеры:\n  gsc sites --for https://blog.example.com/post --json\n\nExample: gsc sites",
+        "options": [
+          {
+            "name": "--for",
+            "arguments": [
+              {
+                "name": "FOR_URL",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "Показать только ресурс, который покрывает этот URL (доменный важнее URL-prefix).",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              }
+            ]
+          },
+          {
+            "name": "--json",
+            "description": "Машиночитаемый вывод: JSON в stdout.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "--quiet",
+            "description": "Не печатать ничего, кроме данных.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "site",
+        "description": "Проверить доступ к одному ресурсу: уровень прав.\n\nНет доступа → INVALID_ARGUMENTS (exit 2) с подсказкой, кого добавить в Search Console.\n\n--json: {\"ok\": true, \"site_url\", \"permission_level\", \"kind\"}.\n\nExample: gsc site -s sc-domain:example.com",
+        "options": [
+          {
+            "name": "--site",
+            "aliases": [
+              "-s"
+            ],
+            "arguments": [
+              {
+                "name": "SITE_URL",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "Ресурс Search Console: sc-domain:example.com или https://example.com/. По умолчанию — site из .gsc/config.toml проекта.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              }
+            ]
+          },
+          {
+            "name": "--json",
+            "description": "Машиночитаемый вывод: JSON в stdout.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "--quiet",
+            "description": "Не печатать ничего, кроме данных.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "analytics",
+        "description": "Поисковая аналитика: клики, показы, CTR, средняя позиция по срезам.\n\nПериод по умолчанию — последние 28 дней, заканчивая 3 днями раньше сегодня\n(данные Search Console приходят с задержкой). URL в ответе — как их отдаёт Google.\n\nGoogle отдаёт не больше ~50 000 строк на запрос — для полного page×query на\nбольшом сайте нужен --by-day (строки тогда по дням, в keys есть date).\n\n--json: {\"ok\": true, \"site\", \"start_date\", \"end_date\", \"dimensions\", \"count\",\n\"first_incomplete_date\", \"rows\": [{keys: {срез: значение}, clicks, impressions, ctr,\nposition}]}; first_incomplete_date — с какой даты данные неполные (при --data-state all).\n\n\b\nЕщё примеры:\n  gsc analytics -s sc-domain:example.com -d page,query --limit 100\n  gsc analytics -s sc-domain:example.com -d page --limit 0 --json > pages.json\n  gsc analytics -s sc-domain:example.com --start-date 2026-01-01 --end-date 2026-01-31\n  gsc analytics -s sc-domain:example.com -d page,query -f page:contains:/blog/ -f country:equals:rus\n  gsc analytics -s sc-domain:example.com -d page,query --by-day --limit 0 --json > full.json\n\nExample: gsc analytics -s sc-domain:example.com",
+        "options": [
+          {
+            "name": "--site",
+            "aliases": [
+              "-s"
+            ],
+            "arguments": [
+              {
+                "name": "SITE_URL",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "Ресурс Search Console: sc-domain:example.com или https://example.com/. По умолчанию — site из .gsc/config.toml проекта.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              }
+            ]
+          },
+          {
+            "name": "--start-date",
+            "arguments": [
+              {
+                "name": "START_DATE",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "Начало периода YYYY-MM-DD.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              }
+            ]
+          },
+          {
+            "name": "--end-date",
+            "arguments": [
+              {
+                "name": "END_DATE",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "Конец периода YYYY-MM-DD.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              }
+            ]
+          },
+          {
+            "name": "--dimensions",
+            "aliases": [
+              "-d"
+            ],
+            "arguments": [
+              {
+                "name": "DIMENSIONS",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "Срезы через запятую: query, page, device, country, date, hour, searchAppearance.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              },
+              {
+                "name": "x-rb-default",
+                "value": "query"
+              }
+            ]
+          },
+          {
+            "name": "--search-type",
+            "arguments": [
+              {
+                "name": "SEARCH_TYPE",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "web, image, video, news, discover, googleNews.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              },
+              {
+                "name": "x-rb-default",
+                "value": "web"
+              }
+            ]
+          },
+          {
+            "name": "--data-state",
+            "arguments": [
+              {
+                "name": "DATA_STATE",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "final — только устоявшиеся данные; all — со свежими; hourly_all — почасовые (со срезом hour).",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              },
+              {
+                "name": "x-rb-default",
+                "value": "final"
+              }
+            ]
+          },
+          {
+            "name": "--filter",
+            "aliases": [
+              "-f"
+            ],
+            "arguments": [
+              {
+                "name": "FILTERS",
+                "required": true
+              }
+            ],
+            "description": "Фильтр СРЕЗ:ОПЕРАТОР:ВЫРАЖЕНИЕ, можно повторять (все условия сразу). Операторы: equals, notEquals, contains, notContains, includingRegex, excludingRegex. Пример: page:contains:/blog/.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              },
+              {
+                "name": "x-rb-default",
+                "value": []
+              },
+              {
+                "name": "x-rb-multiple",
+                "value": true
+              }
+            ]
+          },
+          {
+            "name": "--aggregation",
+            "arguments": [
+              {
+                "name": "AGGREGATION",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "Как считать клики/показы: byPage — по страницам, byProperty — по сайту; по умолчанию решает Google.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              }
+            ]
+          },
+          {
+            "name": "--by-day",
+            "description": "Отдельный запрос на каждый день: обходит предел Google ~50 000 строк на запрос; строки подневные.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "--limit",
+            "aliases": [
+              "-n"
+            ],
+            "arguments": [
+              {
+                "name": "LIMIT",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "Сколько строк; 0 — все (постранично по 25 000).",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "int"
+              },
+              {
+                "name": "x-rb-default",
+                "value": 25
+              }
+            ]
+          },
+          {
+            "name": "--json",
+            "description": "Машиночитаемый вывод: JSON в stdout.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "--quiet",
+            "description": "Не печатать ничего, кроме данных.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "inspect",
+        "description": "Инспекция URL: индексация, покрытие, canonical, robots.txt, карты сайта, расширенные результаты.\n\nКвота Google: 2000 инспекций в сутки и 600 в минуту на ресурс; темп gsc держит\nсам. Ошибка по одному URL не останавливает остальные. Кончилась дневная квота —\nто, что успели, всё равно выводится, с \"quota_exhausted\": true (если не успели\nничего — PROVIDER_ERROR, exit 5).\n\n--json: {\"ok\": true, \"site\", \"count\", \"results\": [{url, verdict, coverage_state,\nindexing_state, robots_txt_state, page_fetch_state, last_crawl_time, crawled_as,\ngoogle_canonical, user_canonical, sitemaps, referring_urls, rich_results, …} |\n{url, code, message, status}], \"quota_remaining\", \"quota_exhausted\"}.\n\n\b\nЕщё примеры:\n  gsc inspect -s sc-domain:example.com https://example.com/a https://example.com/b --json\n\nExample: gsc inspect -s sc-domain:example.com https://example.com/page",
+        "options": [
+          {
+            "name": "--site",
+            "aliases": [
+              "-s"
+            ],
+            "arguments": [
+              {
+                "name": "SITE_URL",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "Ресурс Search Console: sc-domain:example.com или https://example.com/. По умолчанию — site из .gsc/config.toml проекта.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              }
+            ]
+          },
+          {
+            "name": "--language",
+            "arguments": [
+              {
+                "name": "LANGUAGE",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "Язык сообщений об ошибках Google (ru, en, …).",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              },
+              {
+                "name": "x-rb-default",
+                "value": "ru"
+              }
+            ]
+          },
+          {
+            "name": "--raw",
+            "description": "В --json добавить исходный ответ Google (raw).",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "--json",
+            "description": "Машиночитаемый вывод: JSON в stdout.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "--quiet",
+            "description": "Не печатать ничего, кроме данных.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          }
+        ],
+        "arguments": [
+          {
+            "name": "urls",
+            "required": true,
+            "arity": {
+              "minimum": 1
+            },
+            "description": "Один или несколько URL внутри ресурса.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              },
+              {
+                "name": "x-rb-multiple",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sitemaps",
+        "description": "Карты сайта ресурса: тип, ошибки, предупреждения, даты отправки.\n\n--json: {\"ok\": true, \"site\", \"count\", \"sitemaps\": [{path, type, errors, warnings,\nis_pending, is_sitemaps_index, last_submitted, last_downloaded, contents: [{type,\nsubmitted, indexed}]}]}; contents — сколько URL каждого типа (web, image, video) в карте.\n\nExample: gsc sitemaps -s sc-domain:example.com",
+        "options": [
+          {
+            "name": "--site",
+            "aliases": [
+              "-s"
+            ],
+            "arguments": [
+              {
+                "name": "SITE_URL",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "Ресурс Search Console: sc-domain:example.com или https://example.com/. По умолчанию — site из .gsc/config.toml проекта.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              }
+            ]
+          },
+          {
+            "name": "--json",
+            "description": "Машиночитаемый вывод: JSON в stdout.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "--quiet",
+            "description": "Не печатать ничего, кроме данных.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "sitemap",
+        "description": "Одна карта сайта: статус обработки, ошибки, даты.\n\n--json: {\"ok\": true, \"site\", \"path\", \"type\", \"errors\", \"warnings\", \"is_pending\",\n\"is_sitemaps_index\", \"last_submitted\", \"last_downloaded\", \"contents\": [{type, submitted, indexed}]}.\n\nExample: gsc sitemap -s sc-domain:example.com https://example.com/sitemap.xml",
+        "options": [
+          {
+            "name": "--site",
+            "aliases": [
+              "-s"
+            ],
+            "arguments": [
+              {
+                "name": "SITE_URL",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "Ресурс Search Console: sc-domain:example.com или https://example.com/. По умолчанию — site из .gsc/config.toml проекта.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              }
+            ]
+          },
+          {
+            "name": "--json",
+            "description": "Машиночитаемый вывод: JSON в stdout.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "--quiet",
+            "description": "Не печатать ничего, кроме данных.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          }
+        ],
+        "arguments": [
+          {
+            "name": "feedpath",
+            "required": true,
+            "arity": {
+              "minimum": 1,
+              "maximum": 1
+            },
+            "description": "Полный URL карты сайта.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "submit-sitemap",
+        "description": "Отправить карту сайта в Search Console (Google поставит её в очередь на обработку).\n\nМеняет состояние ресурса в Google (повторная отправка безвредна); --dry-run —\nтолько показать, что будет отправлено. Нужны права siteOwner/siteFullUser.\n\n--json: {\"ok\": true, \"site\", \"sitemap\", \"submitted\": true | false, \"dry_run\"}.\n\n\b\nЕщё примеры:\n  gsc submit-sitemap -s sc-domain:example.com https://example.com/sitemap.xml\n\nExample: gsc submit-sitemap -s sc-domain:example.com https://example.com/sitemap.xml --dry-run",
+        "options": [
+          {
+            "name": "--site",
+            "aliases": [
+              "-s"
+            ],
+            "arguments": [
+              {
+                "name": "SITE_URL",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "Ресурс Search Console: sc-domain:example.com или https://example.com/. По умолчанию — site из .gsc/config.toml проекта.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              }
+            ]
+          },
+          {
+            "name": "--dry-run",
+            "description": "Показать, что будет сделано, ничего не меняя.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "--json",
+            "description": "Машиночитаемый вывод: JSON в stdout.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "--quiet",
+            "description": "Не печатать ничего, кроме данных.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          }
+        ],
+        "arguments": [
+          {
+            "name": "feedpath",
+            "required": true,
+            "arity": {
+              "minimum": 1,
+              "maximum": 1
+            },
+            "description": "Полный URL карты сайта.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "pagespeed",
+        "description": "PageSpeed Insights: оценки Lighthouse, лабораторные метрики, CrUX (реальные пользователи), аудиты.\n\nНужен API-ключ PageSpeed (`gsc auth login --provider pagespeed`) — без ключа\nквота Google нулевая. Лимит ключа (400 запросов за 100 с) gsc соблюдает сам.\nОшибка по одному URL не останавливает остальные.\n\n--json: {\"ok\": true, \"count\", \"results\": [{url, final_url, strategy, fetch_time,\nlighthouse_version, scores: {категория: 0..1}, lab: {lcp_ms, fcp_ms, tbt_ms, cls,\nspeed_index_ms, tti_ms}, crux_url, crux_origin: {lcp, inp, cls, fcp, ttfb:\n{percentile, value, category, good, needs_improvement, poor}}, crux_origin_fallback,\ncategory_titles, audits: [{id, title, description, score, score_display_mode,\ndisplay_value, numeric_value, details, savings_ms, savings_bytes, metric_savings,\ncategories: [{category, weight, group}], warnings, explanation, error_message}],\nstack_packs: [{id, title, descriptions: {audit_id: текст}}], entities: [{name,\nis_first_party, category, origins}], run_warnings, runtime_error,\nfinal_screenshot, full_page_screenshot} | {url, code, message, status}]}.\nruntime_error не пуст — Lighthouse не смог замерить страницу, цифрам не верить.\n\n\b\nЕщё примеры:\n  gsc pagespeed https://example.com --strategy desktop -c performance,seo --audits\n  gsc pagespeed https://example.com/a https://example.com/b --json > psi.json\n\nExample: gsc pagespeed https://example.com",
+        "options": [
+          {
+            "name": "--strategy",
+            "arguments": [
+              {
+                "name": "STRATEGY",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "mobile или desktop.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              },
+              {
+                "name": "x-rb-default",
+                "value": "mobile"
+              }
+            ]
+          },
+          {
+            "name": "--categories",
+            "aliases": [
+              "-c"
+            ],
+            "arguments": [
+              {
+                "name": "CATEGORIES",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "Через запятую: performance, accessibility, best-practices, seo (все — одна единица квоты).",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              },
+              {
+                "name": "x-rb-default",
+                "value": "performance,accessibility,best-practices,seo"
+              }
+            ]
+          },
+          {
+            "name": "--screenshots",
+            "description": "В --json добавить скриншоты (base64, сотни КБ на страницу).",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "--locale",
+            "arguments": [
+              {
+                "name": "LOCALE",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "Язык текстов аудитов (ru, en, …).",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              }
+            ]
+          },
+          {
+            "name": "--audits",
+            "description": "В консоли показать проваленные аудиты.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "--concurrency",
+            "arguments": [
+              {
+                "name": "CONCURRENCY",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "Сколько URL анализировать параллельно.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "int"
+              },
+              {
+                "name": "x-rb-default",
+                "value": 4
+              }
+            ]
+          },
+          {
+            "name": "--json",
+            "description": "Машиночитаемый вывод: JSON в stdout.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "--quiet",
+            "description": "Не печатать ничего, кроме данных.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          }
+        ],
+        "arguments": [
+          {
+            "name": "urls",
+            "required": true,
+            "arity": {
+              "minimum": 1
+            },
+            "description": "Один или несколько URL.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              },
+              {
+                "name": "x-rb-multiple",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "crux",
+        "description": "Chrome UX Report: реальные посетители Chrome — Core Web Vitals, доли хороших визитов, история.\n\nДанные только у страниц и сайтов с заметным трафиком из Chrome; нет данных —\n\"record\": null (exit 0). Кроме LCP/INP/CLS/FCP/TTFB: фазы LCP (TTFB, задержка и\nдлительность загрузки, отрисовка), round_trip_time, доли устройств (form_factors).\nКлюч — тот же, что у PageSpeed, с включённым Chrome UX Report API. Квота 150/мин.\n\n--json: {\"ok\": true, \"record\": {url, origin, form_factor, period: {first_date,\nlast_date}, metrics: {имя: {p75, good, needs_improvement, poor, fractions}}} | null};\nс --history: {\"ok\": true, \"history\": {url, origin, form_factor, periods: [...],\nmetrics: {имя: {p75: [...], good: [...], needs_improvement: [...], poor: [...],\nfractions}}} | null} — ряды от старых недель к новым.\n\n\b\nЕщё примеры:\n  gsc crux https://example.com/ --form-factor phone\n  gsc crux --origin https://example.com --history --periods 40 --json\n\nExample: gsc crux --origin https://example.com",
+        "options": [
+          {
+            "name": "--origin",
+            "arguments": [
+              {
+                "name": "ORIGIN",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "Сайт целиком: https://example.com (без пути).",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              }
+            ]
+          },
+          {
+            "name": "--form-factor",
+            "arguments": [
+              {
+                "name": "FORM_FACTOR",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "phone, desktop или tablet; по умолчанию — все устройства вместе.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              }
+            ]
+          },
+          {
+            "name": "--history",
+            "description": "История по неделям вместо последних 28 дней.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "--periods",
+            "arguments": [
+              {
+                "name": "PERIODS",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "С --history: сколько недель (1–40).",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "int"
+              },
+              {
+                "name": "x-rb-default",
+                "value": 25
+              }
+            ]
+          },
+          {
+            "name": "--metrics",
+            "arguments": [
+              {
+                "name": "METRICS",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "Только эти метрики CrUX через запятую (largest_contentful_paint, …).",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              }
+            ]
+          },
+          {
+            "name": "--json",
+            "description": "Машиночитаемый вывод: JSON в stdout.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "--quiet",
+            "description": "Не печатать ничего, кроме данных.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          }
+        ],
+        "arguments": [
+          {
+            "name": "url",
+            "required": false,
+            "arity": {
+              "minimum": 0,
+              "maximum": 1
+            },
+            "description": "URL страницы (или --origin для сайта целиком).",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "init",
+        "description": "Создать проект в папке: .gsc/config.toml с ресурсом по умолчанию (--site) и min_version.\n\nExample: gsc init --site sc-domain:example.com",
+        "options": [
+          {
+            "name": "--name",
+            "arguments": [
+              {
+                "name": "NAME",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "Имя проекта (по умолчанию — имя папки).",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              }
+            ]
+          },
+          {
+            "name": "--site",
+            "aliases": [
+              "-s"
+            ],
+            "arguments": [
+              {
+                "name": "SITE",
+                "required": true,
+                "arity": {
+                  "maximum": 1
+                }
+              }
+            ],
+            "description": "Ресурс Search Console по умолчанию для команд проекта (sc-domain:… или https://…/).",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "str"
+              }
+            ]
+          },
+          {
+            "name": "--force",
+            "description": "Перезаписать настройки уже созданного проекта.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "--json",
+            "description": "Машиночитаемый вывод: JSON в stdout.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "--quiet",
+            "description": "Не печатать ничего, кроме данных.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "--verbose",
+            "description": "Подробная диагностика в stderr.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "status",
+        "description": "Показать проект: имя, путь, ресурс Search Console по умолчанию.\n\nExample: gsc status --json",
+        "options": [
+          {
+            "name": "--json",
+            "description": "Машиночитаемый вывод: JSON в stdout.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "--quiet",
+            "description": "Не печатать ничего, кроме данных.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "--verbose",
+            "description": "Подробная диагностика в stderr.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "describe",
+        "description": "Print this CLI's machine-readable contract: an OpenCLI document (opencli.org).\n\nCommands, options, arguments, exit codes, plus `x-rb-*` metadata: env vars,\ntables, v1 views, data files, external programs. With --json it is the bare\ndocument on one line (no {\"ok\": ...} envelope); without, the same indented.\n\nExample: gsc describe --json",
+        "options": [
+          {
+            "name": "--json",
+            "description": "Машиночитаемый вывод: JSON в stdout.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "--quiet",
+            "description": "Не печатать ничего, кроме данных.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          },
+          {
+            "name": "--verbose",
+            "description": "Подробная диагностика в stderr.",
+            "metadata": [
+              {
+                "name": "x-rb-type",
+                "value": "boolean"
+              },
+              {
+                "name": "x-rb-default",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "auth",
+        "description": "Доступы Google для Google Search Console: ключ сервисного аккаунта и API-ключи (keychain ОС).",
+        "commands": [
+          {
+            "name": "login",
+            "description": "Сохранить доступ Google в общий слот keychain ОС (один на все Google-инструменты).\n\ngoogle: JSON-ключ сервисного аккаунта — из --file, иначе из\nGSC_GOOGLE_SERVICE_ACCOUNT_JSON / GOOGLE_SERVICE_ACCOUNT_JSON / GOOGLE_OAUTH_SERVICE_ACCOUNT_JSON / GOOGLE_SERVICE_ACCOUNT_FILE / GOOGLE_OAUTH_SERVICE_ACCOUNT_FILE, иначе спросит путь к файлу.\nДобавьте email сервисного аккаунта в Search Console → Настройки → Пользователи и разрешения каждого ресурса.\n\npagespeed: API-ключ PageSpeed Insights из GSC_PAGESPEED_API_KEY / GOOGLE_PAGESPEED_API_KEY / GOOGLE_OAUTH_PAGESPEED_API_KEY, иначе спросит скрытым вводом. Ключ — Google Cloud Console → APIs & Services → Credentials, с включённым PageSpeed Insights API.\n\n--json: {\"ok\": true, \"provider\", \"account\", \"stored\"}.\n\n\b\nПримеры:\n  gsc auth login --file ~/Downloads/service-account.json\n  gsc auth login --provider pagespeed\n\nExample: gsc auth login --file ~/Downloads/service-account.json",
+            "options": [
+              {
+                "name": "--provider",
+                "arguments": [
+                  {
+                    "name": "PROVIDER",
+                    "required": true,
+                    "arity": {
+                      "maximum": 1
+                    }
+                  }
+                ],
+                "description": "google — сервисный аккаунт; pagespeed — API-ключ PageSpeed Insights.",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "str"
+                  },
+                  {
+                    "name": "x-rb-default",
+                    "value": "google"
+                  }
+                ]
+              },
+              {
+                "name": "--file",
+                "aliases": [
+                  "-f"
+                ],
+                "arguments": [
+                  {
+                    "name": "FILE",
+                    "required": true,
+                    "arity": {
+                      "maximum": 1
+                    }
+                  }
+                ],
+                "description": "JSON-ключ сервисного аккаунта (для --provider по умолчанию).",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "file"
+                  }
+                ]
+              },
+              {
+                "name": "--non-interactive",
+                "description": "Никогда не спрашивать; при нехватке данных — ошибка.",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "boolean"
+                  },
+                  {
+                    "name": "x-rb-default",
+                    "value": false
+                  }
+                ]
+              },
+              {
+                "name": "--json",
+                "description": "Машиночитаемый вывод: JSON в stdout.",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "boolean"
+                  },
+                  {
+                    "name": "x-rb-default",
+                    "value": false
+                  }
+                ]
+              },
+              {
+                "name": "--quiet",
+                "description": "Не печатать ничего, кроме данных.",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "boolean"
+                  },
+                  {
+                    "name": "x-rb-default",
+                    "value": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "logout",
+            "description": "Удалить доступ из общего слота keychain — для всех Google-инструментов (переменные окружения не трогает).\n\n--json: {\"ok\": true, \"provider\"}.\n\nExample: gsc auth logout",
+            "options": [
+              {
+                "name": "--provider",
+                "arguments": [
+                  {
+                    "name": "PROVIDER",
+                    "required": true,
+                    "arity": {
+                      "maximum": 1
+                    }
+                  }
+                ],
+                "description": "google — сервисный аккаунт; pagespeed — API-ключ PageSpeed Insights.",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "str"
+                  },
+                  {
+                    "name": "x-rb-default",
+                    "value": "google"
+                  }
+                ]
+              },
+              {
+                "name": "--json",
+                "description": "Машиночитаемый вывод: JSON в stdout.",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "boolean"
+                  },
+                  {
+                    "name": "x-rb-default",
+                    "value": false
+                  }
+                ]
+              },
+              {
+                "name": "--quiet",
+                "description": "Не печатать ничего, кроме данных.",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "boolean"
+                  },
+                  {
+                    "name": "x-rb-default",
+                    "value": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "status",
+            "description": "Откуда берутся ключи и работают ли они — отчёт в общей для всех инструментов форме. Значений не печатает.\n\nЗаписи: google (сервисный аккаунт, обязателен) и API-ключи инструмента.\nБез --check — только наличие (`unchecked`, `missing`, `invalid` — битый JSON), без сети.\nКод выхода 0 — всё в порядке, 3 — обязательного ключа нет или Google/API его не принимает.\n--json — контракт для tools-watch (стандарт tools §8): `tool`, `version`,\n`checked_at`, `credentials[]` с `provider`, `required`, `fields`, `source`,\n`source_ref`, `status`, `expires_at`, `quota`, `message`; при коде 3 —\n`ok: false` и `error` CREDENTIALS_UNHEALTHY рядом с отчётом.\n\nExample: gsc auth status --check --json",
+            "options": [
+              {
+                "name": "--check",
+                "description": "Проверить ключи у Google и одним дешёвым запросом к API (не дольше 10 с на ключ).",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "boolean"
+                  },
+                  {
+                    "name": "x-rb-default",
+                    "value": false
+                  }
+                ]
+              },
+              {
+                "name": "--json",
+                "description": "Машиночитаемый вывод: JSON в stdout.",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "boolean"
+                  },
+                  {
+                    "name": "x-rb-default",
+                    "value": false
+                  }
+                ]
+              },
+              {
+                "name": "--quiet",
+                "description": "Не печатать ничего, кроме данных.",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "boolean"
+                  },
+                  {
+                    "name": "x-rb-default",
+                    "value": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "config",
+        "description": "Настройки проекта (.gsc/config.toml).",
+        "commands": [
+          {
+            "name": "list",
+            "description": "Показать все настройки проекта.\n\nExample: gsc config list --json",
+            "options": [
+              {
+                "name": "--json",
+                "description": "Машиночитаемый вывод: JSON в stdout.",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "boolean"
+                  },
+                  {
+                    "name": "x-rb-default",
+                    "value": false
+                  }
+                ]
+              },
+              {
+                "name": "--quiet",
+                "description": "Не печатать ничего, кроме данных.",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "boolean"
+                  },
+                  {
+                    "name": "x-rb-default",
+                    "value": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "get",
+            "description": "Показать одну настройку.\n\nExample: gsc config get site",
+            "options": [
+              {
+                "name": "--json",
+                "description": "Машиночитаемый вывод: JSON в stdout.",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "boolean"
+                  },
+                  {
+                    "name": "x-rb-default",
+                    "value": false
+                  }
+                ]
+              },
+              {
+                "name": "--quiet",
+                "description": "Не печатать ничего, кроме данных.",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "boolean"
+                  },
+                  {
+                    "name": "x-rb-default",
+                    "value": false
+                  }
+                ]
+              }
+            ],
+            "arguments": [
+              {
+                "name": "key",
+                "required": true,
+                "arity": {
+                  "minimum": 1,
+                  "maximum": 1
+                },
+                "description": "Ключ настройки через точку, например site или cli.min_version.",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "str"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "set",
+            "description": "Изменить одну настройку (не секрет — ключи только через auth login).\n\nExample: gsc config set site sc-domain:example.com",
+            "options": [
+              {
+                "name": "--json",
+                "description": "Машиночитаемый вывод: JSON в stdout.",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "boolean"
+                  },
+                  {
+                    "name": "x-rb-default",
+                    "value": false
+                  }
+                ]
+              },
+              {
+                "name": "--quiet",
+                "description": "Не печатать ничего, кроме данных.",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "boolean"
+                  },
+                  {
+                    "name": "x-rb-default",
+                    "value": false
+                  }
+                ]
+              }
+            ],
+            "arguments": [
+              {
+                "name": "key",
+                "required": true,
+                "arity": {
+                  "minimum": 1,
+                  "maximum": 1
+                },
+                "description": "Ключ настройки через точку, например site или cli.min_version.",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "str"
+                  }
+                ]
+              },
+              {
+                "name": "value",
+                "required": true,
+                "arity": {
+                  "minimum": 1,
+                  "maximum": 1
+                },
+                "description": "Новое значение (строка).",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "str"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "skill",
+        "description": "Памятка gsc для AI-агентов.",
+        "commands": [
+          {
+            "name": "install",
+            "description": "Copy this CLI's bundled skills into an AI tool's skill directory.\n\nThe conventions skill and every extra skill the package ships, each into its own directory.\n\nExample: gsc skill install --tool claude-code",
+            "options": [
+              {
+                "name": "--tool",
+                "arguments": [
+                  {
+                    "name": "TOOL",
+                    "required": true,
+                    "arity": {
+                      "maximum": 1
+                    }
+                  }
+                ],
+                "description": "Для какого AI-инструмента: claude-code, agents.",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "str"
+                  },
+                  {
+                    "name": "x-rb-default",
+                    "value": "claude-code"
+                  }
+                ]
+              },
+              {
+                "name": "--project",
+                "description": "Установить в текущий проект, а не для пользователя (во все проекты).",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "boolean"
+                  },
+                  {
+                    "name": "x-rb-default",
+                    "value": false
+                  }
+                ]
+              },
+              {
+                "name": "--skill",
+                "arguments": [
+                  {
+                    "name": "SKILL",
+                    "required": true,
+                    "arity": {
+                      "maximum": 1
+                    }
+                  }
+                ],
+                "description": "Install only this bundled skill (see `skill list`); by default all.",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "str"
+                  }
+                ]
+              },
+              {
+                "name": "--json",
+                "description": "Машиночитаемый вывод: JSON в stdout.",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "boolean"
+                  },
+                  {
+                    "name": "x-rb-default",
+                    "value": false
+                  }
+                ]
+              },
+              {
+                "name": "--quiet",
+                "description": "Не печатать ничего, кроме данных.",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "boolean"
+                  },
+                  {
+                    "name": "x-rb-default",
+                    "value": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "list",
+            "description": "List the agent skills this CLI bundles: name and description.\n\nExample: gsc skill list",
+            "options": [
+              {
+                "name": "--json",
+                "description": "Машиночитаемый вывод: JSON в stdout.",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "boolean"
+                  },
+                  {
+                    "name": "x-rb-default",
+                    "value": false
+                  }
+                ]
+              },
+              {
+                "name": "--quiet",
+                "description": "Не печатать ничего, кроме данных.",
+                "metadata": [
+                  {
+                    "name": "x-rb-type",
+                    "value": "boolean"
+                  },
+                  {
+                    "name": "x-rb-default",
+                    "value": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "exitCodes": [
+      {
+        "code": 0,
+        "description": "Success"
+      },
+      {
+        "code": 1,
+        "description": "General error (incl. UNEXPECTED and ABORTED)"
+      },
+      {
+        "code": 2,
+        "description": "Invalid arguments"
+      },
+      {
+        "code": 3,
+        "description": "Authentication error"
+      },
+      {
+        "code": 4,
+        "description": "Project not initialized"
+      },
+      {
+        "code": 5,
+        "description": "Provider error (external service: network, timeout, 5xx, 429, bad body)"
+      },
+      {
+        "code": 6,
+        "description": "CLI too old for this project or database"
+      }
+    ],
+    "metadata": [
+      {
+        "name": "x-rb-tool",
+        "value": {
+          "tool": "gsc",
+          "dist": "rb-google-search-console",
+          "package": "gsc"
+        }
+      },
+      {
+        "name": "x-rb-template-version",
+        "value": "<template-version>"
+      },
+      {
+        "name": "x-rb-env",
+        "value": []
+      },
+      {
+        "name": "x-rb-data",
+        "value": {
+          "user_data_dir": {
+            "appname": "gsc",
+            "files": []
+          }
+        }
+      },
+      {
+        "name": "x-rb-external",
+        "value": []
+      },
+      {
+        "name": "x-rb-skills",
+        "value": [
+          {
+            "name": "gsc",
+            "description": "Данные Google Search Console (ресурсы, поисковая аналитика — клики/показы/CTR/позиции, инспекция URL — индексация, canonical, покрытие; карты сайта) , PageSpeed Insights (Lighthouse, Core Web Vitals, аудиты) и Chrome UX Report (реальные посетители, история по неделям) через CLI `gsc` или Python-библиотеку `gsc`. Использовать, когда задаче нужны данные GSC, статус индексации страниц, скорость сайта (Search Console, GSC, URL inspection, PageSpeed, PSI, Core Web Vitals, CrUX, Lighthouse). Здесь — установка, --json, коды выхода, доступы, квоты."
+          }
+        ]
+      }
+    ]
+  }
+}

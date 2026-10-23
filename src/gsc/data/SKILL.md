@@ -13,21 +13,18 @@ description: Данные Google Search Console (ресурсы, поисков�
 ## Установка (если `gsc --version` не работает)
 
 ```bash
-uv tool install "rb-google-search-console @ git+https://github.com/bolandeu/google-search-console.git"
+uv tool install rb-google-search-console --index https://homeserver.tailee01ab.ts.net:3000/api/packages/bolandeu/pypi/simple
 ```
 
-macOS и Linux; обновление — `uv tool upgrade rb-google-search-console`. Не запускать из
-исходников, если не просили разрабатывать сам CLI.
-
-Репозиторий приватный. При ошибке авторизации (`Authentication failed`,
-`could not read Username`, `Repository not found`) токен не спрашивать:
-выполнить `gh auth status`; если проходит — `gh auth setup-git` и повторить;
-если нет — попросить пользователя выполнить `gh auth login`. С настроенными
-SSH-ключами работает и так:
+Или из git-тега:
 
 ```bash
-uv tool install "rb-google-search-console @ git+ssh://git@github.com/bolandeu/google-search-console.git"
+uv tool install "rb-google-search-console @ git+https://homeserver.tailee01ab.ts.net:3000/bolandeu/google-search-console.git@vX.Y.Z"
 ```
+
+`vX.Y.Z` — последний тег релиза (ставить из тега, не из ветки). Обновление —
+`uv tool upgrade rb-google-search-console`. Не запускать из исходников, если не просили
+разрабатывать сам CLI.
 
 ## Правила
 
@@ -75,6 +72,8 @@ uv tool install "rb-google-search-console @ git+ssh://git@github.com/bolandeu/go
 - **Сначала `gsc doctor --json`**, если что-то не так: проект, настройки,
   совместимость версий, доступы — без сети. Проверить, что Google принимает
   ключ, — `gsc auth status --check --json`.
+- **`gsc describe --json`** — весь CLI одним документом OpenCLI (команды, параметры, коды
+  выхода, переменные окружения): голый документ, без конверта `{"ok": ...}`.
 
 ## Ошибки
 

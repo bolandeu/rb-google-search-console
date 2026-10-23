@@ -8,26 +8,25 @@
 
 ## Установка
 
+Из реестра Gitea (пакет выпускается туда):
+
 ```bash
-uv tool install "rb-google-search-console @ git+https://github.com/bolandeu/google-search-console.git"
+uv tool install rb-google-search-console --index https://homeserver.tailee01ab.ts.net:3000/api/packages/bolandeu/pypi/simple
 ```
 
-Обновление — `uv tool upgrade rb-google-search-console`, конкретная версия — `…google-search-console.git@vX.Y.Z`.
+Или из git-тега, на любой другой машине:
+
+```bash
+uv tool install "rb-google-search-console @ git+https://homeserver.tailee01ab.ts.net:3000/bolandeu/google-search-console.git@vX.Y.Z"
+```
+
+`vX.Y.Z` — последний тег релиза (ставить из тега, не из ветки). Обновление — `uv tool upgrade rb-google-search-console`.
 Дистрибутив называется `rb-google-search-console` (`gsc` на PyPI — чужой пакет), команда и импорт — `gsc`.
 Стоит старая установка под именем `gsc` — сначала `uv tool uninstall gsc`, иначе два
 инструмента делят одну команду.
 
-**Репозиторий приватный.** `uv` ходит в git так же, как `git clone`. Если установка падает
-с ошибкой авторизации — один раз `gh auth login` (или `gh auth setup-git`, если `gh`
-залогинен через `--with-token`), либо SSH-вариант:
-
-```bash
-uv tool install "rb-google-search-console @ git+ssh://git@github.com/bolandeu/google-search-console.git"
-```
-
-Как зависимость другого проекта (библиотека):
-`uv add "rb-google-search-console @ git+https://github.com/bolandeu/google-search-console.git@vX.Y.Z"` — пин на тег релиза
-(`[tool.uv.sources] rb-google-search-console = { git = "…", tag = "vX.Y.Z" }`, зависимость `rb-google-search-console>=0.4,<0.5`).
+Как зависимость другого проекта (библиотека): `"rb-google-search-console>=0.5,<0.6"` в `dependencies` и
+`rb-google-search-console = { index = "gitea" }` в `[tool.uv.sources]` (с индексом `gitea` из `[[tool.uv.index]]`).
 
 ## Доступы
 
@@ -39,7 +38,7 @@ uv tool install "rb-google-search-console @ git+ssh://git@github.com/bolandeu/go
    создать сервисный аккаунт → *Keys → Add key → JSON*; включить *Google Search Console API*.
 2. `gsc auth login --file ~/Downloads/key.json` — JSON ключа кладётся в Keychain, в общий слот
    всех Google-инструментов (`google-oauth:service_account`, пакет
-   [google-oauth](https://github.com/bolandeu/google-oauth)); файл после этого можно удалить.
+   [google-oauth](https://homeserver.tailee01ab.ts.net:3000/bolandeu/google-oauth)); файл после этого можно удалить.
 3. Email аккаунта (выводится командой) добавить в Search Console → *Настройки → Пользователи
    и разрешения* каждого нужного ресурса. Для `submit-sitemap` — с полными правами.
 
@@ -166,13 +165,13 @@ gsc.auth_status()  # AuthStatus(google="ok"|"missing"|"expired", pagespeed_key=b
 
 ```bash
 uv sync
-uv run scripts/release.py --check   # весь гейт: lock, ruff, ty, pytest, фрагмент, сборка wheel, osv-scanner
-scripts/install_hooks.sh            # pre-commit: docstring команд (это их --help) и фрагмент changelog
+uv run gsc --help
 uv run pytest --snapshot-update     # после изменения справки команды — снапшоты tests/snapshots/help/
-uv run scripts/release.py minor     # релиз с main: CHANGELOG из changelog.d/, коммит, тег vX.Y.Z
 ```
 
-Архитектура — шаблон [cli-generator](https://github.com/bolandeu/cli-generator); правила для
+Гейт — шаг `rb-release check` в `.gitea/workflows/ci.yml`: его команду запускают перед каждым коммитом.
+Версия — git-тег (`vX.Y.Z`); работа и релизы идут через Antagor. Архитектура — шаблон
+[cli-generator](https://homeserver.tailee01ab.ts.net:3000/bolandeu/cli-generator); правила для
 агентов-разработчиков — [AGENTS.md](AGENTS.md).
 
 ### Выбор решений

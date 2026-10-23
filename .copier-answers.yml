@@ -1,14 +1,21 @@
 # Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
-_commit: v1.2.10
+_commit: v1.27.1
 _src_path: https://homeserver.tailee01ab.ts.net:3000/bolandeu/cli-generator.git
+antagor_prefix: GSC
 author_name: bolandeu
 cli_name: gsc
-description: "Google Search Console и PageSpeed Insights: библиотека gsc и CLI"
+description: 'Google Search Console и PageSpeed Insights: библиотека gsc и CLI'
 dist_name: rb-google-search-console
 dist_name_legacy: gsc
 include_auth: true
-include_ci: false
+include_contracts: true
+include_db: false
+include_describe: true
 include_http_provider: true
+include_project: true
+include_skill: true
+install_homeserver_users: rbtools
+install_mac: true
 package_name: gsc
 project_name: gsc
 repository_url: https://homeserver.tailee01ab.ts.net:3000/bolandeu/google-search-console

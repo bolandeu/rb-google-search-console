@@ -7,9 +7,7 @@ from collections.abc import Iterable, Iterator, Sequence
 from concurrent.futures import FIRST_COMPLETED, Future, ThreadPoolExecutor, wait
 from typing import Any
 
-import httpx
-
-from ..providers.google import PageSpeedProvider
+from ..providers.google import PageSpeedProvider, Transport
 from .errors import ApiError, InvalidArguments, QuotaExceeded
 from .models import (
     Audit,
@@ -167,7 +165,7 @@ class PageSpeed:
         self,
         *,
         api_key: str | None = None,
-        transport: httpx.BaseTransport | None = None,
+        transport: Transport | None = None,
         limiter: RateLimiter | None = None,
     ) -> None:
         self._api = PageSpeedProvider(api_key=api_key, transport=transport)

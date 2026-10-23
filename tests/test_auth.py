@@ -1,3 +1,7 @@
+"""Tests of `auth login|logout|status` and the Google credential store; the report shape is the contract with other
+tools.
+"""
+
 from __future__ import annotations
 
 import json
@@ -14,7 +18,7 @@ import gsc
 from gsc.core import auth
 
 from .conftest import SA_INFO, json_response
-from .test_cli import invoke, invoke_json
+from .test_cli import invoke, invoke_json, plain
 
 # Общий слот google-oauth — один на все Google-инструменты.
 SA_SLOT = ("google-oauth:service_account", "default")
@@ -171,8 +175,8 @@ def test_env_var_works_when_keyring_is_unavailable(monkeypatch: pytest.MonkeyPat
 def test_human_auth_status(sa_env: dict) -> None:
     result = invoke("auth", "status")
     assert result.exit_code == 0
-    assert "google: unchecked (env: GSC_GOOGLE_SERVICE_ACCOUNT_JSON)" in result.stdout
-    assert "pagespeed: missing" in result.stdout
+    assert "google: unchecked (env: GSC_GOOGLE_SERVICE_ACCOUNT_JSON)" in plain(result.stdout)
+    assert "pagespeed: missing" in plain(result.stdout)
 
 
 # --- auth status: контракт §8 стандарта tools ----------------------------------------------

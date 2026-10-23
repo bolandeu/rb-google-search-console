@@ -20,6 +20,8 @@ from ..core import auth
 from ..core.errors import ApiError, CliError, NotAuthorized, PropertyNotFound, QuotaExceeded
 from .http import HttpProvider
 
+Transport = httpx.BaseTransport  # the type of the `transport=` test hook, for core/ (which must not import httpx)
+
 # Квоты Google сбрасываются в полночь по тихоокеанскому времени.
 _QUOTA_TZ = ZoneInfo("America/Los_Angeles")
 _QUOTA_REASONS = {"rateLimitExceeded", "userRateLimitExceeded", "quotaExceeded", "dailyLimitExceeded"}
@@ -62,7 +64,7 @@ def _zero_quota(response: httpx.Response) -> bool:
     """Анонимная квота PSI: Google отвечает 429 с quota_limit_value = 0."""
     try:
         details = response.json().get("error", {}).get("details", [])
-    except (ValueError, AttributeError):
+    except ValueError, AttributeError:
         return False
     return any(str(d.get("metadata", {}).get("quota_limit_value")) == "0" for d in details if isinstance(d, dict))
 

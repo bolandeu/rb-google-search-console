@@ -1,37 +1,31 @@
 # AGENTS.md
 
-Guidance for coding agents working on the **gsc** package
-itself (not its end users — see `src/gsc/data/SKILL.md` for
-that).
+Pointers for agents. Antagor shows the changing state (statuses, branches, tasks): `antagor board`.
+
+- What the project is, and the domain glossary: `CONTEXT.md`. Take terms only from there.
+- Decisions and why: `docs/adr/` (format: `docs/adr/README.md`).
+- Code rules for review: `CODING_STANDARDS.md`.
+- Antagor keeps the tasks and epics: `.agents/antagor/`.
+- How to write to the Human and to agents (ASD-STE100): the skill `antagor-method`, section «How to write to the Human and to agents».
+- The package Standard: https://homeserver.tailee01ab.ts.net:3000/bolandeu/cli-generator/src/branch/main/skills/cli-builder/reference/standard.md (sections by name, for example «Install»).
+- The gate before a commit: the `rb-release check` step of `.gitea/workflows/ci.yml` — run that command.
 
 ## Development
 
 ```bash
 uv sync                          # also writes uv.lock — commit it (the gate runs `uv lock --check`)
 uv run gsc --help
-uv run scripts/release.py --check
 ```
 
-Before calling anything done, `release.py --check` must pass — it is the
-authoritative gate (tools/docs/standard-release.md §3): lock, ruff, ty, pytest
-(incl. the `--help` contract and snapshots, the `auth status` shape), the
-`[[tool.rb.external]]` check, a changelog fragment, a wheel build + install +
-`gsc --version`, osv-scanner. There is no GitHub CI: rb-google-oauth is a
-private dependency and the repo has no read-token secret (standard §9).
+Distribution name is `rb-google-search-console` (`_distribution.DIST_NAME`);
+the command and the import package stay `gsc`. `DIST_NAME_LEGACY = "gsc"` lets an
+install made under the old name still report its version. In an old dev venv run
+`uv sync --reinstall-package rb-google-search-console` once — otherwise the rename
+removes `.venv/bin/gsc` and `uv run gsc` silently runs another `gsc` from PATH.
 
-Run `scripts/install_hooks.sh` once (`core.hooksPath` → `.githooks/`; the
-Claude Code SessionStart hook does it too). The pre-commit hook **blocks** a
-commit where a command's logic changed without its docstring (the `--help`
-text agents read as this CLI's API contract), and warns when `src/` changed
-without a changelog fragment. After changing any help text:
-`uv run pytest --snapshot-update` and review `tests/snapshots/help/`.
-
-Distribution name is `rb-google-search-console` (`_distribution.DIST_NAME`,
-standard §10); the command and the import package stay `gsc`.
-`DIST_NAME_LEGACY = "gsc"` lets an install made under the old name still
-report its version. In an old dev venv run `uv sync --reinstall-package
-rb-google-search-console` once — otherwise the rename removes `.venv/bin/gsc`
-and `uv run gsc` silently runs another `gsc` from PATH.
+After changing any help text: `uv run pytest --snapshot-update` and review
+`tests/snapshots/help/`. `src/gsc/data/SKILL.md` deliberately lists no commands, only
+conventions; touch it only if a convention changes (a new exit code, a new credential rule).
 
 ## Architecture (do not violate)
 
@@ -88,7 +82,7 @@ a **major** release. Rules:
 - Quotas are handled here, not by callers: `core/quota.py` (`RateLimiter`,
   `InspectionQuota` — local daily counter in the user state dir).
 - Credentials come from the shared package **rb-google-oauth** (import
-  `google_oauth`, pinned to a release tag in `[tool.uv.sources]`; sibling repo
+  `google_oauth`, from the Gitea registry via `[tool.uv.sources]`; sibling repo
   `../google-oauth`, the Google counterpart of yandex-oauth). `core/auth.py`
   holds gsc's `Profile` + `GOOGLE_AUTH` and thin wrappers that keep the public
   API; `commands/auth.py` is `make_auth_app(GOOGLE_AUTH, output, check=…, api_key_checks=…)`
@@ -103,38 +97,6 @@ a **major** release. Rules:
   `google-oauth:api_key` / `pagespeed`. Env (gsc names first, then shared
   `GOOGLE_OAUTH_*`) overrides keychain. No `.env`. Change key lookup/storage in
   google-oauth, not here.
-
-## Releasing
-
-Version comes from the git tag (`vX.Y.Z`, uv-dynamic-versioning) — there is
-no `version =` line. Never edit `CHANGELOG.md` between releases: each change
-with a user-visible effect adds a fragment
-(`uv run towncrier create +<slug>.<type>.md -c "…"`, types: added, changed,
-deprecated, removed, fixed, security). Release from a clean, pushed `main`:
-`uv run scripts/release.py patch|minor|major` (at 0.x: patch — fixes and
-features, minor — anything breaking on the public surface) runs the gate,
-assembles the changelog, commits and tags; push with `git push --follow-tags`.
-Projects pin the CLI they need via `[cli] min_version` in their config, so a
-change a project depends on needs a release before that project can require it.
-
-## After changing the command surface
-
-Nothing to update by hand: agents discover commands from a bare
-`gsc` / `--help`, which is rendered from the command
-docstrings — so the docstring *is* the API doc, keep it accurate (the
-pre-commit hook warns when it drifts). `src/gsc/data/SKILL.md`
-deliberately lists no commands, only conventions; touch it only if a
-convention changes (a new exit code, a new credential rule).
-
-## Every user-visible change ships as a release
-
-Servers, other tools and the Mac install only from tags, never from `main`,
-so a merged change without a release is invisible to them. A change that
-needs a fragment is done only after the release: merge to `main`, run
-`uv run scripts/release.py patch|minor|major`, ask the user to push with
-`--follow-tags`, and name the new tag in the report. Maintenance-only commits
-(no fragment) wait for the next release. Don't leave a fragment unreleased on
-`main` without naming the reason (`~/Work/tools/docs/standard-release.md` §3).
 
 ## Inside the tools system
 
@@ -154,3 +116,7 @@ Full rules: `~/Work/tools/docs/standard-release.md` §13.
 - **Local data** lives in `platformdirs.user_data_dir("<tool>")`, never in
   the repo; all state in the database file, migrations run by the tool; the
   tool never uploads or syncs its data itself.
+
+## Architect only
+
+A worker does not need this section: Antagor cuts it from the worker's brief.
