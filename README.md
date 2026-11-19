@@ -169,7 +169,7 @@ uv run gsc --help
 uv run pytest --snapshot-update     # после изменения справки команды — снапшоты tests/snapshots/help/
 ```
 
-Гейт — шаг `rb-release check` в `.gitea/workflows/ci.yml`: его команду запускают перед каждым коммитом.
+Гейт — шаг `gate check` в `.gitea/workflows/ci.yml`: его команду запускают перед каждым коммитом.
 Версия — git-тег (`vX.Y.Z`); работа и релизы идут через Antagor. Архитектура — шаблон
 [cli-generator](https://homeserver.tailee01ab.ts.net:3000/bolandeu/cli-generator); правила для
 агентов-разработчиков — [AGENTS.md](AGENTS.md).
